@@ -14,8 +14,9 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
+import static org.mockito.Mockito.mock;
 
 
 @TestForSubmission("h04")
@@ -23,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class H2_1 {
     public final static double minSim = 0.8d;
 
-    public final static ClassTester<?> RobotWithCoinTypesCT = new ClassTester<>("h04",
+    public final static ClassTester<Object> RobotWithCoinTypesCT = new ClassTester("h04",
         "RobotWithCoinTypes", minSim, Modifier.PUBLIC,
         Robot.class,
         new ArrayList<>(List.of(new IdentifierMatcher("WithCoinTypes", "h04", minSim))));
@@ -117,26 +118,24 @@ public class H2_1 {
             mt.assertReturnValueEquals(
                 i,
                 CoinType.SILVER);
-            RobotWithCoinTypesCT.assertFieldEquals(numberOfSilverCoinsField, i);
 
             RobotWithCoinTypesCT.setField(numberOfBrassCoinsField, i);
             mt.assertReturnValueEquals(
                 i,
                 CoinType.BRASS);
-            RobotWithCoinTypesCT.assertFieldEquals(numberOfBrassCoinsField, i);
 
             RobotWithCoinTypesCT.setField(numberOfCopperCoinsField, i);
             mt.assertReturnValueEquals(
                 i,
                 CoinType.COPPER);
-            RobotWithCoinTypesCT.assertFieldEquals(numberOfCopperCoinsField, i);
         }
     }
 
     @Test
     @DisplayName("4 | setNumberOfCoinsOfType()")
     public void test04() {
-        RobotWithCoinTypesCT.resolve();
+        RobotWithCoinTypesCT.resolveClass();
+        RobotWithCoinTypesCT.setClassInstance(mock(RobotWithCoinTypesCT.getTheClass(), RETURNS_DEEP_STUBS));
 
         Field numberOfSilverCoinsField = RobotWithCoinTypesCT
             .resolveAttribute(new AttributeMatcher("numberOfSilverCoins", 0.8,
@@ -155,20 +154,67 @@ public class H2_1 {
             ))).verify();
         mt.resolveMethod();
 
+        MethodTester mt2 = new MethodTester(
+            RobotWithCoinTypesCT, "getNumberOfCoins", 1.0, Modifier.PUBLIC,
+            int.class, null, true).verify();
+        mt2.resolveMethod();
+
+        setupWorld();
+
+        // Test Values
+        for (int i = 0; i <= 20; i++) {
+            mt.invoke(CoinType.SILVER, i);
+            mt2.assertReturnValueEquals(i);
+            RobotWithCoinTypesCT.assertFieldEquals(numberOfSilverCoinsField, i);
+
+            mt.invoke(CoinType.BRASS, i);
+            mt2.assertReturnValueEquals(2*i);
+            RobotWithCoinTypesCT.assertFieldEquals(numberOfBrassCoinsField, i);
+
+            mt.invoke(CoinType.COPPER, i);
+            mt2.assertReturnValueEquals(3*i);
+            RobotWithCoinTypesCT.assertFieldEquals(numberOfCopperCoinsField, i);
+        }
+
         RobotWithCoinTypes testRobot = new RobotWithCoinTypes(1,1,Direction.UP,1,2,3);
 
         // Throws Exception
+        // metodTester.getTheMethd().invoke(mt.getClassTester().getClassInstance())
         assertThrows(RuntimeException.class,
             () -> testRobot.setNumberOfCoinsOfType(CoinType.COPPER, -1));
 
-        // Test Values
-        //for (int i = 0; i <= 20; i++) {
-            //RobotWithCoinTypesCT.setField(numberOfSilverCoinsField, i);
-            //mt.invoke(CoinType.SILVER, i);
-            //RobotWithCoinTypesCT.assertFieldEquals(numberOfSilverCoinsField, i);
-        //}
-
         // Test Robot Method Call
+        for (int i = 0; i <= 20; i++) {
+            testRobot.setNumberOfCoinsOfType(CoinType.SILVER, i);
+            testRobot.setNumberOfCoinsOfType(CoinType.BRASS, i);
+            testRobot.setNumberOfCoinsOfType(CoinType.COPPER, i);
+            mt.invoke(CoinType.SILVER, i);
+            mt.invoke(CoinType.BRASS, i);
+            mt.invoke(CoinType.COPPER, i);
+            //mt2.assertReturnValueEquals(3*i);
+
+            testRobot.setNumberOfCoinsOfType(CoinType.SILVER, i+1);
+            //assertEquals(testRobot.getNumberOfCoins(), 3*i+1);
+
+            testRobot.setNumberOfCoinsOfType(CoinType.BRASS, i+1);
+            //assertEquals(testRobot.getNumberOfCoins(), 3*i+2);
+
+            testRobot.setNumberOfCoinsOfType(CoinType.COPPER, i+1);
+            //assertEquals(testRobot.getNumberOfCoins(), 3*i+3);
+        }
+    }
+
+    @Test
+    @DisplayName("5 | Attribute numberOfSilverCoins, numberOfBrassCoins, numberOfCopperCoins")
+    public void test05() {
+        RobotWithCoinTypesCT.resolve();
+        for (var fieldMatcher : new AttributeMatcher[]{
+            new AttributeMatcher("numberOfSilverCoins", 0.8, Modifier.PRIVATE, int.class),
+            new AttributeMatcher("numberOfBrassCoins", 0.8, Modifier.PRIVATE, int.class),
+            new AttributeMatcher("numberOfCopperCoins", 0.8, Modifier.PRIVATE, int.class)
+        }) {
+            RobotWithCoinTypesCT.resolveAttribute(fieldMatcher);
+        }
     }
 
 }
