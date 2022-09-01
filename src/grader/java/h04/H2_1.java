@@ -1,6 +1,7 @@
 package h04;
 
 import fopbot.Direction;
+import fopbot.KarelWorld;
 import fopbot.Robot;
 import fopbot.World;
 import org.junit.jupiter.api.DisplayName;
@@ -15,8 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
 
 @TestForSubmission("h04")
@@ -137,8 +137,7 @@ public class H2_1 {
     @Test
     @DisplayName("4 | setNumberOfCoinsOfType()")
     public void test04() {
-        RobotWithCoinTypesCT.resolveClass();
-        RobotWithCoinTypesCT.setClassInstance(mock(RobotWithCoinTypesCT.getTheClass(), RETURNS_DEEP_STUBS));
+        RobotWithCoinTypesCT.resolve();
 
         Field numberOfSilverCoinsField = RobotWithCoinTypesCT
             .resolveAttribute(new AttributeMatcher("numberOfSilverCoins", 0.8,
@@ -150,38 +149,40 @@ public class H2_1 {
             .resolveAttribute(new AttributeMatcher("numberOfCopperCoins", 0.8,
                 Modifier.PRIVATE, int.class));
 
-        MethodTester mt = new MethodTester(
+        MethodTester setNumberOfCoinTypesMT = new MethodTester(
             RobotWithCoinTypesCT, "setNumberOfCoinsOfType", 0.8, Modifier.PUBLIC,
             void.class, new ArrayList<>(List.of(new ParameterMatcher("coinType", minSim, CoinType.class),
             new ParameterMatcher("number", 0.8, int.class)
             ))).verify();
-        mt.resolveMethod();
-        mt.assertAccessModifier();
-        mt.assertParametersMatch();
-        mt.assertReturnType();
+        setNumberOfCoinTypesMT.verify();
 
-        MethodTester mt2 = new MethodTester(
+        MethodTester getNumberOfCoinsMT = new MethodTester(
             RobotWithCoinTypesCT, "getNumberOfCoins", 1.0, Modifier.PUBLIC,
             int.class, null, true).verify();
-        mt2.resolveMethod();
-        mt2.assertAccessModifier();
-        mt2.assertParametersMatch();
-        mt2.assertReturnType();
+        getNumberOfCoinsMT.resolveMethod();
 
+        // Prepare World and Robot
         setupWorld();
+        Field world = assertDoesNotThrow(()->RobotWithCoinTypesCT.getTheClass().getSuperclass().getDeclaredField("world"));
+        RobotWithCoinTypesCT.setField(world, World.getGlobalWorld());
+        World.getGlobalWorld().addRobot((Robot)RobotWithCoinTypesCT.getClassInstance());
+
 
         // Test Values
         for (int i = 0; i <= 20; i++) {
-            mt.invoke(CoinType.SILVER, i);
-            mt2.assertReturnValueEquals(i);
+            RobotWithCoinTypesCT.setField(numberOfSilverCoinsField, 0);
+            RobotWithCoinTypesCT.setField(numberOfBrassCoinsField, 0);
+            RobotWithCoinTypesCT.setField(numberOfCopperCoinsField, 0);
+            setNumberOfCoinTypesMT.invoke(CoinType.SILVER, i);
+            getNumberOfCoinsMT.assertReturnValueEquals(i);
             RobotWithCoinTypesCT.assertFieldEquals(numberOfSilverCoinsField, i);
 
-            mt.invoke(CoinType.BRASS, i);
-            mt2.assertReturnValueEquals(2*i);
+            setNumberOfCoinTypesMT.invoke(CoinType.BRASS, i);
+            getNumberOfCoinsMT.assertReturnValueEquals(2*i);
             RobotWithCoinTypesCT.assertFieldEquals(numberOfBrassCoinsField, i);
 
-            mt.invoke(CoinType.COPPER, i);
-            mt2.assertReturnValueEquals(3*i);
+            setNumberOfCoinTypesMT.invoke(CoinType.COPPER, i);
+            getNumberOfCoinsMT.assertReturnValueEquals(3*i);
             RobotWithCoinTypesCT.assertFieldEquals(numberOfCopperCoinsField, i);
         }
 
