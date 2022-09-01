@@ -112,6 +112,9 @@ public class H2_1 {
             RobotWithCoinTypesCT, "getNumberOfCoinsOfType", 0.8, Modifier.PUBLIC,
             int.class, new ArrayList<>(List.of(new ParameterMatcher("coinType", minSim, CoinType.class)))).verify();
         mt.resolveMethod();
+        mt.assertAccessModifier();
+        mt.assertParametersMatch();
+        mt.assertReturnType();
 
         for (int i = 0; i <= 20; i++) {
             RobotWithCoinTypesCT.setField(numberOfSilverCoinsField, i);
@@ -153,11 +156,17 @@ public class H2_1 {
             new ParameterMatcher("number", 0.8, int.class)
             ))).verify();
         mt.resolveMethod();
+        mt.assertAccessModifier();
+        mt.assertParametersMatch();
+        mt.assertReturnType();
 
         MethodTester mt2 = new MethodTester(
             RobotWithCoinTypesCT, "getNumberOfCoins", 1.0, Modifier.PUBLIC,
             int.class, null, true).verify();
         mt2.resolveMethod();
+        mt2.assertAccessModifier();
+        mt2.assertParametersMatch();
+        mt2.assertReturnType();
 
         setupWorld();
 
@@ -176,10 +185,11 @@ public class H2_1 {
             RobotWithCoinTypesCT.assertFieldEquals(numberOfCopperCoinsField, i);
         }
 
+        // This part is with an object since the tests with class tester dont work
         RobotWithCoinTypes testRobot = new RobotWithCoinTypes(1,1,Direction.UP,1,2,3);
 
         // Throws Exception
-        // metodTester.getTheMethd().invoke(mt.getClassTester().getClassInstance())
+        // methodTester.getTheMethd().invoke(mt.getClassTester().getClassInstance())
         assertThrows(RuntimeException.class,
             () -> testRobot.setNumberOfCoinsOfType(CoinType.COPPER, -1));
 
@@ -188,10 +198,7 @@ public class H2_1 {
             testRobot.setNumberOfCoinsOfType(CoinType.SILVER, i);
             testRobot.setNumberOfCoinsOfType(CoinType.BRASS, i);
             testRobot.setNumberOfCoinsOfType(CoinType.COPPER, i);
-            mt.invoke(CoinType.SILVER, i);
-            mt.invoke(CoinType.BRASS, i);
-            mt.invoke(CoinType.COPPER, i);
-            //mt2.assertReturnValueEquals(3*i);
+            //assertEquals(testRobot.getNumberOfCoins(), 3*i);
 
             testRobot.setNumberOfCoinsOfType(CoinType.SILVER, i+1);
             //assertEquals(testRobot.getNumberOfCoins(), 3*i+1);
