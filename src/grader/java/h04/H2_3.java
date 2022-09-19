@@ -100,7 +100,7 @@ public class H2_3 {
         ((ClassTester<Object>) RobotWithCoinTypesAndRefState2CT).setClassInstance(assertDoesNotThrow(()
             -> constructor.newInstance(0, 0, Direction.UP, 1, 2, 3)));
 
-        RobotWithCoinTypesAndRefState2CT.setField(refRobotField, refRobotCT.getClassInstance());
+        RobotWithCoinTypesAndRefState2CT.setField(refRobotField, refRobotCT.resolve().getClassInstance());
 
         getRefXMT.assertReturnValueEquals(0);
         //RobotWithCoinTypesAndRefState2CT.assertFieldEquals((int) getRefXMT.invoke(), 0);
