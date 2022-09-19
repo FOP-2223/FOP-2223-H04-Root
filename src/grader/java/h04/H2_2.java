@@ -102,7 +102,7 @@ public class H2_2 {
     }
 
     @Test
-    @DisplayName("3 | getDiffY()()")
+    @DisplayName("3 | getDiffY()")
     public void test03() {
         RobotWithCoinTypesAndRefState1CT.resolve();
 
@@ -384,20 +384,177 @@ public class H2_2 {
     @Test
     @DisplayName("6 | setCurrentStateAsReferenceState()")
     public void test06() {
+        RobotWithCoinTypesAndRefState1CT.resolve();
 
+        Field refXField = RobotWithCoinTypesAndRefState1CT
+            .resolveAttribute(new AttributeMatcher("refX", 0.8,
+                Modifier.PRIVATE, int.class));
+
+        Field refYField = RobotWithCoinTypesAndRefState1CT
+            .resolveAttribute(new AttributeMatcher("refY", 0.8,
+                Modifier.PRIVATE, int.class));
+
+        Field refDirectionField = RobotWithCoinTypesAndRefState1CT
+            .resolveAttribute(new AttributeMatcher("refDirection", 0.8,
+                Modifier.PRIVATE, Direction.class));
+
+        Field refNumberOfCoinsField = RobotWithCoinTypesAndRefState1CT
+            .resolveAttribute(new AttributeMatcher("refNumberOfCoins", 0.8,
+                Modifier.PRIVATE, int.class));
+
+        MethodTester setCurrentStateAsReferenceStateMT = new MethodTester(
+            RobotWithCoinTypesAndRefState1CT, "setCurrentStateAsReferenceState", 0.8, Modifier.PUBLIC,
+            void.class).verify();
+        setCurrentStateAsReferenceStateMT.resolveMethod();
+
+        // Prepare World and Robot
+        setupWorld();
+        Field world = assertDoesNotThrow(()->RobotWithCoinTypesAndRefState1CT.getTheClass()
+            .getSuperclass().getSuperclass().getDeclaredField("world"));
+        RobotWithCoinTypesAndRefState1CT.setField(world, World.getGlobalWorld());
+        Field direction = assertDoesNotThrow(()->RobotWithCoinTypesAndRefState1CT.getTheClass()
+            .getSuperclass().getSuperclass().getDeclaredField("direction"));
+        RobotWithCoinTypesAndRefState1CT.setField(direction, Direction.UP);
+        Field x = assertDoesNotThrow(()->RobotWithCoinTypesAndRefState1CT.getTheClass()
+            .getSuperclass().getSuperclass().getSuperclass().getDeclaredField("x"));
+        RobotWithCoinTypesAndRefState1CT.setField(x, 0);
+        Field y = assertDoesNotThrow(()->RobotWithCoinTypesAndRefState1CT.getTheClass()
+            .getSuperclass().getSuperclass().getSuperclass().getDeclaredField("y"));
+        RobotWithCoinTypesAndRefState1CT.setField(y, 0);
+        Field coins = assertDoesNotThrow(()->RobotWithCoinTypesAndRefState1CT.getTheClass()
+            .getSuperclass().getSuperclass().getDeclaredField("numberOfCoins"));
+        RobotWithCoinTypesAndRefState1CT.setField(coins, 10);
+
+        World.getGlobalWorld().addRobot((Robot)RobotWithCoinTypesAndRefState1CT.getClassInstance());
+
+        // Test if X changes
+        for(int i = 0; i < 10; i++){
+            RobotWithCoinTypesAndRefState1CT.setField(x, i);
+            setCurrentStateAsReferenceStateMT.invoke();
+            RobotWithCoinTypesAndRefState1CT.assertFieldEquals(refXField, i);
+        }
+
+        // Test if Y changes
+        RobotWithCoinTypesAndRefState1CT.setField(direction, Direction.RIGHT);
+        for(int i = 0; i < 10; i++){
+            RobotWithCoinTypesAndRefState1CT.setField(y, i);
+            setCurrentStateAsReferenceStateMT.invoke();
+            RobotWithCoinTypesAndRefState1CT.assertFieldEquals(refYField, i);
+        }
+
+        // Test if Direction changes
+        RobotWithCoinTypesAndRefState1CT.setField(refDirectionField, Direction.UP);
+        RobotWithCoinTypesAndRefState1CT.setField(direction, Direction.UP);
+        setCurrentStateAsReferenceStateMT.invoke();
+        RobotWithCoinTypesAndRefState1CT.assertFieldEquals(refDirectionField, Direction.UP);
+        RobotWithCoinTypesAndRefState1CT.setField(direction, Direction.RIGHT);
+        setCurrentStateAsReferenceStateMT.invoke();
+        RobotWithCoinTypesAndRefState1CT.assertFieldEquals(refDirectionField, Direction.RIGHT);
+        RobotWithCoinTypesAndRefState1CT.setField(direction, Direction.DOWN);
+        setCurrentStateAsReferenceStateMT.invoke();
+        RobotWithCoinTypesAndRefState1CT.assertFieldEquals(refDirectionField, Direction.DOWN);
+        RobotWithCoinTypesAndRefState1CT.setField(direction, Direction.LEFT);
+        setCurrentStateAsReferenceStateMT.invoke();
+        RobotWithCoinTypesAndRefState1CT.assertFieldEquals(refDirectionField, Direction.LEFT);
+
+
+        // Test if numberOfCoins changes
+        for(int i = 10; i > 0; i--){
+            RobotWithCoinTypesAndRefState1CT.setField(coins, i);
+            setCurrentStateAsReferenceStateMT.invoke();
+            RobotWithCoinTypesAndRefState1CT.setField(refNumberOfCoinsField, i);
+        }
     }
 
     @Test
     @DisplayName("7 | getDiffDirection()")
     public void test07() {
-        // Exhaustive tests for getDiffDirection
-        Direction up = Direction.UP;
-        Direction down = Direction.DOWN;
-        Direction left = Direction.LEFT;
-        Direction right = Direction.RIGHT;
+        RobotWithCoinTypesAndRefState1CT.resolve();
 
+        Field refDirectionField = RobotWithCoinTypesAndRefState1CT
+            .resolveAttribute(new AttributeMatcher("refDirection", 0.8,
+                Modifier.PRIVATE, Direction.class));
 
+        MethodTester refDirectionMT = new MethodTester(
+            RobotWithCoinTypesAndRefState1CT, "getDiffDirection", 0.8, Modifier.PUBLIC,
+            Direction.class).verify();
+        refDirectionMT.resolveMethod();
 
+        MethodTester moveMT = new MethodTester(
+            RobotWithCoinTypesAndRefState1CT, "move", 1.0, Modifier.PUBLIC,
+            void.class, null, true).verify();
+        moveMT.resolveMethod();
+
+        MethodTester turnLeftMT = new MethodTester(
+            RobotWithCoinTypesAndRefState1CT, "turnLeft", 1.0, Modifier.PUBLIC,
+            void.class, null, true).verify();
+        turnLeftMT.resolveMethod();
+
+        // Prepare World and Robot
+        setupWorld();
+        Field world = assertDoesNotThrow(()->RobotWithCoinTypesAndRefState1CT.getTheClass()
+            .getSuperclass().getSuperclass().getDeclaredField("world"));
+        RobotWithCoinTypesAndRefState1CT.setField(world, World.getGlobalWorld());
+        Field direction = assertDoesNotThrow(()->RobotWithCoinTypesAndRefState1CT.getTheClass()
+            .getSuperclass().getSuperclass().getDeclaredField("direction"));
+        RobotWithCoinTypesAndRefState1CT.setField(direction, Direction.UP);
+        Field x = assertDoesNotThrow(()->RobotWithCoinTypesAndRefState1CT.getTheClass()
+            .getSuperclass().getSuperclass().getSuperclass().getDeclaredField("x"));
+        RobotWithCoinTypesAndRefState1CT.setField(x, 0);
+        Field y = assertDoesNotThrow(()->RobotWithCoinTypesAndRefState1CT.getTheClass()
+            .getSuperclass().getSuperclass().getSuperclass().getDeclaredField("y"));
+        RobotWithCoinTypesAndRefState1CT.setField(y, 0);
+
+        World.getGlobalWorld().addRobot((Robot)RobotWithCoinTypesAndRefState1CT.getClassInstance());
+
+        // Test Values for ref stay same when Robot moves
+        for (int i = 0; i < 10; i++) {
+            RobotWithCoinTypesAndRefState1CT.setField(refDirectionField, Direction.UP);
+            moveMT.invoke();
+            RobotWithCoinTypesAndRefState1CT.assertFieldEquals(refDirectionField, Direction.UP);
+        }
+
+        // Reference Direction: UP
+        refDirectionMT.assertReturnValueEquals(Direction.UP);
+        turnLeftMT.invoke();
+        refDirectionMT.assertReturnValueEquals(Direction.LEFT);
+        turnLeftMT.invoke();
+        refDirectionMT.assertReturnValueEquals(Direction.DOWN);
+        turnLeftMT.invoke();
+        refDirectionMT.assertReturnValueEquals(Direction.RIGHT);
+
+        // Reference Direction: LEFT
+        RobotWithCoinTypesAndRefState1CT.setField(refDirectionField, Direction.LEFT);
+        RobotWithCoinTypesAndRefState1CT.setField(direction, Direction.LEFT);
+        refDirectionMT.assertReturnValueEquals(Direction.UP);
+        turnLeftMT.invoke();
+        refDirectionMT.assertReturnValueEquals(Direction.LEFT);
+        turnLeftMT.invoke();
+        refDirectionMT.assertReturnValueEquals(Direction.DOWN);
+        turnLeftMT.invoke();
+        refDirectionMT.assertReturnValueEquals(Direction.RIGHT);
+
+        // Reference Direction: DOWN
+        RobotWithCoinTypesAndRefState1CT.setField(refDirectionField, Direction.DOWN);
+        RobotWithCoinTypesAndRefState1CT.setField(direction, Direction.DOWN);
+        refDirectionMT.assertReturnValueEquals(Direction.UP);
+        turnLeftMT.invoke();
+        refDirectionMT.assertReturnValueEquals(Direction.LEFT);
+        turnLeftMT.invoke();
+        refDirectionMT.assertReturnValueEquals(Direction.DOWN);
+        turnLeftMT.invoke();
+        refDirectionMT.assertReturnValueEquals(Direction.RIGHT);
+
+        // Reference Direction: RIGHT
+        RobotWithCoinTypesAndRefState1CT.setField(refDirectionField, Direction.RIGHT);
+        RobotWithCoinTypesAndRefState1CT.setField(direction, Direction.RIGHT);
+        refDirectionMT.assertReturnValueEquals(Direction.UP);
+        turnLeftMT.invoke();
+        refDirectionMT.assertReturnValueEquals(Direction.LEFT);
+        turnLeftMT.invoke();
+        refDirectionMT.assertReturnValueEquals(Direction.DOWN);
+        turnLeftMT.invoke();
+        refDirectionMT.assertReturnValueEquals(Direction.RIGHT);
     }
 
     @Test
@@ -410,7 +567,7 @@ public class H2_2 {
                 Modifier.PRIVATE, int.class));
 
         MethodTester refNumberOfCoinsMT = new MethodTester(
-            RobotWithCoinTypesAndRefState1CT, "getDiffX", 0.8, Modifier.PUBLIC,
+            RobotWithCoinTypesAndRefState1CT, "getDiffNumberOfCoins", 0.8, Modifier.PUBLIC,
             int.class).verify();
         refNumberOfCoinsMT.resolveMethod();
 
@@ -444,7 +601,7 @@ public class H2_2 {
             .getSuperclass().getSuperclass().getSuperclass().getDeclaredField("y"));
         RobotWithCoinTypesAndRefState1CT.setField(y, 0);
         Field coins = assertDoesNotThrow(()->RobotWithCoinTypesAndRefState1CT.getTheClass()
-            .getSuperclass().getSuperclass().getSuperclass().getDeclaredField("numberOfCoins"));
+            .getSuperclass().getSuperclass().getDeclaredField("numberOfCoins"));
         RobotWithCoinTypesAndRefState1CT.setField(coins, 10);
 
         World.getGlobalWorld().addRobot((Robot)RobotWithCoinTypesAndRefState1CT.getClassInstance());
@@ -457,18 +614,22 @@ public class H2_2 {
             RobotWithCoinTypesAndRefState1CT.assertFieldEquals(refNumberOfCoinsField, i);
         }
 
+        RobotWithCoinTypesAndRefState1CT.setField(refNumberOfCoinsField, 10);
+
         // Test values change if robot puts coin
+        int j = -1;
         for (int i = 10; i > 0; i--) {
-            RobotWithCoinTypesAndRefState1CT.setField(refNumberOfCoinsField, i);
             putCoinMT.invoke();
-            RobotWithCoinTypesAndRefState1CT.assertFieldEquals(refNumberOfCoinsField, i - 1);
+            refNumberOfCoinsMT.assertReturnValueEquals(j);
+            j --;
         }
 
         // Test values change if robot picks up coin
+        j = -10;
         for (int i = 0; i < 10; i++) {
-            RobotWithCoinTypesAndRefState1CT.setField(refNumberOfCoinsField, i);
+            j++;
             pickCoinMT.invoke();
-            RobotWithCoinTypesAndRefState1CT.assertFieldEquals(refNumberOfCoinsField, i + 1);
+            refNumberOfCoinsMT.assertReturnValueEquals(j);
         }
     }
 }

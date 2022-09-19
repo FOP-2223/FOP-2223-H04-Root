@@ -7,6 +7,7 @@ import org.tudalgo.algoutils.reflect.MethodTester;
 
 import static h04.H1_1.RobotWithReferenceStateCT;
 import static h04.H1_2.WithCoinTypesCT;
+import static h04.H2_4.CoinCollectionCT;
 
 @RubricForSubmission("h04")
 public class H04_RubricProvider implements RubricProvider {
@@ -201,7 +202,7 @@ public class H04_RubricProvider implements RubricProvider {
         .shortDescription("Methode setCurrentStateAsReferenceState() ist vollständig korrekt.")
         .grader(Grader.testAwareBuilder()
             .requirePass(JUnitTestRef
-                .ofMethod(() -> H2_1.class.getMethod("test06")))
+                .ofMethod(() -> H2_2.class.getMethod("test06")))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
@@ -211,7 +212,7 @@ public class H04_RubricProvider implements RubricProvider {
         .shortDescription("Attribute refX, refY, refDirection, refNumberOfCoins sind deklariert.")
         .grader(Grader.testAwareBuilder()
             .requirePass(JUnitTestRef
-                .ofMethod(() -> H2_1.class.getMethod("test05")))
+                .ofMethod(() -> H2_2.class.getMethod("test05")))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
@@ -221,7 +222,7 @@ public class H04_RubricProvider implements RubricProvider {
         .shortDescription("Methode getDiffX() ist vollständig korrekt.")
         .grader(Grader.testAwareBuilder()
             .requirePass(JUnitTestRef
-                .ofMethod(() -> H2_1.class.getMethod("test04")))
+                .ofMethod(() -> H2_2.class.getMethod("test04")))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
@@ -230,7 +231,7 @@ public class H04_RubricProvider implements RubricProvider {
         .shortDescription("Methode getDiffY() ist vollständig korrekt.")
         .grader(Grader.testAwareBuilder()
             .requirePass(JUnitTestRef
-                .ofMethod(() -> H2_1.class.getMethod("test03")))
+                .ofMethod(() -> H2_2.class.getMethod("test03")))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
@@ -242,7 +243,7 @@ public class H04_RubricProvider implements RubricProvider {
         .minPoints(-1)
         .grader(Grader.testAwareBuilder()
             .requirePass(JUnitTestRef
-                .ofMethod(() -> H2_1.class.getMethod("test07")))
+                .ofMethod(() -> H2_2.class.getMethod("test07")))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
@@ -254,7 +255,7 @@ public class H04_RubricProvider implements RubricProvider {
         .minPoints(-1)
         .grader(Grader.testAwareBuilder()
             .requirePass(JUnitTestRef
-                .ofMethod(() -> H2_1.class.getMethod("test08")))
+                .ofMethod(() -> H2_2.class.getMethod("test08")))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
@@ -264,7 +265,7 @@ public class H04_RubricProvider implements RubricProvider {
         .shortDescription("Der Konstruktor ist vollständig korrekt.")
         .grader(Grader.testAwareBuilder()
             .requirePass(JUnitTestRef
-                .ofMethod(() -> H2_1.class.getMethod("test02")))
+                .ofMethod(() -> H2_2.class.getMethod("test02")))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
@@ -276,16 +277,16 @@ public class H04_RubricProvider implements RubricProvider {
         .minPoints(-1)
         .grader(Grader.testAwareBuilder()
             .requirePass(JUnitTestRef
-                .ofMethod(() -> H2_1.class.getMethod("test01")))
+                .ofMethod(() -> H2_2.class.getMethod("test01")))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
         .build();
 
     public static final Criterion H2_2 = Criterion.builder()
-        .shortDescription("H2.2  Implementierende Roboterklasse mit vier int-Attributen für den Referenzstatus")
+        .shortDescription("H2.2 Implementierende Roboterklasse mit vier int-Attributen für den Referenzstatus")
         .minPoints(0)
-        .maxPoints(9)
+        .maxPoints(7)
         .addChildCriteria(
             H2_2_T1,
             H2_2_T2,
@@ -297,6 +298,235 @@ public class H04_RubricProvider implements RubricProvider {
             H2_2_T8)
         .build();
 
+    ///////////////////////////////////////////////// H2.3
+
+    public static final Criterion H2_3_T1 = Criterion.builder()
+        .shortDescription("Methode setCurrentStateAsReferenceState() ist vollständig korrekt.")
+        .grader(Grader.testAwareBuilder()
+            .requirePass(JUnitTestRef
+                .ofMethod(() -> H2_3.class.getMethod("test06")))
+            .pointsPassedMax()
+            .pointsFailedMin()
+            .build())
+        .build();
+
+    public static final Criterion H2_3_T2 = Criterion.builder()
+        .shortDescription("Attribute refX, refY, refDirection, refNumberOfCoins sind deklariert.")
+        .grader(Grader.testAwareBuilder()
+            .requirePass(JUnitTestRef
+                .ofMethod(() -> H2_3.class.getMethod("test05")))
+            .pointsPassedMax()
+            .pointsFailedMin()
+            .build())
+        .build();
+
+    public static final Criterion H2_3_T3 = Criterion.builder()
+        .shortDescription("Methode getDiffX() ist vollständig korrekt.")
+        .grader(Grader.testAwareBuilder()
+            .requirePass(JUnitTestRef
+                .ofMethod(() -> H2_3.class.getMethod("test04")))
+            .pointsPassedMax()
+            .pointsFailedMin()
+            .build())
+        .build();
+    public static final Criterion H2_3_T4 = Criterion.builder()
+        .shortDescription("Methode getDiffY() ist vollständig korrekt.")
+        .grader(Grader.testAwareBuilder()
+            .requirePass(JUnitTestRef
+                .ofMethod(() -> H2_3.class.getMethod("test03")))
+            .pointsPassedMax()
+            .pointsFailedMin()
+            .build())
+        .build();
+
+    public static final Criterion H2_3_T5 = Criterion.builder()
+        .shortDescription("Methode getDiffDirection() ist vollständig korrekt.")
+        .maxPoints(0)
+        .minPoints(-1)
+        .grader(Grader.testAwareBuilder()
+            .requirePass(JUnitTestRef
+                .ofMethod(() -> H2_3.class.getMethod("test07")))
+            .pointsPassedMax()
+            .pointsFailedMin()
+            .build())
+        .build();
+
+    public static final Criterion H2_3_T6 = Criterion.builder()
+        .shortDescription("Methode getDiffNumberOfCoins() ist vollständig korrekt.")
+        .maxPoints(0)
+        .minPoints(-1)
+        .grader(Grader.testAwareBuilder()
+            .requirePass(JUnitTestRef
+                .ofMethod(() -> H2_3.class.getMethod("test08")))
+            .pointsPassedMax()
+            .pointsFailedMin()
+            .build())
+        .build();
+
+    public static final Criterion H2_3_T7 = Criterion.builder()
+        .shortDescription("Der Konstruktor ist vollständig korrekt.")
+        .grader(Grader.testAwareBuilder()
+            .requirePass(JUnitTestRef
+                .ofMethod(() -> H2_3.class.getMethod("test02")))
+            .pointsPassedMax()
+            .pointsFailedMin()
+            .build())
+        .build();
+
+    public static final Criterion H2_3_T8 = Criterion.builder()
+        .shortDescription("Klasse RobotWithCoinTypesAndRefState2 ist korrekt deklariert.")
+        .maxPoints(0)
+        .minPoints(-1)
+        .grader(Grader.testAwareBuilder()
+            .requirePass(JUnitTestRef
+                .ofMethod(() -> H2_3.class.getMethod("test01")))
+            .pointsPassedMax()
+            .pointsFailedMin()
+            .build())
+        .build();
+
+    public static final Criterion H2_3 = Criterion.builder()
+        .shortDescription("H2.3 Implementierende Roboterklasse mit Robot-Objekt für den Referenzstatus")
+        .minPoints(0)
+        .maxPoints(5)
+        .addChildCriteria(
+            H2_3_T1,
+            H2_3_T2,
+            H2_3_T3,
+            H2_3_T4,
+            H2_3_T5,
+            H2_3_T6,
+            H2_3_T7,
+            H2_3_T8)
+        .build();
+
+    ///////////////////////////////////////////////// H2.4
+
+    public static final Criterion H2_4_T1 = Criterion.builder()
+        .shortDescription("Methode getNumberOfSilverCoins() ist vollständig korrekt.")
+        .grader(Grader.testAwareBuilder()
+            .requirePass(JUnitTestRef
+                .ofMethod(() -> H2_4.class.getMethod("test03")))
+            .pointsPassedMax()
+            .pointsFailedMin()
+            .build())
+        .build();
+
+    public static final Criterion H2_4_T2 = Criterion.builder()
+        .shortDescription("Attribute numberOfSilverCoins, numberOfBrassCoins, numberOfCopperCoins sind deklariert.")
+        .grader(Grader.testAwareBuilder()
+            .requirePass(JUnitTestRef
+                .ofMethod(() -> H2_4.class.getMethod("test04")))
+            .pointsPassedMax()
+            .pointsFailedMin()
+            .build())
+        .build();
+
+    public static final Criterion H2_4_T3 = Criterion.builder()
+        .shortDescription("Methode getNumberOfBrassCoins() ist vollständig korrekt.")
+        .grader(Grader.testAwareBuilder()
+            .requirePass(JUnitTestRef
+                .ofMethod(() -> H2_4.class.getMethod("test05")))
+            .pointsPassedMax()
+            .pointsFailedMin()
+            .build())
+        .build();
+    public static final Criterion H2_4_T4 = Criterion.builder()
+        .shortDescription("Methode getNumberOfCopperCoins() ist vollständig korrekt.")
+        .grader(Grader.testAwareBuilder()
+            .requirePass(JUnitTestRef
+                .ofMethod(() -> H2_4.class.getMethod("test06")))
+            .pointsPassedMax()
+            .pointsFailedMin()
+            .build())
+        .build();
+
+    public static final Criterion H2_4_T5 = Criterion.builder()
+        .shortDescription("Methode getNumberOfCoinsOfType() ist vollständig korrekt.")
+        .maxPoints(0)
+        .minPoints(-1)
+        .grader(Grader.testAwareBuilder()
+            .requirePass(JUnitTestRef
+                .ofMethod(() -> H2_4.class.getMethod("test07")))
+            .pointsPassedMax()
+            .pointsFailedMin()
+            .build())
+        .build();
+
+    public static final Criterion H2_4_T6 = Criterion.builder()
+        .shortDescription("Methode setNumberOfCoinsOfType() ist vollständig korrekt.")
+        .maxPoints(0)
+        .minPoints(-1)
+        .grader(Grader.testAwareBuilder()
+            .requirePass(JUnitTestRef
+                .ofMethod(() -> H2_4.class.getMethod("test08")))
+            .pointsPassedMax()
+            .pointsFailedMin()
+            .build())
+        .build();
+
+    public static final Criterion H2_4_T7 = Criterion.builder()
+        .shortDescription("Der Konstruktor ist vollständig korrekt.")
+        .grader(Grader.testAwareBuilder()
+            .requirePass(JUnitTestRef
+                .ofMethod(() -> H2_4.class.getMethod("test02")))
+            .pointsPassedMax()
+            .pointsFailedMin()
+            .build())
+        .build();
+
+    public static final Criterion H2_4_T8 = Criterion.builder()
+        .shortDescription("Methode insertCoin() ist vollständig korrekt.")
+        .maxPoints(0)
+        .minPoints(-1)
+        .grader(Grader.testAwareBuilder()
+            .requirePass(JUnitTestRef
+                .ofMethod(() -> H2_4.class.getMethod("test09")))
+            .pointsPassedMax()
+            .pointsFailedMin()
+            .build())
+        .build();
+
+    public static final Criterion H2_4_T9 = Criterion.builder()
+        .shortDescription("Methode removeCoin() ist vollständig korrekt.")
+        .maxPoints(0)
+        .minPoints(-1)
+        .grader(Grader.testAwareBuilder()
+            .requirePass(JUnitTestRef
+                .ofMethod(() -> H2_4.class.getMethod("test10")))
+            .pointsPassedMax()
+            .pointsFailedMin()
+            .build())
+        .build();
+
+    public static final Criterion H2_4_T10 = Criterion.builder()
+        .shortDescription("Klasse CoinCollection ist korrekt deklariert.")
+        .maxPoints(0)
+        .minPoints(-1)
+        .grader(Grader.testAwareBuilder()
+            .requirePass(JUnitTestRef
+                .ofMethod(() -> H2_4.class.getMethod("test01")))
+            .pointsPassedMax()
+            .pointsFailedMin()
+            .build())
+        .build();
+
+    public static final Criterion H2_4 = Criterion.builder()
+        .shortDescription("H2.4 Klasse ohne Roboter, aber mit Münztypen")
+        .minPoints(0)
+        .maxPoints(8)
+        .addChildCriteria(
+            H2_4_T1,
+            H2_4_T2,
+            H2_4_T3,
+            H2_4_T4,
+            H2_4_T5,
+            H2_4_T6,
+            H2_4_T7,
+            H2_4_T8,
+            H2_4_T9,
+            H2_4_T10)
+        .build();
 
     ///////////////////////////////////////////////// Tasks
     public static final Criterion H1 = Criterion.builder()
@@ -309,7 +539,9 @@ public class H04_RubricProvider implements RubricProvider {
         .shortDescription("H2 Implementierende Klassen")
         .addChildCriteria(
             H2_1,
-            H2_2)
+            H2_2,
+            H2_3,
+            H2_4)
         .build();
 
     public static final Criterion JAVADOC;
@@ -330,6 +562,9 @@ public class H04_RubricProvider implements RubricProvider {
                 .addJavaDoc(new MethodTester(RobotWithReferenceStateCT, "getDiffNumberOfCoins")::getMethodDocumentation, H1_1)
                 .addJavaDoc(new MethodTester(WithCoinTypesCT, "getNumberOfCoinsOfType")::getMethodDocumentation, H1_2)
                 .addJavaDoc(new MethodTester(WithCoinTypesCT, "setNumberOfCoinsOfType")::getMethodDocumentation, H1_2)
+                .addJavaDoc(new MethodTester(CoinCollectionCT, "getNumberOfSilverCoins")::getMethodDocumentation, H2_4)
+                .addJavaDoc(new MethodTester(CoinCollectionCT, "getNumberOfBrassCoins")::getMethodDocumentation, H2_4)
+                .addJavaDoc(new MethodTester(CoinCollectionCT, "getNumberOfCopperCoins")::getMethodDocumentation, H2_4)
                 .build());
     }
 

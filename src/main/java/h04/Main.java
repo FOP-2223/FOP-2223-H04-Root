@@ -29,11 +29,11 @@ public class Main {
         // H1.2 - Fehlermeldungen besser verstehen
         // yourErrorMessage();
         // H2.1 - Zur eigenen Kontrolle
-        // yourTests();
+        yourTests();
         // H2.2 - Zur eigenen Kontrolle / Additional Tests
-        // yourTests2();
+        yourTests2();
         // H2.3 - Zur eigenen Kontrolle / Additional Tests
-        // yourTests3();
+        yourTests3();
         // H2.4 - Zur eigenen Kontrolle
         yourTests4();
 
