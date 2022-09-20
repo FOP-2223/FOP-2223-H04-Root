@@ -462,7 +462,7 @@ public class H2_2 {
         for(int i = 10; i > 0; i--){
             RobotWithCoinTypesAndRefState1CT.setField(coins, i);
             setCurrentStateAsReferenceStateMT.invoke();
-            RobotWithCoinTypesAndRefState1CT.setField(refNumberOfCoinsField, i);
+            RobotWithCoinTypesAndRefState1CT.assertFieldEquals(refNumberOfCoinsField, i);
         }
     }
 
