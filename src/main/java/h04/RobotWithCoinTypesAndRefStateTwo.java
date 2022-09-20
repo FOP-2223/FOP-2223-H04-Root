@@ -10,7 +10,7 @@ public class RobotWithCoinTypesAndRefStateTwo extends RobotWithCoinTypes impleme
     /**
      * The reference robot
      */
-    private ReferenceRobot referenceRobot;
+    private ReferenceRobot refRobot;
 
     /**
      * Initializes a new robot with three coin types.
@@ -25,32 +25,32 @@ public class RobotWithCoinTypesAndRefStateTwo extends RobotWithCoinTypes impleme
     public RobotWithCoinTypesAndRefStateTwo(int x, int y, Direction direction, int numberOfSilverCoins,
                                             int numberOfBrassCoins, int numberOfCopperCoins) {
         super(x, y, direction, numberOfSilverCoins, numberOfBrassCoins, numberOfCopperCoins);
-        referenceRobot = new ReferenceRobot(x, y, direction,
+        refRobot = new ReferenceRobot(x, y, direction,
             numberOfCopperCoins + numberOfBrassCoins + numberOfSilverCoins);
     }
 
     @Override
     public void setCurrentStateAsReferenceState() {
-        referenceRobot.setRefX(this.getX());
-        referenceRobot.setRefY(this.getY());
-        referenceRobot.setRefDirection(this.getDirection());
-        referenceRobot.setRefNumberOfCoins(this.getNumberOfCoins());
+        refRobot.setRefX(this.getX());
+        refRobot.setRefY(this.getY());
+        refRobot.setRefDirection(this.getDirection());
+        refRobot.setRefNumberOfCoins(this.getNumberOfCoins());
     }
 
     @Override
     public int getDiffX() {
-        return this.getX() - referenceRobot.getRefX();
+        return this.getX() - refRobot.getRefX();
     }
 
     @Override
     public int getDiffY() {
-        return this.getY() - referenceRobot.getRefY();
+        return this.getY() - refRobot.getRefY();
     }
 
     @Override
     public Direction getDiffDirection() {
         Direction currDirection = this.getDirection();
-        Direction refDirection = referenceRobot.getRefDirection();
+        Direction refDirection = refRobot.getRefDirection();
 
         if (refDirection.equals(currDirection))
             return Direction.UP;
@@ -70,6 +70,6 @@ public class RobotWithCoinTypesAndRefStateTwo extends RobotWithCoinTypes impleme
 
     @Override
     public int getDiffNumberOfCoins() {
-        return this.getNumberOfCoins() - referenceRobot.getRefNumberOfCoins();
+        return this.getNumberOfCoins() - refRobot.getRefNumberOfCoins();
     }
 }

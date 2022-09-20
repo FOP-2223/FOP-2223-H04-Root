@@ -33,7 +33,7 @@ public class H2_3 {
     public final static ClassTester<?> RobotWithCoinTypesCT = new ClassTester<>("h04",
         "RobotWithCoinTypes", minSim, Modifier.PUBLIC);
     public final static ClassTester<Object> refRobotCT = new ClassTester("h04",
-        "ReferenceRobot", minSim, Modifier.PUBLIC,
+        "refRobot", minSim, Modifier.PUBLIC,
         Robot.class, null);
 
     final String class_name = "RobotWithCoinTypesAndRefStateTwo";
@@ -71,7 +71,7 @@ public class H2_3 {
             parameterMatcher);
 
         Field refRobotField = RobotWithCoinTypesAndRefState2CT
-            .resolveAttribute(new AttributeMatcher("referenceRobot", 0.8,
+            .resolveAttribute(new AttributeMatcher("refRobot", 0.8,
                 Modifier.PRIVATE, ReferenceRobot.class));
 
         MethodTester getRefXMT = new MethodTester(
@@ -141,7 +141,7 @@ public class H2_3 {
         refRobotCT.resolve();
 
         Field refRobotField = RobotWithCoinTypesAndRefState2CT
-            .resolveAttribute(new AttributeMatcher("referenceRobot", 0.8,
+            .resolveAttribute(new AttributeMatcher("refRobot", 0.8,
                 Modifier.PRIVATE, ReferenceRobot.class));
 
         MethodTester getRefYMT = new MethodTester(
@@ -291,7 +291,7 @@ public class H2_3 {
         refRobotCT.resolve();
 
         Field refRobotField = RobotWithCoinTypesAndRefState2CT
-            .resolveAttribute(new AttributeMatcher("referenceRobot", 0.8,
+            .resolveAttribute(new AttributeMatcher("refRobot", 0.8,
                 Modifier.PRIVATE, ReferenceRobot.class));
 
         MethodTester getRefXMT = new MethodTester(
@@ -439,7 +439,7 @@ public class H2_3 {
     public void test05() {
         RobotWithCoinTypesAndRefState2CT.resolve();
         for (var fieldMatcher : new AttributeMatcher[]{
-            new AttributeMatcher("referenceRobot", 0.8, Modifier.PRIVATE, ReferenceRobot.class)
+            new AttributeMatcher("refRobot", 0.8, Modifier.PRIVATE, ReferenceRobot.class)
         }) {
             RobotWithCoinTypesAndRefState2CT.resolveAttribute(fieldMatcher);
         }
@@ -451,7 +451,7 @@ public class H2_3 {
         RobotWithCoinTypesAndRefState2CT.resolve();
 
         Field refRobotField = RobotWithCoinTypesAndRefState2CT
-            .resolveAttribute(new AttributeMatcher("referenceRobot", 0.8,
+            .resolveAttribute(new AttributeMatcher("refRobot", 0.8,
                 Modifier.PRIVATE, ReferenceRobot.class));
 
         MethodTester getRefXMT = new MethodTester(
@@ -549,7 +549,7 @@ public class H2_3 {
         refRobotCT.resolve();
 
         Field refRobotField = RobotWithCoinTypesAndRefState2CT
-            .resolveAttribute(new AttributeMatcher("referenceRobot", 0.8,
+            .resolveAttribute(new AttributeMatcher("refRobot", 0.8,
                 Modifier.PRIVATE, ReferenceRobot.class));
 
         MethodTester getRefDirectionMT = new MethodTester(
@@ -650,7 +650,7 @@ public class H2_3 {
         refRobotCT.resolve();
 
         Field refRobotField = RobotWithCoinTypesAndRefState2CT
-            .resolveAttribute(new AttributeMatcher("referenceRobot", 0.8,
+            .resolveAttribute(new AttributeMatcher("refRobot", 0.8,
                 Modifier.PRIVATE, ReferenceRobot.class));
 
         MethodTester getRefNumberofCoinsMT = new MethodTester(
