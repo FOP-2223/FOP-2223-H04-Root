@@ -33,7 +33,7 @@ public class H2_3 {
     public final static ClassTester<?> RobotWithCoinTypesCT = new ClassTester<>("h04",
         "RobotWithCoinTypes", minSim, Modifier.PUBLIC);
     public final static ClassTester<Object> refRobotCT = new ClassTester("h04",
-        "refRobot", minSim, Modifier.PUBLIC,
+        "ReferenceRobot", minSim, Modifier.PUBLIC,
         Robot.class, null);
 
     final String class_name = "RobotWithCoinTypesAndRefStateTwo";
