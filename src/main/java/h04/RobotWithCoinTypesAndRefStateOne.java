@@ -5,12 +5,24 @@ import fopbot.Direction;
 /**
  * Represents a robot with a reference state.
  */
-public class RobotWithCoinTypesAndRefState2 extends RobotWithCoinTypes implements RobotWithReferenceState{
+public class RobotWithCoinTypesAndRefStateOne extends RobotWithCoinTypes implements RobotWithReferenceState{
 
     /**
-     * The reference robot
+     * The x-coordinate the reference robot has
      */
-    private ReferenceRobot referenceRobot;
+    private int refX;
+    /**
+     * The y-coordinate the reference robot has
+     */
+    private int refY;
+    /**
+     * The direction the reference robot has
+     */
+    private Direction refDirection;
+    /**
+     * The amount of coins the reference robot has
+     */
+    private int refNumberOfCoins;
 
     /**
      * Initializes a new robot with three coin types.
@@ -22,45 +34,47 @@ public class RobotWithCoinTypesAndRefState2 extends RobotWithCoinTypes implement
      * @param numberOfBrassCoins the amount of the brass coins of the robot
      * @param numberOfCopperCoins the amount of the copper coins of the robot
      */
-    public RobotWithCoinTypesAndRefState2(int x, int y, Direction direction, int numberOfSilverCoins,
-                                          int numberOfBrassCoins, int numberOfCopperCoins) {
+    public RobotWithCoinTypesAndRefStateOne(int x, int y, Direction direction, int numberOfSilverCoins,
+                                            int numberOfBrassCoins, int numberOfCopperCoins) {
         super(x, y, direction, numberOfSilverCoins, numberOfBrassCoins, numberOfCopperCoins);
-        referenceRobot = new ReferenceRobot(x, y, direction,
-            numberOfCopperCoins + numberOfBrassCoins + numberOfSilverCoins);
+        refX = x;
+        refY = y;
+        refDirection = direction;
+        refNumberOfCoins = numberOfSilverCoins + numberOfBrassCoins + numberOfCopperCoins;
     }
+
 
     @Override
     public void setCurrentStateAsReferenceState() {
-        referenceRobot.setRefX(this.getX());
-        referenceRobot.setRefY(this.getY());
-        referenceRobot.setRefDirection(this.getDirection());
-        referenceRobot.setRefNumberOfCoins(this.getNumberOfCoins());
+        refX = this.getX();
+        refY = this.getY();
+        refDirection = this.getDirection();
+        refNumberOfCoins = this.getNumberOfCoins();
     }
 
     @Override
     public int getDiffX() {
-        return this.getX() - referenceRobot.getRefX();
+        return this.getX() - refX;
     }
 
     @Override
     public int getDiffY() {
-        return this.getY() - referenceRobot.getRefY();
+        return this.getY() - refY;
     }
 
     @Override
     public Direction getDiffDirection() {
         Direction currDirection = this.getDirection();
-        Direction refDirection = referenceRobot.getRefDirection();
 
         if (refDirection.equals(currDirection))
             return Direction.UP;
-            // UP and LEFT, LEFT and DOWN, DOWN and RIGHT, RIGHT and UP
-            // 0 and 1, 1 and 2, 2 and 3, 3 and 0
+        // UP and LEFT, LEFT and DOWN, DOWN and RIGHT, RIGHT and UP
+        // 0 and 1, 1 and 2, 2 and 3, 3 and 0
         else if (refDirection.ordinal() + 3 == currDirection.ordinal()
             || refDirection.ordinal() - 1 == currDirection.ordinal())
             return Direction.LEFT;
-            // UP and DOWN, DOWN and UP, RIGHT and LEFT, LEFT and RIGHT
-            // 0 and 2, 2 and 0, 1 and 3, 3 and 1
+        // UP and DOWN, DOWN and UP, RIGHT and LEFT, LEFT and RIGHT
+        // 0 and 2, 2 and 0, 1 and 3, 3 and 1
         else if (currDirection.ordinal() - 2 == refDirection.ordinal()
             || currDirection.ordinal() + 2 == refDirection.ordinal())
             return Direction.DOWN;
@@ -70,6 +84,7 @@ public class RobotWithCoinTypesAndRefState2 extends RobotWithCoinTypes implement
 
     @Override
     public int getDiffNumberOfCoins() {
-        return this.getNumberOfCoins() - referenceRobot.getRefNumberOfCoins();
+        return this.getNumberOfCoins() - refNumberOfCoins;
     }
+
 }

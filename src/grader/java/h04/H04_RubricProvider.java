@@ -272,7 +272,7 @@ public class H04_RubricProvider implements RubricProvider {
         .build();
 
     public static final Criterion H2_2_T8 = Criterion.builder()
-        .shortDescription("Klasse RobotWithCoinTypesAndRefState1 ist korrekt deklariert.")
+        .shortDescription("Klasse RobotWithCoinTypesAndRefStateOne ist korrekt deklariert.")
         .maxPoints(0)
         .minPoints(-1)
         .grader(Grader.testAwareBuilder()
@@ -374,7 +374,7 @@ public class H04_RubricProvider implements RubricProvider {
         .build();
 
     public static final Criterion H2_3_T8 = Criterion.builder()
-        .shortDescription("Klasse RobotWithCoinTypesAndRefState2 ist korrekt deklariert.")
+        .shortDescription("Klasse RobotWithCoinTypesAndRefStateTwo ist korrekt deklariert.")
         .maxPoints(0)
         .minPoints(-1)
         .grader(Grader.testAwareBuilder()

@@ -107,23 +107,23 @@ public class Main {
      */
     public static void yourTests2() {
         // Test the correct initialization of the object
-        RobotWithCoinTypesAndRefState1 robotWithCoinTypesAndRefState1;
+        RobotWithCoinTypesAndRefStateOne robotWithCoinTypesAndRefStateOne;
         Robot robot;
-        robotWithCoinTypesAndRefState1 = new RobotWithCoinTypesAndRefState1(1, 1, Direction.UP, 1, 1, 1);
-        robot = new RobotWithCoinTypesAndRefState1(1, 1, Direction.UP, 1, 1, 1);
+        robotWithCoinTypesAndRefStateOne = new RobotWithCoinTypesAndRefStateOne(1, 1, Direction.UP, 1, 1, 1);
+        robot = new RobotWithCoinTypesAndRefStateOne(1, 1, Direction.UP, 1, 1, 1);
         System.out.println("x:" + robot.getX() + " , y:" + robot.getY()
             + " , direction:" + robot.getDirection() + ", coins:" + robot.getNumberOfCoins());
-        System.out.println("x:" + robotWithCoinTypesAndRefState1.getX() + " , y:" + robotWithCoinTypesAndRefState1.getY()
-            + " , direction:" + robotWithCoinTypesAndRefState1.getDirection() + ", coins:" + robotWithCoinTypesAndRefState1.getNumberOfCoins());
+        System.out.println("x:" + robotWithCoinTypesAndRefStateOne.getX() + " , y:" + robotWithCoinTypesAndRefStateOne.getY()
+            + " , direction:" + robotWithCoinTypesAndRefStateOne.getDirection() + ", coins:" + robotWithCoinTypesAndRefStateOne.getNumberOfCoins());
 
         // Test all methods besides getDiffDirection
-        System.out.println("xDiff: " + robotWithCoinTypesAndRefState1.getDiffX() + ", yDiff: " + robotWithCoinTypesAndRefState1.getDiffY()
-            + " , directionDiff: " + robotWithCoinTypesAndRefState1.getDiffDirection() + " , coinsDiff: " + robotWithCoinTypesAndRefState1.getDiffNumberOfCoins());
+        System.out.println("xDiff: " + robotWithCoinTypesAndRefStateOne.getDiffX() + ", yDiff: " + robotWithCoinTypesAndRefStateOne.getDiffY()
+            + " , directionDiff: " + robotWithCoinTypesAndRefStateOne.getDiffDirection() + " , coinsDiff: " + robotWithCoinTypesAndRefStateOne.getDiffNumberOfCoins());
 
-        robotWithCoinTypesAndRefState1.move();
-        robotWithCoinTypesAndRefState1.putCoin();
-        System.out.println("xDiff: " + robotWithCoinTypesAndRefState1.getDiffX() + ", yDiff: " + robotWithCoinTypesAndRefState1.getDiffY()
-            + " , directionDiff: " + robotWithCoinTypesAndRefState1.getDiffDirection() + " , coinsDiff: " + robotWithCoinTypesAndRefState1.getDiffNumberOfCoins());
+        robotWithCoinTypesAndRefStateOne.move();
+        robotWithCoinTypesAndRefStateOne.putCoin();
+        System.out.println("xDiff: " + robotWithCoinTypesAndRefStateOne.getDiffX() + ", yDiff: " + robotWithCoinTypesAndRefStateOne.getDiffY()
+            + " , directionDiff: " + robotWithCoinTypesAndRefStateOne.getDiffDirection() + " , coinsDiff: " + robotWithCoinTypesAndRefStateOne.getDiffNumberOfCoins());
 
         // Exhaustive tests for getDiffDirection
         Direction up = Direction.UP;
@@ -132,51 +132,51 @@ public class Main {
         Direction right = Direction.RIGHT;
 
         // Reference: UP
-        System.out.println("UP and UP:" + robotWithCoinTypesAndRefState1.getDiffDirection());
-        robotWithCoinTypesAndRefState1.turnLeft();
-        System.out.println("UP and RIGHT:" + robotWithCoinTypesAndRefState1.getDiffDirection());
-        robotWithCoinTypesAndRefState1.turnLeft();
-        System.out.println("UP and DOWN:" + robotWithCoinTypesAndRefState1.getDiffDirection());
-        robotWithCoinTypesAndRefState1.turnLeft();
-        System.out.println("UP and LEFT:" + robotWithCoinTypesAndRefState1.getDiffDirection());
+        System.out.println("UP and UP:" + robotWithCoinTypesAndRefStateOne.getDiffDirection());
+        robotWithCoinTypesAndRefStateOne.turnLeft();
+        System.out.println("UP and RIGHT:" + robotWithCoinTypesAndRefStateOne.getDiffDirection());
+        robotWithCoinTypesAndRefStateOne.turnLeft();
+        System.out.println("UP and DOWN:" + robotWithCoinTypesAndRefStateOne.getDiffDirection());
+        robotWithCoinTypesAndRefStateOne.turnLeft();
+        System.out.println("UP and LEFT:" + robotWithCoinTypesAndRefStateOne.getDiffDirection());
 
-        robotWithCoinTypesAndRefState1.setCurrentStateAsReferenceState();
+        robotWithCoinTypesAndRefStateOne.setCurrentStateAsReferenceState();
 
         // Reference: LEFT
-        System.out.println("LEFT and LEFT:" + robotWithCoinTypesAndRefState1.getDiffDirection());
-        robotWithCoinTypesAndRefState1.turnLeft();
-        System.out.println("LEFT and UP:" + robotWithCoinTypesAndRefState1.getDiffDirection());
-        robotWithCoinTypesAndRefState1.turnLeft();
-        System.out.println("LEFT and RIGHT:" + robotWithCoinTypesAndRefState1.getDiffDirection());
-        robotWithCoinTypesAndRefState1.turnLeft();
-        System.out.println("LEFT and DOWN:" + robotWithCoinTypesAndRefState1.getDiffDirection());
+        System.out.println("LEFT and LEFT:" + robotWithCoinTypesAndRefStateOne.getDiffDirection());
+        robotWithCoinTypesAndRefStateOne.turnLeft();
+        System.out.println("LEFT and UP:" + robotWithCoinTypesAndRefStateOne.getDiffDirection());
+        robotWithCoinTypesAndRefStateOne.turnLeft();
+        System.out.println("LEFT and RIGHT:" + robotWithCoinTypesAndRefStateOne.getDiffDirection());
+        robotWithCoinTypesAndRefStateOne.turnLeft();
+        System.out.println("LEFT and DOWN:" + robotWithCoinTypesAndRefStateOne.getDiffDirection());
 
-        robotWithCoinTypesAndRefState1.setCurrentStateAsReferenceState();
+        robotWithCoinTypesAndRefStateOne.setCurrentStateAsReferenceState();
 
         // Reference: DOWN
-        System.out.println("DOWN and DOWN:" + robotWithCoinTypesAndRefState1.getDiffDirection());
-        robotWithCoinTypesAndRefState1.turnLeft();
-        System.out.println("DOWN and LEFT:" + robotWithCoinTypesAndRefState1.getDiffDirection());
-        robotWithCoinTypesAndRefState1.turnLeft();
-        System.out.println("DOWN and UP:" + robotWithCoinTypesAndRefState1.getDiffDirection());
-        robotWithCoinTypesAndRefState1.turnLeft();
-        System.out.println("DOWN and RIGHT:" + robotWithCoinTypesAndRefState1.getDiffDirection());
+        System.out.println("DOWN and DOWN:" + robotWithCoinTypesAndRefStateOne.getDiffDirection());
+        robotWithCoinTypesAndRefStateOne.turnLeft();
+        System.out.println("DOWN and LEFT:" + robotWithCoinTypesAndRefStateOne.getDiffDirection());
+        robotWithCoinTypesAndRefStateOne.turnLeft();
+        System.out.println("DOWN and UP:" + robotWithCoinTypesAndRefStateOne.getDiffDirection());
+        robotWithCoinTypesAndRefStateOne.turnLeft();
+        System.out.println("DOWN and RIGHT:" + robotWithCoinTypesAndRefStateOne.getDiffDirection());
 
-        robotWithCoinTypesAndRefState1.setCurrentStateAsReferenceState();
+        robotWithCoinTypesAndRefStateOne.setCurrentStateAsReferenceState();
 
         // Reference: RIGHT
-        System.out.println("RIGHT and RIGHT:" + robotWithCoinTypesAndRefState1.getDiffDirection());
-        robotWithCoinTypesAndRefState1.turnLeft();
-        System.out.println("RIGHT and DOWN:" + robotWithCoinTypesAndRefState1.getDiffDirection());
-        robotWithCoinTypesAndRefState1.turnLeft();
-        System.out.println("RIGHT and LEFT:" + robotWithCoinTypesAndRefState1.getDiffDirection());
-        robotWithCoinTypesAndRefState1.turnLeft();
-        System.out.println("RIGHT and UP:" + robotWithCoinTypesAndRefState1.getDiffDirection());
+        System.out.println("RIGHT and RIGHT:" + robotWithCoinTypesAndRefStateOne.getDiffDirection());
+        robotWithCoinTypesAndRefStateOne.turnLeft();
+        System.out.println("RIGHT and DOWN:" + robotWithCoinTypesAndRefStateOne.getDiffDirection());
+        robotWithCoinTypesAndRefStateOne.turnLeft();
+        System.out.println("RIGHT and LEFT:" + robotWithCoinTypesAndRefStateOne.getDiffDirection());
+        robotWithCoinTypesAndRefStateOne.turnLeft();
+        System.out.println("RIGHT and UP:" + robotWithCoinTypesAndRefStateOne.getDiffDirection());
 
-        robotWithCoinTypesAndRefState1.turnLeft();
-        robotWithCoinTypesAndRefState1.move();
-        System.out.println("xDiff: " + robotWithCoinTypesAndRefState1.getDiffX() + ", yDiff: " + robotWithCoinTypesAndRefState1.getDiffY()
-            + " , directionDiff: " + robotWithCoinTypesAndRefState1.getDiffDirection() + " , coinsDiff: " + robotWithCoinTypesAndRefState1.getDiffNumberOfCoins());
+        robotWithCoinTypesAndRefStateOne.turnLeft();
+        robotWithCoinTypesAndRefStateOne.move();
+        System.out.println("xDiff: " + robotWithCoinTypesAndRefStateOne.getDiffX() + ", yDiff: " + robotWithCoinTypesAndRefStateOne.getDiffY()
+            + " , directionDiff: " + robotWithCoinTypesAndRefStateOne.getDiffDirection() + " , coinsDiff: " + robotWithCoinTypesAndRefStateOne.getDiffNumberOfCoins());
 
     }
 
@@ -186,10 +186,10 @@ public class Main {
      */
     public static void yourTests3() {
         // Test the correct initialization of the object
-        RobotWithCoinTypesAndRefState2 robotWithCoinTypesAndRefState2;
+        RobotWithCoinTypesAndRefStateTwo robotWithCoinTypesAndRefState2;
         Robot robot;
-        robotWithCoinTypesAndRefState2 = new RobotWithCoinTypesAndRefState2(1, 1, Direction.UP, 1, 1, 1);
-        robot = new RobotWithCoinTypesAndRefState1(1, 1, Direction.UP, 1, 1, 1);
+        robotWithCoinTypesAndRefState2 = new RobotWithCoinTypesAndRefStateTwo(1, 1, Direction.UP, 1, 1, 1);
+        robot = new RobotWithCoinTypesAndRefStateOne(1, 1, Direction.UP, 1, 1, 1);
         System.out.println("x:" + robot.getX() + " , y:" + robot.getY()
             + " , direction:" + robot.getDirection() + ", coins:" + robot.getNumberOfCoins());
         System.out.println("x:" + robotWithCoinTypesAndRefState2.getX() + " , y:" + robotWithCoinTypesAndRefState2.getY()

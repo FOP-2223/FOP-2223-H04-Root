@@ -27,13 +27,13 @@ public class H2_2 {
     public final static double minSim = 0.8d;
 
     public final static ClassTester<Object> RobotWithCoinTypesAndRefState1CT = new ClassTester("h04",
-        "RobotWithCoinTypesAndRefState1", minSim, Modifier.PUBLIC,
+        "RobotWithCoinTypesAndRefStateOne", minSim, Modifier.PUBLIC,
         RobotWithCoinTypes.class,
         new ArrayList<>(List.of(new IdentifierMatcher("RobotWithReferenceState", "h04", minSim))));
     public final static ClassTester<?> RobotWithCoinTypesCT = new ClassTester<>("h04",
         "RobotWithCoinTypes", minSim, Modifier.PUBLIC);
 
-    final String class_name = "RobotWithCoinTypesAndRefState1";
+    final String class_name = "RobotWithCoinTypesAndRefStateOne";
 
     public static void setupWorld() {
         World.reset();
