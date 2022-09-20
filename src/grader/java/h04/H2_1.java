@@ -44,7 +44,7 @@ public class H2_1 {
     @Test
     @DisplayName("1 | Existenz Klasse " + class_name)
     public void test01() {
-        RobotWithCoinTypesCT.setSuperClass((Class<Object>) RobotCT.assureClassResolved().getTheClass());
+        RobotWithCoinTypesCT.setSuperClass((Class<Object>) (Class<?>) Robot.class);
         RobotWithCoinTypesCT.setImplementsInterfaces(
             new ArrayList<>(List.of(new IdentifierMatcher("WithCoinTypes", "h04", minSim))));
         RobotWithCoinTypesCT.verify(1.0d);

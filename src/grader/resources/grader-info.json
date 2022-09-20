@@ -7,13 +7,28 @@
     {
       "name": "grader",
       "files": [
-        "h04/H04_RubricProvider.java"
+        "h04/H04_RubricProvider.java",
+        "h04/H1_1.java",
+        "h04/H1_2.java",
+        "h04/H2_1.java",
+        "h04/H2_2.java",
+        "h04/H2_3.java",
+        "h04/H2_4.java",
+        "h04/ExampleJUnitTest.java"
       ]
     },
     {
       "name": "solution",
       "files": [
-        "h04/Main.java"
+        "h04/Main.java",
+        "h04/CoinCollection.java",
+        "h04/CoinType.java",
+        "h04/ReferenceRobot.java",
+        "h04/RobotWithCoinTypes.java",
+        "h04/RobotWithCoinTypesAndRefStateOne.java",
+        "h04/RobotWithCoinTypesAndRefStateTwo.java",
+        "h04/RobotWithReferenceState.java",
+        "h04/WithCoinTypes.java"
       ]
     }
   ]
