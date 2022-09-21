@@ -18,10 +18,10 @@ public class H04_RubricProvider implements RubricProvider {
     ////////////////////////////////////////////////// H1.1
 
     public static final Criterion H1_1_T1 = Criterion.builder()
-        .shortDescription("Die Methoden [[[%s]]], [[[%s]]], [[[%s]]], [[[%s]]] und [[[%s]]] sind korrekt deklariert.".formatted(
-            "setCurrentStateAsReferenceState()", "getDiffX()", "getDiffY()", "getDiffDirection()", "getDiffNumberOfCoins()"))
+        .shortDescription("Das Interface [[[RobotWithReferenceState]]] ist mitsamt Methoden korrekt deklariert.")
         .grader(Grader.testAwareBuilder()
             .requirePass(JUnitTestRef.and(
+                JUnitTestRef.ofMethod(() -> H1_1.class.getMethod("test01")),
                 JUnitTestRef.ofMethod(() -> H1_1.class.getMethod("test02")),
                 JUnitTestRef.ofMethod(() -> H1_1.class.getMethod("test03")),
                 JUnitTestRef.ofMethod(() -> H1_1.class.getMethod("test04")),
@@ -32,20 +32,9 @@ public class H04_RubricProvider implements RubricProvider {
             .build())
         .build();
 
-    public static final Criterion H1_1_T2 = Criterion.builder()
-        .shortDescription("Interface [[[RobotWithReferenceState]]] ist korrekt deklariert.")
-        .grader(Grader.testAwareBuilder()
-            .requirePass(JUnitTestRef.ofMethod(() -> H1_1.class.getMethod("test01")))
-            .pointsPassedMax()
-            .pointsFailedMin()
-            .build())
-        .build();
-
     public static final Criterion H1_1 = Criterion.builder()
         .shortDescription("H1.1 | Interface [[[RobotWithReferenceState]]]")
-        .minPoints(0)
-        .maxPoints(2)
-        .addChildCriteria(H1_1_T1, H1_1_T2)
+        .addChildCriteria(H1_1_T1)
         .build();
 
     ////////////////////////////////////////////////// H1.2
@@ -60,9 +49,10 @@ public class H04_RubricProvider implements RubricProvider {
         .build();
 
     public static final Criterion H1_2_T2 = Criterion.builder()
-        .shortDescription("Die Methoden [[[getNumberOfCoinsOfType()]]] und [[[setNumberOfCoinsOfType()]]] sind korrekt deklariert.")
+        .shortDescription("Das Interface [[[WithCoinTypes]]] ist mitsamt Methoden korrekt deklariert.")
         .grader(Grader.testAwareBuilder()
             .requirePass(JUnitTestRef.and(
+                JUnitTestRef.ofMethod(() -> H1_2.class.getMethod("test01")),
                 JUnitTestRef.ofMethod(() -> H1_2.class.getMethod("test03")),
                 JUnitTestRef.ofMethod(() -> H1_2.class.getMethod("test04"))))
             .pointsPassedMax()
@@ -70,20 +60,9 @@ public class H04_RubricProvider implements RubricProvider {
             .build())
         .build();
 
-    public static final Criterion H1_2_T3 = Criterion.builder()
-        .shortDescription("Interface [[[WithCoinTypes]]] ist korrekt deklariert.")
-        .grader(Grader.testAwareBuilder()
-            .requirePass(JUnitTestRef.ofMethod(() -> H1_2.class.getMethod("test01")))
-            .pointsPassedMax()
-            .pointsFailedMin()
-            .build())
-        .build();
-
     public static final Criterion H1_2 = Criterion.builder()
         .shortDescription("H1.2 | Interface [[[WithCoinTypes]]]")
-        .minPoints(0)
-        .maxPoints(3)
-        .addChildCriteria(H1_2_T1, H1_2_T2, H1_2_T3)
+        .addChildCriteria(H1_2_T1, H1_2_T2)
         .build();
 
     ////////////////////////////////////////////////// H2.1
@@ -118,14 +97,13 @@ public class H04_RubricProvider implements RubricProvider {
 
     public static final Criterion H2_1_T4 = Criterion.builder()
         .shortDescription("Methode [[[setNumberOfCoins()]]] ist vollständig korrekt.")
-        .maxPoints(2)
-        .minPoints(0)
         .grader(Grader.testAwareBuilder()
             .requirePass(JUnitTestRef.ofMethod(() -> H2_1.class.getMethod("test06")))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
         .build();
+
     public static final Criterion H2_1_T5 = Criterion.builder()
         .shortDescription("Methode [[[getNumberOfCoinsOfType()]]] ist vollständig korrekt.")
         .grader(Grader.testAwareBuilder()
@@ -137,8 +115,6 @@ public class H04_RubricProvider implements RubricProvider {
 
     public static final Criterion H2_1_T6 = Criterion.builder()
         .shortDescription("Methode [[[setNumberOfCoinsOfType()]]] ist vollständig korrekt.")
-        .maxPoints(2)
-        .minPoints(0)
         .grader(Grader.testAwareBuilder()
             .requirePass(JUnitTestRef.ofMethod(() -> H2_1.class.getMethod("test04")))
             .pointsPassedMax()
@@ -166,8 +142,6 @@ public class H04_RubricProvider implements RubricProvider {
 
     public static final Criterion H2_1 = Criterion.builder()
         .shortDescription("H2.1 | Implementierende Roboterklasse mit verschiedenen Münztypen")
-        .minPoints(0)
-        .maxPoints(10)
         .addChildCriteria(H2_1_T1, H2_1_T2, H2_1_T3, H2_1_T4, H2_1_T5, H2_1_T6, H2_1_T7, H2_1_T8)
         .build();
 
@@ -249,8 +223,6 @@ public class H04_RubricProvider implements RubricProvider {
 
     public static final Criterion H2_2 = Criterion.builder()
         .shortDescription("H2.2 | Implementierende Roboterklasse mit vier [[[int]]]-Attributen für den Referenzstatus")
-        .minPoints(0)
-        .maxPoints(9)
         .addChildCriteria(H2_2_T1, H2_2_T2, H2_2_T3, H2_2_T4, H2_2_T5, H2_2_T6, H2_2_T7, H2_2_T8)
         .build();
 
@@ -304,8 +276,6 @@ public class H04_RubricProvider implements RubricProvider {
 
     public static final Criterion H2_3 = Criterion.builder()
         .shortDescription("H2.3 | Implementierende Roboterklasse mit [[[Robot]]]-Objekt für den Referenzstatus")
-        .minPoints(0)
-        .maxPoints(5)
         .addChildCriteria(H2_3_T1, H2_3_T2, H2_3_T3, H2_3_T4)
         .build();
 
@@ -375,8 +345,6 @@ public class H04_RubricProvider implements RubricProvider {
 
     public static final Criterion H2_4 = Criterion.builder()
         .shortDescription("H2.4 | Klasse ohne Roboter, aber mit Münztypen")
-        .minPoints(0)
-        .maxPoints(6)
         .addChildCriteria(H2_4_T1, H2_4_T2, H2_4_T3, H2_4_T4, H2_4_T5, H2_4_T6)
         .build();
 
