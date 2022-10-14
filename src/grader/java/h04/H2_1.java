@@ -1,7 +1,6 @@
 package h04;
 
 import fopbot.Direction;
-import fopbot.KarelWorld;
 import fopbot.Robot;
 import fopbot.World;
 import org.junit.jupiter.api.DisplayName;
@@ -17,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 
 @TestForSubmission("h04")
@@ -190,7 +188,7 @@ public class H2_1 {
                     CoinType.BRASS, -1);
         }
         catch (IllegalAccessException | InvocationTargetException e) {
-            assertEquals(RuntimeException.class, e.getCause().getClass());
+            assertEquals(IllegalArgumentException.class, e.getCause().getClass());
         }
 
     }
@@ -264,7 +262,7 @@ public class H2_1 {
             setNumberOfCoinsMT.getTheMethod().invoke(RobotWithCoinTypesCT.getClassInstance(), -1);
         }
         catch (IllegalAccessException | InvocationTargetException e) {
-            assertEquals(RuntimeException.class, e.getCause().getClass());
+            assertEquals(IllegalArgumentException.class, e.getCause().getClass());
         }
 
     }
