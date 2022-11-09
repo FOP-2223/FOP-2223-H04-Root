@@ -50,6 +50,7 @@ public class RobotWithCoinTypes extends Robot implements WithCoinTypes {
     @Override
     public void setNumberOfCoinsOfType(CoinType type, int number) {
         if (number < 0) {
+            // leads to exception as number of coins < 0 is invalid
             super.setNumberOfCoins(number);
         }
         switch (type) {
