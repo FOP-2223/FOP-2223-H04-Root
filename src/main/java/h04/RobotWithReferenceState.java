@@ -1,4 +1,5 @@
 package h04;
+
 import fopbot.Direction;
 
 /**

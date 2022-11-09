@@ -3,73 +3,57 @@ package h04;
 import fopbot.Direction;
 
 /**
- * Represents a robot with a reference state.
+ * Represents a robot with a reference state and multiple coin types. Uses a roboter as reference state internally.
  */
-public class RobotWithCoinTypesAndRefStateTwo extends RobotWithCoinTypes implements RobotWithReferenceState{
-
+public class RobotWithCoinTypesAndRefStateTwo extends RobotWithCoinTypes implements RobotWithReferenceState {
     /**
-     * The reference robot
+     * The reference robot.
      */
     private ReferenceRobot refRobot;
 
     /**
      * Initializes a new robot with three coin types.
      *
-     * @param x the value of the x-coordinate of the robot
-     * @param y the value of the y-coordinate of the robot
-     * @param direction the value of the direction of the robot
-     * @param numberOfSilverCoins the amount of the silver coins of the robot
-     * @param numberOfBrassCoins the amount of the brass coins of the robot
-     * @param numberOfCopperCoins the amount of the copper coins of the robot
+     * @param x The value of the x-coordinate of the robot.
+     * @param y The value of the y-coordinate of the robot.
+     * @param direction The value of the direction of the robot.
+     * @param numberOfSilverCoins The amount of the silver coins of the robot.
+     * @param numberOfBrassCoins The amount of the brass coins of the robot.
+     * @param numberOfCopperCoins The amount of the copper coins of the robot.
      */
     public RobotWithCoinTypesAndRefStateTwo(int x, int y, Direction direction, int numberOfSilverCoins,
-                                            int numberOfBrassCoins, int numberOfCopperCoins) {
+                                             int numberOfBrassCoins, int numberOfCopperCoins) {
         super(x, y, direction, numberOfSilverCoins, numberOfBrassCoins, numberOfCopperCoins);
-        refRobot = new ReferenceRobot(x, y, direction,
-            numberOfCopperCoins + numberOfBrassCoins + numberOfSilverCoins);
+        int totalNumberOfCoins = numberOfSilverCoins + numberOfBrassCoins + numberOfCopperCoins;
+        refRobot = new ReferenceRobot(x, y, direction, totalNumberOfCoins);
     }
 
     @Override
     public void setCurrentStateAsReferenceState() {
-        refRobot.setRefX(this.getX());
-        refRobot.setRefY(this.getY());
-        refRobot.setRefDirection(this.getDirection());
-        refRobot.setRefNumberOfCoins(this.getNumberOfCoins());
+        refRobot.setRefX(getX());
+        refRobot.setRefY(getY());
+        refRobot.setRefDirection(getDirection());
+        refRobot.setRefNumberOfCoins(getNumberOfCoins());
     }
 
     @Override
     public int getDiffX() {
-        return this.getX() - refRobot.getRefX();
+        return getX() - refRobot.getRefX();
     }
 
     @Override
     public int getDiffY() {
-        return this.getY() - refRobot.getRefY();
+        return getY() - refRobot.getRefY();
     }
 
     @Override
     public Direction getDiffDirection() {
-        Direction currDirection = this.getDirection();
-        Direction refDirection = refRobot.getRefDirection();
-
-        if (refDirection.equals(currDirection))
-            return Direction.UP;
-            // UP and LEFT, LEFT and DOWN, DOWN and RIGHT, RIGHT and UP
-            // 0 and 1, 1 and 2, 2 and 3, 3 and 0
-        else if (refDirection.ordinal() + 3 == currDirection.ordinal()
-            || refDirection.ordinal() - 1 == currDirection.ordinal())
-            return Direction.LEFT;
-            // UP and DOWN, DOWN and UP, RIGHT and LEFT, LEFT and RIGHT
-            // 0 and 2, 2 and 0, 1 and 3, 3 and 1
-        else if (currDirection.ordinal() - 2 == refDirection.ordinal()
-            || currDirection.ordinal() + 2 == refDirection.ordinal())
-            return Direction.DOWN;
-        else
-            return Direction.RIGHT;
+        int relativeDirection = getDirection().ordinal() - refRobot.getRefDirection().ordinal();
+        return Direction.values()[Math.floorMod(relativeDirection, Direction.values().length)];
     }
 
     @Override
     public int getDiffNumberOfCoins() {
-        return this.getNumberOfCoins() - refRobot.getRefNumberOfCoins();
+        return getNumberOfCoins() - refRobot.getRefNumberOfCoins();
     }
 }
