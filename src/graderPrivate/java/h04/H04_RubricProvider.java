@@ -1,7 +1,5 @@
 package h04;
 
-import org.sourcegrade.docwatcher.api.grading.DocumentationCriterion;
-import org.sourcegrade.docwatcher.api.grading.DocumentationGrader;
 import org.sourcegrade.jagr.api.rubric.*;
 import org.tudalgo.algoutils.reflect.MethodTester;
 
@@ -12,7 +10,6 @@ import static h04.H2_2.RobotWithCoinTypesAndRefState1CT;
 import static h04.H2_3.RobotWithCoinTypesAndRefState2CT;
 import static h04.H2_4.CoinCollectionCT;
 
-@RubricForSubmission("h04")
 public class H04_RubricProvider implements RubricProvider {
 
     ////////////////////////////////////////////////// H1.1
@@ -359,38 +356,19 @@ public class H04_RubricProvider implements RubricProvider {
         .addChildCriteria(H2_1, H2_2, H2_3, H2_4)
         .build();
 
-    public static final Criterion JAVADOC;
-
     static {
         try {
             Class.forName("org.sourcegrade.docwatcher.DocWatcherModule");
         } catch (ClassNotFoundException e) {
             // ignore
         }
-        JAVADOC = DocumentationCriterion.forGrader(
-            DocumentationGrader.builder()
-                .addJavaDoc(new MethodTester(RobotWithReferenceStateCT, "setCurrentStateAsReferenceState")::getMethodDocumentation, H1_1)
-                .addJavaDoc(new MethodTester(RobotWithReferenceStateCT, "getDiffX")::getMethodDocumentation, H1_1)
-                .addJavaDoc(new MethodTester(RobotWithReferenceStateCT, "getDiffY")::getMethodDocumentation, H1_1)
-                .addJavaDoc(new MethodTester(RobotWithReferenceStateCT, "getDiffDirection")::getMethodDocumentation, H1_1)
-                .addJavaDoc(new MethodTester(RobotWithReferenceStateCT, "getDiffNumberOfCoins")::getMethodDocumentation, H1_1)
-                .addJavaDoc(new MethodTester(WithCoinTypesCT, "getNumberOfCoinsOfType")::getMethodDocumentation, H1_2)
-                .addJavaDoc(new MethodTester(WithCoinTypesCT, "setNumberOfCoinsOfType")::getMethodDocumentation, H1_2)
-                .addJavaDoc(RobotWithCoinTypesCT::getConstructorDocumentation, H2_1)
-                .addJavaDoc(RobotWithCoinTypesAndRefState1CT::getConstructorDocumentation, H2_2)
-                .addJavaDoc(RobotWithCoinTypesAndRefState2CT::getConstructorDocumentation, H2_3)
-                .addJavaDoc(CoinCollectionCT::getConstructorDocumentation, H2_4)
-                .addJavaDoc(new MethodTester(CoinCollectionCT, "getNumberOfSilverCoins")::getMethodDocumentation, H2_4)
-                .addJavaDoc(new MethodTester(CoinCollectionCT, "getNumberOfBrassCoins")::getMethodDocumentation, H2_4)
-                .addJavaDoc(new MethodTester(CoinCollectionCT, "getNumberOfCopperCoins")::getMethodDocumentation, H2_4)
-                .build());
     }
 
     @Override
     public Rubric getRubric() {
         return Rubric.builder()
             .title("H04 | Roboter mit Referenzstatus")
-            .addChildCriteria(H1, H2, JAVADOC)
+            .addChildCriteria(H1, H2)
             .build();
     }
 }

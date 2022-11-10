@@ -3,18 +3,17 @@ package h04;
 /**
  * Represents a coin collector with three coin types (silver, brass and copper).
  */
-public class CoinCollection implements WithCoinTypes{
-
+public class CoinCollection implements WithCoinTypes {
     /**
-     * The amount of silver coins the robot has
+     * The amount of silver coins the coin collection contains
      */
     private int numberOfSilverCoins;
     /**
-     * The amount of brass coins the robot has
+     * The amount of brass coins the coin collection contains
      */
     private int numberOfBrassCoins;
     /**
-     * The amount of copper coins the robot has
+     * The amount of copper coins the coin collection contains
      */
     private int numberOfCopperCoins;
 
@@ -25,10 +24,29 @@ public class CoinCollection implements WithCoinTypes{
      * @param numberOfBrassCoins the amount of the brass coins
      * @param numberOfCopperCoins the amount of the copper coins
      */
-    public CoinCollection(int numberOfSilverCoins, int numberOfBrassCoins, int numberOfCopperCoins){
+    public CoinCollection(int numberOfSilverCoins, int numberOfBrassCoins, int numberOfCopperCoins) {
         this.numberOfSilverCoins = numberOfSilverCoins;
         this.numberOfBrassCoins = numberOfBrassCoins;
         this.numberOfCopperCoins = numberOfCopperCoins;
+    }
+
+    @Override
+    public void setNumberOfCoinsOfType(CoinType type, int number) {
+        number = Math.max(0, number);
+        switch (type) {
+            case BRASS -> numberOfBrassCoins = number;
+            case SILVER -> numberOfSilverCoins = number;
+            case COPPER -> numberOfCopperCoins = number;
+        }
+    }
+
+    @Override
+    public int getNumberOfCoinsOfType(CoinType type) {
+        return switch (type) {
+            case SILVER -> numberOfSilverCoins;
+            case BRASS -> numberOfBrassCoins;
+            case COPPER -> numberOfCopperCoins;
+        };
     }
 
     /**
@@ -58,54 +76,21 @@ public class CoinCollection implements WithCoinTypes{
         return numberOfCopperCoins;
     }
 
-    @Override
-    public int getNumberOfCoinsOfType(CoinType coinType) {
-        if (coinType.equals(CoinType.SILVER))
-            return numberOfSilverCoins;
-        else if (coinType.equals(CoinType.BRASS))
-            return numberOfBrassCoins;
-        else
-            return numberOfCopperCoins;
-    }
-
-    @Override
-    public void setNumberOfCoinsOfType(CoinType coinType, int number) {
-        number = number > 0 ? number : 0;
-        // Set the value of the attribute representing the amount of coins
-        // for the coinType to number
-        if (coinType.equals(CoinType.SILVER))
-            numberOfSilverCoins = number;
-        else if (coinType.equals(CoinType.BRASS))
-            numberOfBrassCoins = number;
-        else
-            numberOfCopperCoins = number;
-    }
-
     /**
      * This method adds a coin of the specified coin type.
      *
-     * @param coinType the specified coin type
+     * @param type the specified coin type
      */
-    public void insertCoin(CoinType coinType){
-        if (coinType.equals(CoinType.SILVER))
-            numberOfSilverCoins++;
-        else if (coinType.equals(CoinType.BRASS))
-            numberOfBrassCoins++;
-        else
-            numberOfCopperCoins++;
+    public void insertCoin(CoinType type) {
+        setNumberOfCoinsOfType(type, getNumberOfCoinsOfType(type) + 1);
     }
 
     /**
      * This method removes a coin of the specified coin type.
      *
-     * @param coinType the specified coin type
+     * @param type the specified coin type
      */
-    public void removeCoin(CoinType coinType){
-        if (coinType.equals(CoinType.SILVER))
-            numberOfSilverCoins = numberOfSilverCoins > 0 ? numberOfSilverCoins - 1 : numberOfSilverCoins;
-        else if (coinType.equals(CoinType.BRASS))
-            numberOfBrassCoins = numberOfBrassCoins > 0 ? numberOfBrassCoins - 1 : numberOfBrassCoins;
-        else
-            numberOfCopperCoins = numberOfCopperCoins > 0 ? numberOfCopperCoins - 1 : numberOfCopperCoins;
+    public void removeCoin(CoinType type) {
+        setNumberOfCoinsOfType(type, getNumberOfCoinsOfType(type) - 1);
     }
 }
