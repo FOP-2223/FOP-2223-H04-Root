@@ -74,14 +74,14 @@ public class RobotWithCoinTypes extends Robot implements WithCoinTypes {
 
     @Override
     public void putCoin() {
-        if (numberOfSilverCoins > 0) {
-            numberOfSilverCoins--;
+        if (numberOfCopperCoins > 0) {
+            numberOfCopperCoins--;
         }
         else if (numberOfBrassCoins > 0) {
             numberOfBrassCoins--;
         }
-        else if (numberOfCopperCoins > 0) {
-            numberOfCopperCoins--;
+        else if (numberOfSilverCoins > 0) {
+            numberOfSilverCoins--;
         }
         // leads to exception if getNumberOfCoins() == 0
         super.putCoin();
