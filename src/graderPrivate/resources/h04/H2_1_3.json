@@ -1,0 +1,56 @@
+[
+  {
+    "robotBefore": {
+      "x": 4,
+      "y": 2,
+      "direction": "UP",
+      "numberOfSilverCoins": 10,
+      "numberOfBrassCoins": 20,
+      "numberOfCopperCoins": 30
+    },
+    "robotAfter": {
+      "x": 1024,
+      "y": 512,
+      "direction": "UP",
+      "numberOfSilverCoins": -1,
+      "numberOfBrassCoins": -8,
+      "numberOfCopperCoins": -6
+    }
+  },
+  {
+    "robotBefore": {
+      "x": 4,
+      "y": 2,
+      "direction": "UP",
+      "numberOfSilverCoins": 20,
+      "numberOfBrassCoins": 30,
+      "numberOfCopperCoins": 0
+    },
+    "robotAfter": {
+      "x": 128,
+      "y": 256,
+      "direction": "UP",
+      "numberOfSilverCoins": -12,
+      "numberOfBrassCoins": -142,
+      "numberOfCopperCoins": -1337
+    }
+  },
+  {
+    "robotBefore": {
+      "x": 4,
+      "y": 2,
+      "direction": "UP",
+      "numberOfSilverCoins": 30,
+      "numberOfBrassCoins": 0,
+      "numberOfCopperCoins": 0
+    },
+    "robotAfter": {
+      "x": -9,
+      "y": -8,
+      "direction": "UP",
+      "numberOfSilverCoins": -1,
+      "numberOfBrassCoins": -1,
+      "numberOfCopperCoins": -1
+    }
+  }
+]

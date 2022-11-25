@@ -3,58 +3,60 @@ package h04;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.sourcegrade.jagr.api.rubric.TestForSubmission;
-import org.tudalgo.algoutils.reflect.ClassTester;
-import org.tudalgo.algoutils.reflect.MethodTester;
-import org.tudalgo.algoutils.reflect.ParameterMatcher;
-import org.tudalgo.algoutils.reflect.TestUtils;
 
-import java.lang.reflect.Modifier;
-import java.util.ArrayList;
 import java.util.List;
 
+import static h04.student.CoinTypeStudent.linkToCoinType;
+import static h04.student.More.linkToInt;
+import static h04.student.More.linkToVoid;
+import static h04.student.WithCoinTypesStudent.linkToGetNumberOfCoinsOfType;
+import static h04.student.WithCoinTypesStudent.linkToSetNumberOfCoinsOfType;
+import static h04.student.WithCoinTypesStudent.linkToWithCoinTypes;
+import static org.tudalgo.algoutils.tutor.general.assertions.Assertions3.assertCorrectModifiers;
+import static org.tudalgo.algoutils.tutor.general.assertions.Assertions3.assertCorrectParameters;
+import static org.tudalgo.algoutils.tutor.general.assertions.Assertions3.assertCorrectReturnType;
+import static org.tudalgo.algoutils.tutor.general.assertions.Assertions3.assertHasEnumConstant;
+import static org.tudalgo.algoutils.tutor.general.match.BasicReflectionMatchers.sameType;
+import static org.tudalgo.algoutils.tutor.general.match.BasicStringMatchers.identical;
+import static org.tudalgo.algoutils.tutor.general.reflections.Modifier.INTERFACE;
+import static org.tudalgo.algoutils.tutor.general.reflections.Modifier.PUBLIC;
 
-@TestForSubmission("h04")
+
+@TestForSubmission
 @DisplayName("H1_2")
 public class H1_2 {
-    public final static double minSim = 0.8d;
-    public final static ClassTester<?> WithCoinTypesCT = new ClassTester<>("h04",
-        "WithCoinTypes", minSim, Modifier.PUBLIC | Modifier.ABSTRACT | Modifier.INTERFACE);
-    public final static ClassTester<?> CoinTypeCT = new ClassTester<>("h04",
-        "CoinType", minSim,  Modifier.PUBLIC | Modifier.FINAL | TestUtils.ENUM);
-    final String interface_name = "WithCoinTypes";
-    final String enum_name = "CoinType";
 
     @Test
-    @DisplayName("1 | Existenz Interface " + interface_name)
-    public void test01() {
-        WithCoinTypesCT.verify(1.0d);
+    @DisplayName("1 | Existenz Interface WithCoinTypes")
+    public void t3_1() {
+        var type = linkToWithCoinTypes();
+        assertCorrectModifiers(type, INTERFACE);
     }
 
     @Test
-    @DisplayName("2 | Existenz Enum " + enum_name)
-    public void test02() {
-        CoinTypeCT.verify(1.0d).assertEnumConstants(new String[]{"SILVER", "BRASS", "COPPER"});
+    @DisplayName("2 | Existenz Enum CoinType")
+    public void t2() {
+        var type = linkToCoinType();
+        for (var constant : List.of("BRASS", "COPPER", "SILVER")) {
+            assertHasEnumConstant(type, identical(constant));
+        }
     }
 
     @Test
     @DisplayName("3 | getNumberOfCoinsOfType()")
-    public void test03() {
-        new MethodTester(WithCoinTypesCT.assureClassResolved(),
-            "getNumberOfCoinsOfType", 0.8,
-            Modifier.PUBLIC | Modifier.ABSTRACT,
-            int.class,
-            new ArrayList<>(List.of(new ParameterMatcher("coinType", 0.8, CoinType.class)
-            ))).verify();
+    public void t3_2() {
+        var type = linkToGetNumberOfCoinsOfType();
+        assertCorrectModifiers(type, PUBLIC);
+        assertCorrectParameters(type, sameType(linkToCoinType()));
+        assertCorrectReturnType(type, sameType(linkToInt()));
     }
 
     @Test
     @DisplayName("4 | setNumberOfCoinsOfType()")
-    public void test04() {
-        new MethodTester(WithCoinTypesCT.assureClassResolved(),
-            "setNumberOfCoinsOfType", 0.8,
-            Modifier.PUBLIC | Modifier.ABSTRACT,
-            void.class, new ArrayList<>(List.of(new ParameterMatcher("coinType", 0.8, CoinType.class)
-            , new ParameterMatcher("number", 0.8, int.class)))).verify();
-        ;
+    public void t3_3() {
+        var type = linkToSetNumberOfCoinsOfType();
+        assertCorrectModifiers(type, PUBLIC);
+        assertCorrectParameters(type, sameType(linkToCoinType()), sameType(linkToInt()));
+        assertCorrectReturnType(type, sameType(linkToVoid()));
     }
 }

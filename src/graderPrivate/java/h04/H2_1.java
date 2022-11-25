@@ -1,407 +1,393 @@
 package h04;
 
-import fopbot.Direction;
-import fopbot.Robot;
 import fopbot.World;
+import h04.student.RobotWithCoinTypesData;
+import h04.student.RobotWithCoinTypesStudent;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junitpioneer.jupiter.json.JsonClasspathSource;
+import org.junitpioneer.jupiter.json.Property;
 import org.sourcegrade.jagr.api.rubric.TestForSubmission;
-import org.tudalgo.algoutils.reflect.*;
+import org.tudalgo.algoutils.tutor.general.assertions.Assertions2;
+import org.tudalgo.algoutils.tutor.general.reflections.FieldLink;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Modifier;
-import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static h04.student.CoinTypeStudent.linkToCoinTypeBrass;
+import static h04.student.CoinTypeStudent.linkToCoinTypeCopper;
+import static h04.student.CoinTypeStudent.linkToCoinTypeSilver;
+import static h04.student.More.linkToInt;
+import static h04.student.RobotStudent.linkToPickCoin;
+import static h04.student.RobotStudent.linkToPutCoin;
+import static h04.student.RobotStudent.linkToRobot;
+import static h04.student.RobotStudent.linkToSetNumberOfCoins;
+import static h04.student.RobotWithCoinTypesStudent.linkToNumberOfBrassCoins;
+import static h04.student.RobotWithCoinTypesStudent.linkToNumberOfCopperCoins;
+import static h04.student.RobotWithCoinTypesStudent.linkToNumberOfSilverCoins;
+import static h04.student.RobotWithCoinTypesStudent.linkToRobotWithCoinTypes;
+import static h04.student.RobotWithCoinTypesStudent.linkToRobotWithCoinTypesConstructor;
+import static h04.student.WithCoinTypesStudent.linkToGetNumberOfCoinsOfType;
+import static h04.student.WithCoinTypesStudent.linkToSetNumberOfCoinsOfType;
+import static h04.student.WithCoinTypesStudent.linkToWithCoinTypes;
+import static org.tudalgo.algoutils.tutor.general.assertions.Assertions2.assertEquals;
+import static org.tudalgo.algoutils.tutor.general.assertions.Assertions2.context;
+import static org.tudalgo.algoutils.tutor.general.assertions.Assertions2.contextBuilder;
+import static org.tudalgo.algoutils.tutor.general.assertions.Assertions3.assertCorrectInterfaces;
+import static org.tudalgo.algoutils.tutor.general.assertions.Assertions3.assertCorrectModifiers;
+import static org.tudalgo.algoutils.tutor.general.assertions.Assertions3.assertCorrectStaticType;
+import static org.tudalgo.algoutils.tutor.general.assertions.Assertions3.assertCorrectSuperType;
+import static org.tudalgo.algoutils.tutor.general.match.BasicReflectionMatchers.sameType;
+import static org.tudalgo.algoutils.tutor.general.reflections.Modifier.PRIVATE;
+import static org.tudalgo.algoutils.tutor.general.reflections.Modifier.PUBLIC;
 
 
-@TestForSubmission("h04")
+@TestForSubmission
 @DisplayName("H2_1")
 public class H2_1 {
-    public final static double minSim = 0.8d;
 
-    public final static ClassTester<Object> RobotWithCoinTypesCT = new ClassTester("h04",
-        "RobotWithCoinTypes", minSim, Modifier.PUBLIC,
-        Robot.class,
-        new ArrayList<>(List.of(new IdentifierMatcher("WithCoinTypes", "h04", minSim))));
-    public final static ClassTester<?> RobotCT = new ClassTester<>("fopbot",
-        "Robot", minSim, Modifier.PUBLIC);
-
-    final String class_name = "RobotWithCoinTypes";
-
-    public static void setupWorld() {
-        World.reset();
-        World.setSize(5, 5);
+    @BeforeEach
+    public void setupWorld() {
         World.setDelay(0);
-        World.setVisible(false);
+        World.setSize(5, 5);
     }
 
     @Test
-    @DisplayName("1 | Existenz Klasse " + class_name)
-    public void test01() {
-        RobotWithCoinTypesCT.setSuperClass((Class<Object>) (Class<?>) Robot.class);
-        RobotWithCoinTypesCT.setImplementsInterfaces(
-            new ArrayList<>(List.of(new IdentifierMatcher("WithCoinTypes", "h04", minSim))));
-        RobotWithCoinTypesCT.verify(1.0d);
+    @DisplayName("1 | Existenz Klasse RobotWithCoinTypes")
+    public void t4() {
+        var type = linkToRobotWithCoinTypes();
+        assertCorrectModifiers(type, PUBLIC);
+        assertCorrectSuperType(type, sameType(linkToRobot()));
+        assertCorrectInterfaces(type, sameType(linkToWithCoinTypes()));
     }
 
-    @Test
+    @ParameterizedTest
+    @JsonClasspathSource("h04/H2_1_1.json")
     @DisplayName("2 | Konstruktor")
-    public void test02() {
-        ParameterMatcher [] parameterMatcher = new ParameterMatcher[6];
-        parameterMatcher[0] = new ParameterMatcher("x", 0.8, int.class);
-        parameterMatcher[1] = new ParameterMatcher("y", 0.8, int.class);
-        parameterMatcher[2] = new ParameterMatcher("direction", 0.8, Direction.class);
-        parameterMatcher[3] = new ParameterMatcher("numberOfSilverCoins", 0.8, int.class);
-        parameterMatcher[4] = new ParameterMatcher("numberOfBrassCoins", 0.8, int.class);
-        parameterMatcher[5] = new ParameterMatcher("numberOfCopperCoins", 0.8, int.class);
-
-        RobotWithCoinTypesCT.assureClassResolved();
-        var constructor = (Constructor<Object>) RobotWithCoinTypesCT.resolveConstructor(parameterMatcher);
-        ((ClassTester<Object>) RobotWithCoinTypesCT).assertConstructorValid(constructor, Modifier.PUBLIC,
-            parameterMatcher);
-
-        Field numberOfSilverCoinsField = RobotWithCoinTypesCT
-            .resolveAttribute(new AttributeMatcher("numberOfSilverCoins", 0.8,
-                Modifier.PRIVATE, int.class));
-        Field numberOfBrassCoinsField = RobotWithCoinTypesCT
-            .resolveAttribute(new AttributeMatcher("numberOfBrassCoins", 0.8,
-                Modifier.PRIVATE, int.class));
-        Field numberOfCopperCoinsField = RobotWithCoinTypesCT
-            .resolveAttribute(new AttributeMatcher("numberOfCopperCoins", 0.8,
-                Modifier.PRIVATE, int.class));
-
+    public void t6(@Property("robot") RobotWithCoinTypesData robotData) {
         setupWorld();
-
-        // Valid Value
-        ((ClassTester<Object>) RobotWithCoinTypesCT).setClassInstance(assertDoesNotThrow(()
-            -> constructor.newInstance(0, 0, Direction.UP, 1, 2, 3)));
-
-        RobotWithCoinTypesCT.assertFieldEquals(numberOfSilverCoinsField, 1);
-        RobotWithCoinTypesCT.assertFieldEquals(numberOfBrassCoinsField, 2);
-        RobotWithCoinTypesCT.assertFieldEquals(numberOfCopperCoinsField, 3);
-
-        // Bigger Value
-        ((ClassTester<Object>) RobotWithCoinTypesCT).setClassInstance(assertDoesNotThrow(()
-            -> constructor.newInstance( 0, 0, Direction.UP, 10, 20, 30)));
-        RobotWithCoinTypesCT.assertFieldEquals(numberOfSilverCoinsField, 10);
-        RobotWithCoinTypesCT.assertFieldEquals(numberOfBrassCoinsField, 20);
-        RobotWithCoinTypesCT.assertFieldEquals(numberOfCopperCoinsField, 30);
+        var robot = new RobotWithCoinTypesStudent(robotData, false);
+        assertCorrectModifiers(linkToRobotWithCoinTypesConstructor(), PUBLIC);
+        assertEquals(
+            robotData.x(),
+            robot.x(),
+            robot.context(),
+            r -> "unexpected x-coordinate"
+        );
+        assertEquals(
+            robotData.y(),
+            robot.y(),
+            robot.context(),
+            r -> "unexpected y-coordinate"
+        );
+        assertEquals(
+            robotData.direction(),
+            robot.direction(),
+            robot.context(),
+            r -> "unexpected direction"
+        );
+        assertEquals(
+            robotData.numberOfSilverCoins(),
+            robot.numberOfSilverCoins(),
+            robot.context(),
+            r -> "unexpected number of silver coins"
+        );
+        assertEquals(
+            robotData.numberOfBrassCoins(),
+            robot.numberOfBrassCoins(),
+            robot.context(),
+            r -> "unexpected number of brass coins"
+        );
+        assertEquals(
+            robotData.numberOfCopperCoins(),
+            robot.numberOfCopperCoins(),
+            robot.context(),
+            r -> "unexpected number of copper coins"
+        );
     }
 
-    @Test
-    @DisplayName("3 | getNumberOfCoinsOfType()")
-    public void test03() {
-        RobotWithCoinTypesCT.resolve();
-
-        Field numberOfSilverCoinsField = RobotWithCoinTypesCT
-            .resolveAttribute(new AttributeMatcher("numberOfSilverCoins", 0.8,
-                Modifier.PRIVATE, int.class));
-        Field numberOfBrassCoinsField = RobotWithCoinTypesCT
-            .resolveAttribute(new AttributeMatcher("numberOfBrassCoins", 0.8,
-                Modifier.PRIVATE, int.class));
-        Field numberOfCopperCoinsField = RobotWithCoinTypesCT
-            .resolveAttribute(new AttributeMatcher("numberOfCopperCoins", 0.8,
-                Modifier.PRIVATE, int.class));
-
-        MethodTester mt = new MethodTester(
-            RobotWithCoinTypesCT, "getNumberOfCoinsOfType", 0.8, Modifier.PUBLIC,
-            int.class, new ArrayList<>(List.of(new ParameterMatcher("coinType", minSim, CoinType.class)))).verify();
-        mt.resolveMethod();
-
-        for (int i = 0; i <= 20; i++) {
-            RobotWithCoinTypesCT.setField(numberOfSilverCoinsField, i);
-            mt.assertReturnValueEquals(
-                i,
-                CoinType.SILVER);
-
-            RobotWithCoinTypesCT.setField(numberOfBrassCoinsField, i);
-            mt.assertReturnValueEquals(
-                i,
-                CoinType.BRASS);
-
-            RobotWithCoinTypesCT.setField(numberOfCopperCoinsField, i);
-            mt.assertReturnValueEquals(
-                i,
-                CoinType.COPPER);
-        }
+    @ParameterizedTest
+    @JsonClasspathSource("h04/H2_1_1.json")
+    @DisplayName("3 | getNumberOfCoinsOfType(CoinType)")
+    public void t8(@Property("robot") RobotWithCoinTypesData robotData) {
+        var method = linkToGetNumberOfCoinsOfType();
+        var robot = new RobotWithCoinTypesStudent(robotData, true);
+        var context = contextBuilder().subject(method).add(robot.context()).build();
+        assertEquals(
+            robotData.numberOfSilverCoins(),
+            robot.getNumberOfCoinsOfType(linkToCoinTypeSilver().constant()),
+            context,
+            r -> "unexpected number of silver coins"
+        );
+        assertEquals(
+            robotData.numberOfBrassCoins(),
+            robot.getNumberOfCoinsOfType(linkToCoinTypeBrass().constant()),
+            context,
+            r -> "unexpected number of brass coins"
+        );
+        assertEquals(
+            robotData.numberOfCopperCoins(),
+            robot.getNumberOfCoinsOfType(linkToCoinTypeCopper().constant()),
+            context,
+            r -> "unexpected number of copper coins"
+        );
     }
 
-    @Test
-    @DisplayName("4 | setNumberOfCoinsOfType()")
-    public void test04() {
-        RobotWithCoinTypesCT.resolve();
+    //
+    @ParameterizedTest
+    @JsonClasspathSource("h04/H2_1_2.json")
+    @DisplayName("4 | setNumberOfCoinsOfType(CoinType, int)")
+    public void t9(
+        @Property("robotBefore") RobotWithCoinTypesData robotBeforeData,
+        @Property("robotAfter") RobotWithCoinTypesData robotAfterData
+    ) {
+        var robot = new RobotWithCoinTypesStudent(robotBeforeData, true);
+        var context = contextBuilder()
+            .subject(linkToSetNumberOfCoinsOfType())
+            .add("numberOfSilverCoins", robotBeforeData.numberOfSilverCoins())
+            .build();
+        robot.setNumberOfCoinsOfType(linkToCoinTypeSilver().constant(), robotAfterData.numberOfSilverCoins());
+        assertEquals(
+            robotAfterData.numberOfSilverCoins(),
+            robot.numberOfSilverCoins(),
+            context,
+            r -> "unexpected number of silver coins"
+        );
+        context = contextBuilder()
+            .subject(linkToSetNumberOfCoinsOfType())
+            .add("numberOfBrassCoins", robotBeforeData.numberOfBrassCoins())
+            .build();
+        robot.setNumberOfCoinsOfType(linkToCoinTypeBrass().constant(), robotAfterData.numberOfBrassCoins());
+        assertEquals(
+            robotAfterData.numberOfBrassCoins(),
+            robot.numberOfBrassCoins(),
+            context,
+            r -> "unexpected number of brass coins"
+        );
+        context = contextBuilder()
+            .subject(linkToSetNumberOfCoinsOfType())
+            .add("numberOfCopperCoins", robotBeforeData.numberOfCopperCoins())
+            .build();
+        robot.setNumberOfCoinsOfType(linkToCoinTypeCopper().constant(), robotAfterData.numberOfCopperCoins());
+        assertEquals(
+            robotAfterData.numberOfCopperCoins(),
+            robot.numberOfCopperCoins(),
+            context,
+            r -> "unexpected number of copper coins"
+        );
+        // check total number of coins
+        context = contextBuilder()
+            .subject(linkToSetNumberOfCoinsOfType())
+            .add("numberOfSilverCoins", robotBeforeData.numberOfSilverCoins())
+            .add("numberOfBrassCoins", robotBeforeData.numberOfBrassCoins())
+            .add("numberOfCopperCoins", robotBeforeData.numberOfCopperCoins())
+            .build();
+        assertEquals(
+            robotAfterData.numberOfSilverCoins() + robotAfterData.numberOfBrassCoins() + robotAfterData.numberOfCopperCoins(),
+            robot.numberOfCoins(),
+            context,
+            r -> "unexpected total number of coins"
+        );
+    }
 
-        Field numberOfSilverCoinsField = RobotWithCoinTypesCT
-            .resolveAttribute(new AttributeMatcher("numberOfSilverCoins", 0.8,
-                Modifier.PRIVATE, int.class));
-        Field numberOfBrassCoinsField = RobotWithCoinTypesCT
-            .resolveAttribute(new AttributeMatcher("numberOfBrassCoins", 0.8,
-                Modifier.PRIVATE, int.class));
-        Field numberOfCopperCoinsField = RobotWithCoinTypesCT
-            .resolveAttribute(new AttributeMatcher("numberOfCopperCoins", 0.8,
-                Modifier.PRIVATE, int.class));
-
-        MethodTester setNumberOfCoinTypesMT = new MethodTester(
-            RobotWithCoinTypesCT, "setNumberOfCoinsOfType", 0.8, Modifier.PUBLIC,
-            void.class, new ArrayList<>(List.of(new ParameterMatcher("coinType", minSim, CoinType.class),
-            new ParameterMatcher("number", 0.8, int.class)
-            ))).verify();
-        setNumberOfCoinTypesMT.resolveMethod();
-
-        MethodTester getNumberOfCoinsMT = new MethodTester(
-            RobotWithCoinTypesCT, "getNumberOfCoins", 1.0, Modifier.PUBLIC,
-            int.class, null, true).verify();
-        getNumberOfCoinsMT.resolveMethod();
-
-        // Prepare World and Robot
-        setupWorld();
-        Field world = assertDoesNotThrow(()->RobotWithCoinTypesCT.getTheClass().getSuperclass().getDeclaredField("world"));
-        RobotWithCoinTypesCT.setField(world, World.getGlobalWorld());
-        World.getGlobalWorld().addRobot((Robot)RobotWithCoinTypesCT.getClassInstance());
-
-
-        // Test Values and Robot Method Call
-        for (int i = 0; i <= 20; i++) {
-            RobotWithCoinTypesCT.setField(numberOfSilverCoinsField, 0);
-            RobotWithCoinTypesCT.setField(numberOfBrassCoinsField, 0);
-            RobotWithCoinTypesCT.setField(numberOfCopperCoinsField, 0);
-            setNumberOfCoinTypesMT.invoke(CoinType.SILVER, i);
-            getNumberOfCoinsMT.assertReturnValueEquals(i);
-            RobotWithCoinTypesCT.assertFieldEquals(numberOfSilverCoinsField, i);
-
-            setNumberOfCoinTypesMT.invoke(CoinType.BRASS, i);
-            getNumberOfCoinsMT.assertReturnValueEquals(2*i);
-            RobotWithCoinTypesCT.assertFieldEquals(numberOfBrassCoinsField, i);
-
-            setNumberOfCoinTypesMT.invoke(CoinType.COPPER, i);
-            getNumberOfCoinsMT.assertReturnValueEquals(3*i);
-            RobotWithCoinTypesCT.assertFieldEquals(numberOfCopperCoinsField, i);
-        }
-
-        // Throws Exception
-        try{
-            setNumberOfCoinTypesMT.getTheMethod().invoke(RobotWithCoinTypesCT.getClassInstance(),
-                    CoinType.BRASS, -1);
-        }
-        catch (IllegalAccessException | InvocationTargetException e) {
-            assertEquals(IllegalArgumentException.class, e.getCause().getClass());
-        }
-
+    @ParameterizedTest
+    @JsonClasspathSource("h04/H2_1_3.json")
+    @DisplayName("4 | setNumberOfCoinsOfType(CoinType, int) | IllegalArgumentException")
+    public void t9_2(
+        @Property("robotBefore") RobotWithCoinTypesData robotBeforeData,
+        @Property("robotAfter") RobotWithCoinTypesData robotAfterData
+    ) {
+        var robot = new RobotWithCoinTypesStudent(robotBeforeData, true);
+        robot.setNumberOfCoinsOfTypeExceptional(linkToCoinTypeSilver().constant(), robotAfterData.numberOfSilverCoins());
+        robot.setNumberOfCoinsOfTypeExceptional(linkToCoinTypeBrass().constant(), robotAfterData.numberOfBrassCoins());
+        robot.setNumberOfCoinsOfTypeExceptional(linkToCoinTypeCopper().constant(), robotAfterData.numberOfCopperCoins());
+        assertEquals(
+            robotBeforeData.numberOfSilverCoins(),
+            robot.numberOfSilverCoins(),
+            contextBuilder()
+                .subject(linkToSetNumberOfCoinsOfType())
+                .add("numberOfSilverCoinsBefore", robotBeforeData.numberOfSilverCoins())
+                .add("numberOfSilverCoinsAfter", robotAfterData.numberOfSilverCoins())
+                .build(),
+            r -> "unexpected number of silver coins"
+        );
+        assertEquals(
+            robotBeforeData.numberOfBrassCoins(),
+            robot.numberOfBrassCoins(),
+            contextBuilder()
+                .subject(linkToSetNumberOfCoinsOfType())
+                .add("numberOfBrassCoinsBefore", robotBeforeData.numberOfBrassCoins())
+                .add("numberOfBrassCoinsAfter", robotAfterData.numberOfBrassCoins())
+                .build(),
+            r -> "unexpected number of brass coins"
+        );
+        assertEquals(
+            robotBeforeData.numberOfCopperCoins(),
+            robot.numberOfCopperCoins(),
+            contextBuilder()
+                .subject(linkToSetNumberOfCoinsOfType())
+                .add("numberOfCopperCoinsBefore", robotBeforeData.numberOfCopperCoins())
+                .add("numberOfCopperCoinsAfter", robotAfterData.numberOfCopperCoins())
+                .build(),
+            r -> "unexpected number of copper coins"
+        );
     }
 
     @Test
     @DisplayName("5 | Attribute numberOfSilverCoins, numberOfBrassCoins, numberOfCopperCoins")
-    public void test05() {
-        RobotWithCoinTypesCT.resolve();
-        for (var fieldMatcher : new AttributeMatcher[]{
-            new AttributeMatcher("numberOfSilverCoins", 0.8, Modifier.PRIVATE, int.class),
-            new AttributeMatcher("numberOfBrassCoins", 0.8, Modifier.PRIVATE, int.class),
-            new AttributeMatcher("numberOfCopperCoins", 0.8, Modifier.PRIVATE, int.class)
-        }) {
-            RobotWithCoinTypesCT.resolveAttribute(fieldMatcher);
+    public void t5() {
+        for (FieldLink link : List.of(linkToNumberOfSilverCoins(), linkToNumberOfBrassCoins(), linkToNumberOfCopperCoins())) {
+            assertCorrectStaticType(link, sameType(linkToInt()));
+            assertCorrectModifiers(link, PRIVATE);
         }
     }
 
-    @Test
-    @DisplayName("6 | setNumberOfCoins()")
-    public void test06() {
-        RobotWithCoinTypesCT.resolve();
 
-        Field numberOfSilverCoinsField = RobotWithCoinTypesCT
-            .resolveAttribute(new AttributeMatcher("numberOfSilverCoins", 0.8,
-                Modifier.PRIVATE, int.class));
-        Field numberOfBrassCoinsField = RobotWithCoinTypesCT
-            .resolveAttribute(new AttributeMatcher("numberOfBrassCoins", 0.8,
-                Modifier.PRIVATE, int.class));
-        Field numberOfCopperCoinsField = RobotWithCoinTypesCT
-            .resolveAttribute(new AttributeMatcher("numberOfCopperCoins", 0.8,
-                Modifier.PRIVATE, int.class));
-
-        MethodTester setNumberOfCoinsMT = new MethodTester(
-            RobotWithCoinTypesCT, "setNumberOfCoins", 0.8, Modifier.PUBLIC,
-            void.class, new ArrayList<>(List.of(new ParameterMatcher("number", 0.8, int.class)
-        ))).verify();
-        setNumberOfCoinsMT.resolveMethod();
-
-        MethodTester getNumberOfCoinsOfTypeMT = new MethodTester(
-            RobotWithCoinTypesCT, "getNumberOfCoinsOfType", 0.8, Modifier.PUBLIC,
-            int.class, new ArrayList<>(List.of(new ParameterMatcher("coinType", minSim, CoinType.class)))).verify();
-
-        getNumberOfCoinsOfTypeMT.resolveMethod();
-
-        MethodTester getNumberOfCoinsMT = new MethodTester(
-            RobotWithCoinTypesCT, "getNumberOfCoins", 1.0, Modifier.PUBLIC,
-            int.class, null, true).verify();
-        getNumberOfCoinsMT.resolveMethod();
-
-        // Prepare World and Robot
-        setupWorld();
-        Field world = assertDoesNotThrow(()->RobotWithCoinTypesCT.getTheClass().getSuperclass().getDeclaredField("world"));
-        RobotWithCoinTypesCT.setField(world, World.getGlobalWorld());
-        World.getGlobalWorld().addRobot((Robot)RobotWithCoinTypesCT.getClassInstance());
-
-
-        // Test Values and Robot Method Call
-        for (int i = 0; i <= 20; i++) {
-            RobotWithCoinTypesCT.setField(numberOfCopperCoinsField, 0);
-            RobotWithCoinTypesCT.setField(numberOfSilverCoinsField, 0);
-            RobotWithCoinTypesCT.setField(numberOfBrassCoinsField, 0);
-
-            setNumberOfCoinsMT.invoke(i);
-            getNumberOfCoinsMT.assertReturnValueEquals(i);
-            getNumberOfCoinsOfTypeMT.assertReturnValueEquals(i, CoinType.COPPER);
-            RobotWithCoinTypesCT.assertFieldEquals(numberOfCopperCoinsField, i);
-        }
-
-        // Throws Exception
-        try {
-            setNumberOfCoinsMT.getTheMethod().invoke(RobotWithCoinTypesCT.getClassInstance(), -1);
-        }
-        catch (IllegalAccessException | InvocationTargetException e) {
-            assertEquals(IllegalArgumentException.class, e.getCause().getClass());
-        }
-
+    @ParameterizedTest
+    @JsonClasspathSource("h04/H2_1_1.json")
+    @DisplayName("6 | setNumberOfCoins(int)")
+    public void t7(
+        @Property("robot") RobotWithCoinTypesData robotData,
+        @Property("numberOfCoins") int numberOfCoins
+    ) {
+        var robot = new RobotWithCoinTypesStudent(robotData, true);
+        robot.setNumberOfCoins(numberOfCoins);
+        var context = contextBuilder()
+            .subject(linkToSetNumberOfCoins())
+            .add("initial", context(robotData))
+            .add("numberOfCoins", numberOfCoins)
+            .build();
+        assertEquals(
+            robotData.numberOfSilverCoins(),
+            robot.numberOfSilverCoins(),
+            context,
+            r -> "unexpected number of silver coins"
+        );
+        assertEquals(
+            robotData.numberOfBrassCoins(),
+            robot.numberOfBrassCoins(),
+            context,
+            r -> "unexpected number of brass coins"
+        );
+        assertEquals(
+            numberOfCoins,
+            robot.numberOfCopperCoins(),
+            context,
+            r -> "unexpected number of copper coins"
+        );
     }
 
-    @Test
+    @ParameterizedTest
+    @JsonClasspathSource("h04/H2_1_1.json")
     @DisplayName("7 | pickCoin()")
-    public void test07() {
-        RobotWithCoinTypesCT.resolve();
-
-        Field numberOfSilverCoinsField = RobotWithCoinTypesCT
-            .resolveAttribute(new AttributeMatcher("numberOfSilverCoins", 0.8,
-                Modifier.PRIVATE, int.class));
-        Field numberOfBrassCoinsField = RobotWithCoinTypesCT
-            .resolveAttribute(new AttributeMatcher("numberOfBrassCoins", 0.8,
-                Modifier.PRIVATE, int.class));
-        Field numberOfCopperCoinsField = RobotWithCoinTypesCT
-            .resolveAttribute(new AttributeMatcher("numberOfCopperCoins", 0.8,
-                Modifier.PRIVATE, int.class));
-
-        MethodTester pickCoinMT = new MethodTester(
-            RobotWithCoinTypesCT, "pickCoin", 0.8, Modifier.PUBLIC,
-            void.class).verify();
-        pickCoinMT.resolveMethod();
-
-        MethodTester getNumberOfCoinsOfTypeMT = new MethodTester(
-            RobotWithCoinTypesCT, "getNumberOfCoinsOfType", 0.8, Modifier.PUBLIC,
-            int.class, new ArrayList<>(List.of(new ParameterMatcher("coinType", minSim, CoinType.class)))).verify();
-        getNumberOfCoinsOfTypeMT.resolveMethod();
-
-        MethodTester getNumberOfCoinsMT = new MethodTester(
-            RobotWithCoinTypesCT, "getNumberOfCoins", 1.0, Modifier.PUBLIC,
-            int.class, null, true).verify();
-        getNumberOfCoinsMT.resolveMethod();
-
-        // Prepare World and Robot
-        setupWorld();
-        Field world = assertDoesNotThrow(()->RobotWithCoinTypesCT.getTheClass().getSuperclass().getDeclaredField("world"));
-        RobotWithCoinTypesCT.setField(world, World.getGlobalWorld());
-        World.getGlobalWorld().addRobot((Robot)RobotWithCoinTypesCT.getClassInstance());
-        World.getGlobalWorld().putCoins(0,0,21);
-
-        // Test Values and Robot Method Call
-        for (int i = 0; i <= 20; i++) {
-            RobotWithCoinTypesCT.setField(numberOfCopperCoinsField, i);
-            RobotWithCoinTypesCT.setField(numberOfSilverCoinsField, 0);
-            RobotWithCoinTypesCT.setField(numberOfBrassCoinsField, 0);
-
-            pickCoinMT.invoke();
-            getNumberOfCoinsMT.assertReturnValueEquals(i + 1);
-            getNumberOfCoinsOfTypeMT.assertReturnValueEquals(i + 1, CoinType.COPPER);
-            RobotWithCoinTypesCT.assertFieldEquals(numberOfCopperCoinsField, i + 1);
-        }
+    public void t11(
+        @Property("robot") RobotWithCoinTypesData robotData
+    ) {
+        World.getGlobalWorld().putCoins(robotData.x(), robotData.y(), 10);
+        var instance = new RobotWithCoinTypesStudent(robotData, true);
+        instance.pickCoin();
+        var context = contextBuilder()
+            .subject(linkToPickCoin())
+            .add("initial", context(robotData))
+            .build();
+        Assertions2.assertEquals(
+            robotData.numberOfCopperCoins() + 1,
+            instance.numberOfCopperCoins(),
+            context,
+            r -> "unexpected number of copper coins"
+        );
+        assertEquals(
+            robotData.numberOfSilverCoins(),
+            instance.numberOfSilverCoins(),
+            context,
+            r -> "unexpected number of silver coins"
+        );
+        assertEquals(
+            robotData.numberOfBrassCoins(),
+            instance.numberOfBrassCoins(),
+            context,
+            r -> "unexpected number of brass coins"
+        );
     }
 
-    @Test
+    @SuppressWarnings("DuplicatedCode")
+    @ParameterizedTest
+    @JsonClasspathSource("h04/H2_1_2.json")
     @DisplayName("8 | putCoin()")
-    public void test08() {
-        RobotWithCoinTypesCT.resolve();
+    public void t10(
+        @Property("robotBefore") RobotWithCoinTypesData robotBeforeData,
+        @Property("robotAfter") RobotWithCoinTypesData robotAfterData
+    ) {
+        var robot = new RobotWithCoinTypesStudent(robotBeforeData, true);
+        robot.putCoin();
+        var context = contextBuilder()
+            .subject(linkToPutCoin())
+            .add("before", context(robotBeforeData))
+            .build();
+        Assertions2.assertEquals(
+            robotAfterData.numberOfCopperCoins(),
+            robot.numberOfCopperCoins(),
+            context,
+            r -> "unexpected number of copper coins"
+        );
+        assertEquals(
+            robotAfterData.numberOfSilverCoins(),
+            robot.numberOfSilverCoins(),
+            context,
+            r -> "unexpected number of silver coins"
+        );
+        assertEquals(
+            robotAfterData.numberOfBrassCoins(),
+            robot.numberOfBrassCoins(),
+            context,
+            r -> "unexpected number of brass coins"
+        );
+        assertEquals(
+            robotAfterData.numberOfSilverCoins() + robotAfterData.numberOfBrassCoins() + robotAfterData.numberOfCopperCoins(),
+            robot.numberOfCoins(),
+            context,
+            r -> "unexpected number of total coins"
+        );
+    }
 
-        Field numberOfSilverCoinsField = RobotWithCoinTypesCT
-            .resolveAttribute(new AttributeMatcher("numberOfSilverCoins", 0.8,
-                Modifier.PRIVATE, int.class));
-        Field numberOfBrassCoinsField = RobotWithCoinTypesCT
-            .resolveAttribute(new AttributeMatcher("numberOfBrassCoins", 0.8,
-                Modifier.PRIVATE, int.class));
-        Field numberOfCopperCoinsField = RobotWithCoinTypesCT
-            .resolveAttribute(new AttributeMatcher("numberOfCopperCoins", 0.8,
-                Modifier.PRIVATE, int.class));
-
-        MethodTester putCoinMT = new MethodTester(
-            RobotWithCoinTypesCT, "putCoin", 0.8, Modifier.PUBLIC,
-            void.class).verify();
-        putCoinMT.resolveMethod();
-
-        MethodTester getNumberOfCoinsOfTypeMT = new MethodTester(
-            RobotWithCoinTypesCT, "getNumberOfCoinsOfType", 0.8, Modifier.PUBLIC,
-            int.class, new ArrayList<>(List.of(new ParameterMatcher("coinType", minSim, CoinType.class)))).verify();
-        getNumberOfCoinsOfTypeMT.resolveMethod();
-
-        MethodTester getNumberOfCoinsMT = new MethodTester(
-            RobotWithCoinTypesCT, "getNumberOfCoins", 1.0, Modifier.PUBLIC,
-            int.class, null, true).verify();
-        getNumberOfCoinsMT.resolveMethod();
-
-        // Prepare World and Robot
-        setupWorld();
-        Field world = assertDoesNotThrow(()->RobotWithCoinTypesCT.getTheClass().getSuperclass().getDeclaredField("world"));
-        RobotWithCoinTypesCT.setField(world, World.getGlobalWorld());
-        World.getGlobalWorld().addRobot((Robot)RobotWithCoinTypesCT.getClassInstance());
-        ((Robot) RobotWithCoinTypesCT.getClassInstance()).setNumberOfCoins(30);
-
-        // Test Values and Robot Method Call
-        for (int i = 30; i >= 1; i = i-3) {
-            // Test if it puts copper, when there is copper available
-            RobotWithCoinTypesCT.setField(numberOfCopperCoinsField, i);
-            RobotWithCoinTypesCT.setField(numberOfSilverCoinsField, 0);
-            RobotWithCoinTypesCT.setField(numberOfBrassCoinsField, 0);
-
-            putCoinMT.invoke();
-            getNumberOfCoinsMT.assertReturnValueEquals(i - 1);
-            getNumberOfCoinsOfTypeMT.assertReturnValueEquals(i - 1, CoinType.COPPER);
-            getNumberOfCoinsOfTypeMT.assertReturnValueEquals(0, CoinType.BRASS);
-            getNumberOfCoinsOfTypeMT.assertReturnValueEquals(0, CoinType.SILVER);
-            RobotWithCoinTypesCT.assertFieldEquals(numberOfCopperCoinsField, i - 1);
-
-            // Test if it puts brass, when there is no copper, but brass available
-            RobotWithCoinTypesCT.setField(numberOfCopperCoinsField, 0);
-            RobotWithCoinTypesCT.setField(numberOfBrassCoinsField, i);
-
-            putCoinMT.invoke();
-            getNumberOfCoinsMT.assertReturnValueEquals(i - 2);
-            getNumberOfCoinsOfTypeMT.assertReturnValueEquals(0, CoinType.COPPER);
-            getNumberOfCoinsOfTypeMT.assertReturnValueEquals(i - 1, CoinType.BRASS);
-            getNumberOfCoinsOfTypeMT.assertReturnValueEquals(0, CoinType.SILVER);
-            RobotWithCoinTypesCT.assertFieldEquals(numberOfBrassCoinsField, i - 1);
-
-            // Test if it puts silver, when there is no copper and brass, but silver available
-            RobotWithCoinTypesCT.setField(numberOfBrassCoinsField, 0);
-            RobotWithCoinTypesCT.setField(numberOfSilverCoinsField, i);
-
-            putCoinMT.invoke();
-            getNumberOfCoinsMT.assertReturnValueEquals(i - 3);
-            getNumberOfCoinsOfTypeMT.assertReturnValueEquals(0, CoinType.COPPER);
-            getNumberOfCoinsOfTypeMT.assertReturnValueEquals(0, CoinType.BRASS);
-            getNumberOfCoinsOfTypeMT.assertReturnValueEquals(i - 1, CoinType.SILVER);
-            RobotWithCoinTypesCT.assertFieldEquals(numberOfSilverCoinsField, i - 1);
-        }
-
-        // Throw Exception
-        RobotWithCoinTypesCT.setField(numberOfCopperCoinsField, 0);
-        RobotWithCoinTypesCT.setField(numberOfSilverCoinsField, 0);
-        RobotWithCoinTypesCT.setField(numberOfBrassCoinsField, 0);
-
-        try {
-            putCoinMT.getTheMethod().invoke(RobotWithCoinTypesCT.getClassInstance());
-        }
-        catch (IllegalAccessException | InvocationTargetException e) {
-            assertEquals(RuntimeException.class, e.getCause().getClass());
-        }
+    @SuppressWarnings("DuplicatedCode")
+    @ParameterizedTest
+    @JsonClasspathSource("h04/H2_1_4.json")
+    @DisplayName("8 | putCoin()")
+    public void t10_2(
+        @Property("robot") RobotWithCoinTypesData robotData
+    ) {
+        var robot = new RobotWithCoinTypesStudent(robotData, true);
+        robot.putCoinExceptional();
+        var context = contextBuilder()
+            .subject(linkToPutCoin())
+            .add("before", context(robotData))
+            .build();
+        Assertions2.assertEquals(
+            robotData.numberOfCopperCoins(),
+            robot.numberOfCopperCoins(),
+            context,
+            r -> "unexpected number of copper coins"
+        );
+        assertEquals(
+            robotData.numberOfSilverCoins(),
+            robot.numberOfSilverCoins(),
+            context,
+            r -> "unexpected number of silver coins"
+        );
+        assertEquals(
+            robotData.numberOfBrassCoins(),
+            robot.numberOfBrassCoins(),
+            context,
+            r -> "unexpected number of brass coins"
+        );
+        assertEquals(
+            robotData.numberOfSilverCoins() + robotData.numberOfBrassCoins() + robotData.numberOfCopperCoins(),
+            robot.numberOfCoins(),
+            context,
+            r -> "unexpected number of total coins"
+        );
     }
 }
 

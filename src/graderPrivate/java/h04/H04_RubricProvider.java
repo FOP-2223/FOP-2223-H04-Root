@@ -1,374 +1,447 @@
 package h04;
 
-import org.sourcegrade.jagr.api.rubric.*;
-import org.tudalgo.algoutils.reflect.MethodTester;
+import fopbot.Direction;
+import h04.student.CoinCollectionData;
+import h04.student.RobotWithCoinTypesData;
+import org.sourcegrade.jagr.api.rubric.Criterion;
+import org.sourcegrade.jagr.api.rubric.GradeResult;
+import org.sourcegrade.jagr.api.rubric.Grader;
+import org.sourcegrade.jagr.api.rubric.JUnitTestRef;
+import org.sourcegrade.jagr.api.rubric.Rubric;
+import org.sourcegrade.jagr.api.rubric.RubricProvider;
 
-import static h04.H1_1.RobotWithReferenceStateCT;
-import static h04.H1_2.WithCoinTypesCT;
-import static h04.H2_1.RobotWithCoinTypesCT;
-import static h04.H2_2.RobotWithCoinTypesAndRefState1CT;
-import static h04.H2_3.RobotWithCoinTypesAndRefState2CT;
-import static h04.H2_4.CoinCollectionCT;
+import java.util.List;
+
+import static org.tudalgo.algoutils.tutor.general.stringify.HTML.tt;
+
 
 public class H04_RubricProvider implements RubricProvider {
 
     ////////////////////////////////////////////////// H1.1
 
     public static final Criterion H1_1_T1 = Criterion.builder()
-        .shortDescription("Das Interface [[[RobotWithReferenceState]]] ist mitsamt Methoden korrekt deklariert.")
+        .shortDescription("Interface " + tt("RobotWithReferenceState") + " ist mitsamt Methoden korrekt deklariert.")
         .grader(Grader.testAwareBuilder()
             .requirePass(JUnitTestRef.and(
-                JUnitTestRef.ofMethod(() -> H1_1.class.getMethod("test01")),
-                JUnitTestRef.ofMethod(() -> H1_1.class.getMethod("test02")),
-                JUnitTestRef.ofMethod(() -> H1_1.class.getMethod("test03")),
-                JUnitTestRef.ofMethod(() -> H1_1.class.getMethod("test04")),
-                JUnitTestRef.ofMethod(() -> H1_1.class.getMethod("test05")),
-                JUnitTestRef.ofMethod(() -> H1_1.class.getMethod("test06"))))
+                JUnitTestRef.ofMethod(() -> H1_1.class.getMethod("t1_1")),
+                JUnitTestRef.ofMethod(() -> H1_1.class.getMethod("t1_2")),
+                JUnitTestRef.ofMethod(() -> H1_1.class.getMethod("t1_3")),
+                JUnitTestRef.ofMethod(() -> H1_1.class.getMethod("t1_4")),
+                JUnitTestRef.ofMethod(() -> H1_1.class.getMethod("t1_5")),
+                JUnitTestRef.ofMethod(() -> H1_1.class.getMethod("t1_6"))))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
         .build();
 
     public static final Criterion H1_1 = Criterion.builder()
-        .shortDescription("H1.1 | Interface [[[RobotWithReferenceState]]]")
+        .shortDescription("H1.1 | Keine Referenz? Ist nicht egal!")
         .addChildCriteria(H1_1_T1)
         .build();
 
     ////////////////////////////////////////////////// H1.2
 
     public static final Criterion H1_2_T1 = Criterion.builder()
-        .shortDescription("Das Enum [[[CoinType]]] ist vollständig korrekt.")
+        .shortDescription("Enum " + tt("CoinType") + " ist korrekt.")
         .grader(Grader.testAwareBuilder()
-            .requirePass(JUnitTestRef.ofMethod(() -> H1_2.class.getMethod("test02")))
+            .requirePass(JUnitTestRef.ofMethod(() -> H1_2.class.getMethod("t2")))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
         .build();
 
     public static final Criterion H1_2_T2 = Criterion.builder()
-        .shortDescription("Das Interface [[[WithCoinTypes]]] ist mitsamt Methoden korrekt deklariert.")
+        .shortDescription("Interface " + tt("WithCoinTypes") + " ist mitsamt Methoden korrekt deklariert.")
         .grader(Grader.testAwareBuilder()
             .requirePass(JUnitTestRef.and(
-                JUnitTestRef.ofMethod(() -> H1_2.class.getMethod("test01")),
-                JUnitTestRef.ofMethod(() -> H1_2.class.getMethod("test03")),
-                JUnitTestRef.ofMethod(() -> H1_2.class.getMethod("test04"))))
+                JUnitTestRef.ofMethod(() -> H1_2.class.getMethod("t3_1")),
+                JUnitTestRef.ofMethod(() -> H1_2.class.getMethod("t3_2")),
+                JUnitTestRef.ofMethod(() -> H1_2.class.getMethod("t3_3"))))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
         .build();
 
     public static final Criterion H1_2 = Criterion.builder()
-        .shortDescription("H1.2 | Interface [[[WithCoinTypes]]]")
+        .shortDescription("H1.2 |  Keine Münzen? Ist nicht egal!")
         .addChildCriteria(H1_2_T1, H1_2_T2)
         .build();
 
     ////////////////////////////////////////////////// H2.1
-
+    public static final Criterion H1 = Criterion.builder()
+        .shortDescription("H1 | Zwei Interfaces")
+        .addChildCriteria(H1_1, H1_2)
+        .build();
     public static final Criterion H2_1_T1 = Criterion.builder()
-        .shortDescription("Klasse [[[RobotWithCoinTypes]]] ist korrekt deklariert.")
+        .shortDescription("Klasse " + tt("RobotWithCoinTypes") + " ist korrekt deklariert.")
         .grader(Grader.testAwareBuilder()
-            .requirePass(JUnitTestRef.ofMethod(() -> H2_1.class.getMethod("test01")))
+            .requirePass(JUnitTestRef.ofMethod(() -> H2_1.class.getMethod("t4")))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
         .build();
-
     public static final Criterion H2_1_T2 = Criterion.builder()
-        .shortDescription("Die Attribute [[[numberOfSilverCoins]]], [[[numberOfBrassCoins]]], [[[numberOfCopperCoins]]] sind " +
+        .shortDescription("Attribute " + tt("numberOfSilverCoins") + ", " + tt("numberOfBrassCoins") + ", " + tt("numberOfCopperCoins") + " sind " +
             "korrekt deklariert.")
         .grader(Grader.testAwareBuilder()
-            .requirePass(JUnitTestRef.ofMethod(() -> H2_1.class.getMethod("test05")))
+            .requirePass(JUnitTestRef.ofMethod(() -> H2_1.class.getMethod("t5")))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
         .build();
-
     public static final Criterion H2_1_T3 = Criterion.builder()
-        .shortDescription("Der Konstruktor ist vollständig korrekt.")
+        .shortDescription("Konstruktor ist korrekt.")
         .grader(Grader.testAwareBuilder()
-            .requirePass(JUnitTestRef.ofMethod(() -> H2_1.class.getMethod("test02")))
+            .requirePass(JUnitTestRef.ofMethod(() -> H2_1.class.getMethod("t6", RobotWithCoinTypesData.class)))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
         .build();
-
     public static final Criterion H2_1_T4 = Criterion.builder()
-        .shortDescription("Methode [[[setNumberOfCoins()]]] ist vollständig korrekt.")
+        .shortDescription("Methode " + tt("setNumberOfCoins") + " ist korrekt.")
         .grader(Grader.testAwareBuilder()
-            .requirePass(JUnitTestRef.ofMethod(() -> H2_1.class.getMethod("test06")))
+            .requirePass(JUnitTestRef.ofMethod(() -> H2_1.class.getMethod("t7", RobotWithCoinTypesData.class, int.class)))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
         .build();
-
     public static final Criterion H2_1_T5 = Criterion.builder()
-        .shortDescription("Methode [[[getNumberOfCoinsOfType()]]] ist vollständig korrekt.")
+        .shortDescription("Methode " + tt("getNumberOfCoinsOfType") + " ist korrekt.")
         .grader(Grader.testAwareBuilder()
-            .requirePass(JUnitTestRef.ofMethod(() -> H2_1.class.getMethod("test03")))
+            .requirePass(JUnitTestRef.ofMethod(() -> H2_1.class.getMethod("t8", RobotWithCoinTypesData.class)))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
         .build();
-
     public static final Criterion H2_1_T6 = Criterion.builder()
-        .shortDescription("Methode [[[setNumberOfCoinsOfType()]]] ist vollständig korrekt.")
+        .shortDescription("Methode " + tt("setNumberOfCoinsOfType") + " ist korrekt.")
         .grader(Grader.testAwareBuilder()
-            .requirePass(JUnitTestRef.ofMethod(() -> H2_1.class.getMethod("test04")))
+            .requirePass(JUnitTestRef.ofMethod(() -> H2_1.class.getMethod(
+                "t9",
+                RobotWithCoinTypesData.class,
+                RobotWithCoinTypesData.class
+            )))
+            .requirePass(JUnitTestRef.ofMethod(() -> H2_1.class.getMethod(
+                "t9_2",
+                RobotWithCoinTypesData.class,
+                RobotWithCoinTypesData.class
+            )))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
         .build();
-
     public static final Criterion H2_1_T7 = Criterion.builder()
-        .shortDescription("Methode [[[putCoin()]]] ist vollständig korrekt.")
+        .shortDescription("Methode " + tt("putCoin") + " ist korrekt.")
         .grader(Grader.testAwareBuilder()
-            .requirePass(JUnitTestRef.ofMethod(() -> H2_1.class.getMethod("test08")))
+            .requirePass(JUnitTestRef.ofMethod(() -> H2_1.class.getMethod("t10", RobotWithCoinTypesData.class, RobotWithCoinTypesData.class)))
+            .requirePass(JUnitTestRef.ofMethod(() -> H2_1.class.getMethod("t10_2", RobotWithCoinTypesData.class)))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
         .build();
-
     public static final Criterion H2_1_T8 = Criterion.builder()
-        .shortDescription("Methode [[[pickCoin()]]] ist vollständig korrekt.")
+        .shortDescription("Methode " + tt("pickCoin") + " ist korrekt.")
         .grader(Grader.testAwareBuilder()
-            .requirePass(JUnitTestRef.ofMethod(() -> H2_1.class.getMethod("test07")))
+            .requirePass(JUnitTestRef.ofMethod(() -> H2_1.class.getMethod("t11", RobotWithCoinTypesData.class)))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
-        .build();
-
-    public static final Criterion H2_1 = Criterion.builder()
-        .shortDescription("H2.1 | Implementierende Roboterklasse mit verschiedenen Münztypen")
-        .addChildCriteria(H2_1_T1, H2_1_T2, H2_1_T3, H2_1_T4, H2_1_T5, H2_1_T6, H2_1_T7, H2_1_T8)
         .build();
 
     ////////////////////////////////////////////////// H2.2
-
+    public static final Criterion H2_1 = Criterion.builder()
+        .shortDescription("H2.1 | Keine Scheine? Ist mir egal!")
+        .addChildCriteria(H2_1_T1, H2_1_T2, H2_1_T3, H2_1_T4, H2_1_T5, H2_1_T6, H2_1_T7, H2_1_T8)
+        .build();
     public static final Criterion H2_2_T1 = Criterion.builder()
-        .shortDescription("Klasse [[[RobotWithCoinTypesAndRefStateTwo]]] ist korrekt deklariert.")
+        .shortDescription("Klasse " + tt("RobotWithCoinTypesAndRefStateOne") + " ist korrekt deklariert.")
         .grader(Grader.testAwareBuilder()
-            .requirePass(JUnitTestRef.ofMethod(() -> H2_2.class.getMethod("test01")))
+            .requirePass(JUnitTestRef.ofMethod(() -> H2_2.class.getMethod("t12")))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
         .build();
-
     public static final Criterion H2_2_T2 = Criterion.builder()
-        .shortDescription("Die Attribute [[[%s]]], [[[%s]]], [[[%s]]] und [[[%s]]] sind korrekt deklariert".formatted(
-            "refX", "refY", "refDirection", "refNumberOfCoins"))
+        .shortDescription("Attribute " + tt("ref{X,Y,Direction,NumberOfCoins}") + " sind korrekt deklariert.")
         .grader(Grader.testAwareBuilder()
-            .requirePass(JUnitTestRef.ofMethod(() -> H2_2.class.getMethod("test05")))
+            .requirePass(JUnitTestRef.ofMethod(() -> H2_2.class.getMethod("t13")))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
         .build();
-
     public static final Criterion H2_2_T3 = Criterion.builder()
-        .shortDescription("Der Konstruktor ist vollständig korrekt.")
+        .shortDescription("Konstruktor ist korrekt.")
         .grader(Grader.testAwareBuilder()
-            .requirePass(JUnitTestRef.ofMethod(() -> H2_2.class.getMethod("test02")))
+            .requirePass(JUnitTestRef.ofMethod(() -> H2_2.class.getMethod("t14", RobotWithCoinTypesData.class)))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
         .build();
-
     public static final Criterion H2_2_T4 = Criterion.builder()
-        .shortDescription("Methode [[[setCurrentStateAsReferenceState()]]] ist vollständig korrekt.")
+        .shortDescription("Methode " + tt("setCurrentStateAsReferenceState") + " ist korrekt.")
         .grader(Grader.testAwareBuilder()
-            .requirePass(JUnitTestRef.ofMethod(() -> H2_2.class.getMethod("test06")))
+            .requirePass(JUnitTestRef.ofMethod(() -> H2_2.class.getMethod(
+                "t15",
+                RobotWithCoinTypesData.class,
+                int.class,
+                int.class,
+                Direction.class,
+                int.class,
+                int.class,
+                int.class
+            )))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
         .build();
-
     public static final Criterion H2_2_T5 = Criterion.builder()
-        .shortDescription("Methode [[[getDiffX()]]] ist vollständig korrekt.")
+        .shortDescription("Methode " + tt("getDiffX") + " ist korrekt.")
         .grader(Grader.testAwareBuilder()
-            .requirePass(JUnitTestRef.ofMethod(() -> H2_2.class.getMethod("test04")))
+            .requirePass(JUnitTestRef.ofMethod(() -> H2_2.class.getMethod(
+                "t16",
+                RobotWithCoinTypesData.class,
+                int.class,
+                int.class
+            )))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
         .build();
     public static final Criterion H2_2_T6 = Criterion.builder()
-        .shortDescription("Methode [[[getDiffY()]]] ist vollständig korrekt.")
+        .shortDescription("Methode " + tt("getDiffY") + " ist korrekt.")
         .grader(Grader.testAwareBuilder()
-            .requirePass(JUnitTestRef.ofMethod(() -> H2_2.class.getMethod("test03")))
+            .requirePass(JUnitTestRef.ofMethod(() -> H2_2.class.getMethod(
+                "t17",
+                RobotWithCoinTypesData.class,
+                int.class,
+                int.class
+            )))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
         .build();
-
     public static final Criterion H2_2_T7 = Criterion.builder()
-        .shortDescription("Methode [[[getDiffNumberOfCoins()]]] ist vollständig korrekt.")
+        .shortDescription("Methode " + tt("getDiffNumberOfCoins") + " ist korrekt.")
         .grader(Grader.testAwareBuilder()
-            .requirePass(JUnitTestRef.ofMethod(() -> H2_2.class.getMethod("test08")))
+            .requirePass(JUnitTestRef.ofMethod(() -> H2_2.class.getMethod("t18", RobotWithCoinTypesData.class, int.class, int.class, int.class, int.class)))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
         .build();
-
     public static final Criterion H2_2_T8 = Criterion.builder()
-        .shortDescription("Methode [[[getDiffDirection()]]] ist vollständig korrekt.")
+        .shortDescription("Methode " + tt("getDiffDirection") + " ist korrekt.")
         .maxPoints(2)
         .minPoints(0)
         .grader(Grader.testAwareBuilder()
-            .requirePass(JUnitTestRef.ofMethod(() -> H2_2.class.getMethod("test07")))
+            .requirePass(JUnitTestRef.ofMethod(() -> H2_2.class.getMethod("t19", RobotWithCoinTypesData.class, Direction.class, Direction.class)))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
-        .build();
-
-    public static final Criterion H2_2 = Criterion.builder()
-        .shortDescription("H2.2 | Implementierende Roboterklasse mit vier [[[int]]]-Attributen für den Referenzstatus")
-        .addChildCriteria(H2_2_T1, H2_2_T2, H2_2_T3, H2_2_T4, H2_2_T5, H2_2_T6, H2_2_T7, H2_2_T8)
         .build();
 
 
     ////////////////////////////////////////////////// H2.3
-
+    public static final Criterion H2_2 = Criterion.builder()
+        .shortDescription("H2.2 | Keine Geld? Ist nicht egal!")
+        .addChildCriteria(H2_2_T1, H2_2_T2, H2_2_T3, H2_2_T4, H2_2_T5, H2_2_T6, H2_2_T7, H2_2_T8)
+        .build();
     public static final Criterion H2_3_T1 = Criterion.builder()
-        .shortDescription("Klasse [[[RobotWithCoinTypesAndRefStateOne]]] ist korrekt deklariert.")
+        .shortDescription("Klasse " + tt("RobotWithCoinTypesAndRefStateTwo") + " ist korrekt deklariert.")
         .grader(Grader.testAwareBuilder()
-            .requirePass(JUnitTestRef.ofMethod(() -> H2_3.class.getMethod("test01")))
+            .requirePass(JUnitTestRef.ofMethod(() -> H2_3.class.getMethod("t20")))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
         .build();
-
     public static final Criterion H2_3_T2 = Criterion.builder()
-        .shortDescription("Die Attribute [[[%s]]], [[[%s]]], [[[%s]]] und [[[%s]]] sind korrekt deklariert.".formatted(
-            "refX", "refY", "refDirection", "refNumberOfCoins"))
+        .shortDescription("Attribut " + tt("refRobot") + " ist korrekt deklariert.")
         .grader(Grader.testAwareBuilder()
-            .requirePass(JUnitTestRef.ofMethod(() -> H2_3.class.getMethod("test05")))
+            .requirePass(JUnitTestRef.ofMethod(() -> H2_3.class.getMethod("t21")))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
         .build();
-
     public static final Criterion H2_3_T3 = Criterion.builder()
-        .shortDescription("Der Konstruktor ist vollständig korrekt.")
+        .shortDescription("Konstruktor ist korrekt.")
         .grader(Grader.testAwareBuilder()
-            .requirePass(JUnitTestRef.ofMethod(() -> H2_3.class.getMethod("test02")))
+            .requirePass(JUnitTestRef.ofMethod(() -> H2_3.class.getMethod("t22", RobotWithCoinTypesData.class)))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
         .build();
-
     public static final Criterion H2_3_T4 = Criterion.builder()
-        .shortDescription("Die Methoden [[[%s]]], [[[%s]]], [[[%s]]], [[[%s]]] und [[[%s]]] sind vollständig korrekt.".formatted(
-            "setCurrentStateAsReferenceState()", "getDiffX()", "getDiffY()", "getDiffDirection()", "getDiffNumberOfCoins()"))
+        .shortDescription("Methoden " + tt("setCurrentStateAsReferenceState,getDiff{X,Y,Direction,NumberOfCoins}") + " sind korrekt.")
         .minPoints(0)
         .maxPoints(2)
         .grader(Grader.testAwareBuilder()
             .requirePass(JUnitTestRef.and(
-                JUnitTestRef.ofMethod(() -> H2_3.class.getMethod("test06")),
-                JUnitTestRef.ofMethod(() -> H2_3.class.getMethod("test04")),
-                JUnitTestRef.ofMethod(() -> H2_3.class.getMethod("test03")),
-                JUnitTestRef.ofMethod(() -> H2_3.class.getMethod("test07")),
-                JUnitTestRef.ofMethod(() -> H2_3.class.getMethod("test08"))))
+                JUnitTestRef.ofMethod(() -> H2_3.class.getMethod(
+                    "t23_1",
+                    RobotWithCoinTypesData.class,
+                    int.class,
+                    int.class,
+                    Direction.class,
+                    int.class,
+                    int.class,
+                    int.class
+                )),
+                JUnitTestRef.ofMethod(() -> H2_3.class.getMethod(
+                    "t23_2",
+                    RobotWithCoinTypesData.class,
+                    int.class,
+                    int.class
+                )),
+                JUnitTestRef.ofMethod(() -> H2_3.class.getMethod(
+                    "t23_3",
+                    RobotWithCoinTypesData.class,
+                    int.class,
+                    int.class
+                )),
+                JUnitTestRef.ofMethod(() -> H2_3.class.getMethod(
+                    "t23_4",
+                    RobotWithCoinTypesData.class,
+                    Direction.class,
+                    Direction.class
+                )),
+                JUnitTestRef.ofMethod(() -> H2_3.class.getMethod(
+                    "t23_5",
+                    RobotWithCoinTypesData.class,
+                    int.class,
+                    int.class,
+                    int.class,
+                    int.class
+                ))))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
-        .build();
-
-    public static final Criterion H2_3 = Criterion.builder()
-        .shortDescription("H2.3 | Implementierende Roboterklasse mit [[[Robot]]]-Objekt für den Referenzstatus")
-        .addChildCriteria(H2_3_T1, H2_3_T2, H2_3_T3, H2_3_T4)
         .build();
 
     ////////////////////////////////////////////////// H2.4
-
+    public static final Criterion H2_3 = Criterion.builder()
+        .shortDescription("H2.3 |  Roboter in Roboter? Ist mir egal!")
+        .addChildCriteria(H2_3_T1, H2_3_T2, H2_3_T3, H2_3_T4)
+        .build();
     public static final Criterion H2_4_T1 = Criterion.builder()
-        .shortDescription("Klasse [[[CoinCollection]]] ist korrekt deklariert.")
+        .shortDescription("Klasse " + tt("CoinCollection") + " ist korrekt deklariert.")
         .grader(Grader.testAwareBuilder()
-            .requirePass(JUnitTestRef.ofMethod(() -> H2_4.class.getMethod("test01")))
+            .requirePass(JUnitTestRef.ofMethod(() -> H2_4.class.getMethod("t24")))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
         .build();
-
     public static final Criterion H2_4_T2 = Criterion.builder()
-        .shortDescription("Die Attribute [[[%s]]], [[[%s]]] und [[[%s]]] sind korrekt deklariert.".formatted(
-            "numberOfSilverCoins", "numberOfBrassCoins", "numberOfCopperCoins"))
+        .shortDescription("Attribute " + tt("numberOf{Silver,Brass,Copper}Coins") + " sind korrekt deklariert.")
         .grader(Grader.testAwareBuilder()
-            .requirePass(JUnitTestRef.ofMethod(() -> H2_4.class.getMethod("test04")))
+            .requirePass(JUnitTestRef.ofMethod(() -> H2_4.class.getMethod("t25")))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
         .build();
     public static final Criterion H2_4_T3 = Criterion.builder()
-        .shortDescription("Der Konstruktor ist vollständig korrekt.")
+        .shortDescription("Konstruktor ist korrekt.")
         .grader(Grader.testAwareBuilder()
-            .requirePass(JUnitTestRef.ofMethod(() -> H2_4.class.getMethod("test02")))
+            .requirePass(JUnitTestRef.ofMethod(() -> H2_4.class.getMethod(
+                "t26",
+                CoinCollectionData.class
+            )))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
         .build();
-
     public static final Criterion H2_4_T4 = Criterion.builder()
-        .shortDescription("Die Methoden [[[getNumberOfCoinsOfType()]]] und [[[setNumberOfCoinsOfType()]]] sind vollständig korrekt.")
+        .shortDescription("Methoden " + tt("{get,set}NumberOfCoinsOfType") + " sind korrekt.")
         .grader(Grader.testAwareBuilder()
             .requirePass(JUnitTestRef.and(
-                JUnitTestRef.ofMethod(() -> H2_4.class.getMethod("test07")),
-                JUnitTestRef.ofMethod(() -> H2_4.class.getMethod("test08"))))
+                JUnitTestRef.ofMethod(() -> H2_4.class.getMethod(
+                    "t27_1",
+                    CoinCollectionData.class
+                )),
+                JUnitTestRef.ofMethod(() -> H2_4.class.getMethod(
+                    "t27_2",
+                    CoinCollectionData.class,
+                    CoinCollectionData.class
+                ))))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
         .build();
-
-    public static final Criterion H2_4_T5 = Criterion.builder()
-        .shortDescription("Die Methoden [[[%s]]], [[[%s]]] und [[[%s]]] sind vollständig korrekt.".formatted(
-            "getNumberOfSilverCoins()", "getNumberOfBrassCoins()", "getNumberOfCopperCoins()"))
+    public static final Criterion C28 = Criterion.builder()
+        .shortDescription("Methoden " + tt("getNumberOf{Silver,Brass,Copper}Coins") + " sind korrekt.")
         .grader(Grader.testAwareBuilder()
             .requirePass(JUnitTestRef.and(
-                JUnitTestRef.ofMethod(() -> H2_4.class.getMethod("test03")),
-                JUnitTestRef.ofMethod(() -> H2_4.class.getMethod("test05")),
-                JUnitTestRef.ofMethod(() -> H2_4.class.getMethod("test06"))))
+                JUnitTestRef.ofMethod(() -> H2_4.class.getMethod(
+                    "t28",
+                    CoinCollectionData.class
+                ))))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
         .build();
-
     public static final Criterion H2_4_T6 = Criterion.builder()
-        .shortDescription("Die Methoden [[[insertCoin()]]] und [[[removeCoin()]]] sind vollständig korrekt.")
+        .shortDescription("Methoden " + tt("{insert,remove}Coin") + " sind korrekt.")
         .grader(Grader.testAwareBuilder()
             .requirePass(JUnitTestRef.and(
-                JUnitTestRef.ofMethod(() -> H2_4.class.getMethod("test09")),
-                JUnitTestRef.ofMethod(() -> H2_4.class.getMethod("test10"))))
+                JUnitTestRef.ofMethod(() -> H2_4.class.getMethod(
+                    "t29_1",
+                    CoinCollectionData.class,
+                    CoinCollectionData.class
+                )),
+                JUnitTestRef.ofMethod(() -> H2_4.class.getMethod(
+                    "t29_2",
+                    CoinCollectionData.class,
+                    CoinCollectionData.class
+                ))))
             .pointsPassedMax()
             .pointsFailedMin()
             .build())
-        .build();
-
-    public static final Criterion H2_4 = Criterion.builder()
-        .shortDescription("H2.4 | Klasse ohne Roboter, aber mit Münztypen")
-        .addChildCriteria(H2_4_T1, H2_4_T2, H2_4_T3, H2_4_T4, H2_4_T5, H2_4_T6)
         .build();
 
     ////////////////////////////////////////////////// Tasks
-
-    public static final Criterion H1 = Criterion.builder()
-        .shortDescription("H1 | Zwei Interfaces")
-        .addChildCriteria(H1_1, H1_2)
+    public static final Criterion H2_4 = Criterion.builder()
+        .shortDescription("H2.4 | Klasse ohne Roboter? Ist mir egal!")
+        .addChildCriteria(H2_4_T1, H2_4_T2, H2_4_T3, H2_4_T4, C28, H2_4_T6)
         .build();
     public static final Criterion H2 = Criterion.builder()
         .shortDescription("H2 | Implementierende Klassen")
         .addChildCriteria(H2_1, H2_2, H2_3, H2_4)
         .build();
 
-    static {
-        try {
-            Class.forName("org.sourcegrade.docwatcher.DocWatcherModule");
-        } catch (ClassNotFoundException e) {
-            // ignore
-        }
-    }
+    public static final Criterion DOC = Criterion.builder()
+        .shortDescription("Dokumentation mittels JavaDoc")
+        .addChildCriteria(
+            Criterion.builder()
+                .shortDescription("Dokumentation mittels JavaDoc ist vorhanden und korrekt.")
+                .minPoints(-3)
+                .maxPoints(0)
+                .grader((testCycle, criterion) -> new GradeResult() {
+
+                    @Override
+                    public int getMinPoints() {
+                        return -3;
+                    }
+
+                    @Override
+                    public int getMaxPoints() {
+                        return 0;
+                    }
+
+                    @Override
+                    public List<String> getComments() {
+                        return List.of("Your documentation will be checked soon!");
+                    }
+                }).build()
+        )
+
+        .build();
+
 
     @Override
     public Rubric getRubric() {
         return Rubric.builder()
-            .title("H04 | Roboter mit Referenzstatus")
-            .addChildCriteria(H1, H2)
+            .title("H04 | Roboter mit Senf")
+            .addChildCriteria(H1, H2, DOC)
             .build();
     }
+
+
 }
