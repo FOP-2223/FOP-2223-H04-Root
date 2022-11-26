@@ -413,25 +413,9 @@ public class H04_RubricProvider implements RubricProvider {
                 .shortDescription("Dokumentation mittels JavaDoc ist vorhanden und korrekt.")
                 .minPoints(-3)
                 .maxPoints(0)
-                .grader((testCycle, criterion) -> new GradeResult() {
-
-                    @Override
-                    public int getMinPoints() {
-                        return -3;
-                    }
-
-                    @Override
-                    public int getMaxPoints() {
-                        return 0;
-                    }
-
-                    @Override
-                    public List<String> getComments() {
-                        return List.of("Your documentation will be checked soon!");
-                    }
-                }).build()
+                .grader((t, c) -> GradeResult.of(-3, 0, "Your documentation will be checked soon!"))
+                .build()
         )
-
         .build();
 
 
