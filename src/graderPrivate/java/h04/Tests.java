@@ -40,7 +40,7 @@ public class Tests {
                         } else if (!matched()) {
                             return -1;
                         }
-                        double otherSimilarity = TestUtils.similarity(string, other.object().string());
+                        double otherSimilarity = TestUtils.similarity(other.object().string(), string);
                         return Double.compare(similarity, otherSimilarity);
                     }
                 };
