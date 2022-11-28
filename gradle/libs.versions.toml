@@ -1,11 +1,11 @@
 [versions]
-algoutils = "0.5.0"
+algoutils = "0.6.1"
 
 [libraries]
 annotations = "org.jetbrains:annotations:23.0.0"
 algoutils-student = { module = "org.tudalgo:algoutils-student", version.ref = "algoutils" }
 algoutils-tutor = { module = "org.tudalgo:algoutils-tutor", version.ref = "algoutils" }
-junit-core = { module = "org.junit.jupiter:junit-jupiter", version = "5.9.1" }
+junit-core = {  module = "org.junit.jupiter:junit-jupiter", version = "5.9.1" }
 fopbot = "org.tudalgo:fopbot:0.4.1"
 
 [plugins]
