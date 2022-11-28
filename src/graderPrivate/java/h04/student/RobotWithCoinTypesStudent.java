@@ -96,36 +96,57 @@ public class RobotWithCoinTypesStudent implements RobotStudent {
         }
     }
 
+    private static FieldLink linkToNumberOfSilverCoins;
+    private static FieldLink linkToNumberOfBrassCoins;
+    private static FieldLink linkToNumberOfCopperCoins;
+    private static TypeLink linkToRobotWithCoinTypes;
+    private static ConstructorLink linkToRobotWithCoinTypesConstructor;
+
     public static FieldLink linkToNumberOfSilverCoins() {
-        return assertFieldExists(
+        if (linkToNumberOfSilverCoins != null) {
+            return linkToNumberOfSilverCoins;
+        }
+        return linkToNumberOfSilverCoins = assertFieldExists(
             linkToRobotWithCoinTypes(),
             stringMatcher("numberOfSilverCoins").and(hasModifiers(NON_STATIC)).and(sameType(linkToInt()))
         );
     }
 
     public static FieldLink linkToNumberOfBrassCoins() {
-        return assertFieldExists(
+        if (linkToNumberOfBrassCoins != null) {
+            return linkToNumberOfBrassCoins;
+        }
+        return linkToNumberOfBrassCoins = assertFieldExists(
             linkToRobotWithCoinTypes(),
             stringMatcher("numberOfBrassCoins").and(hasModifiers(NON_STATIC)).and(sameType(linkToInt()))
         );
     }
 
     public static FieldLink linkToNumberOfCopperCoins() {
-        return assertFieldExists(
+        if (linkToNumberOfCopperCoins != null) {
+            return linkToNumberOfCopperCoins;
+        }
+        return linkToNumberOfCopperCoins = assertFieldExists(
             linkToRobotWithCoinTypes(),
             stringMatcher("numberOfCopperCoins").and(hasModifiers(NON_STATIC)).and(sameType(linkToInt()))
         );
     }
 
     public static TypeLink linkToRobotWithCoinTypes() {
-        return assertTypeExists(
+        if (linkToRobotWithCoinTypes != null) {
+            return linkToRobotWithCoinTypes;
+        }
+        return linkToRobotWithCoinTypes = assertTypeExists(
             linkToH01(),
             stringMatcher("RobotWithCoinTypes")
         );
     }
 
     public static ConstructorLink linkToRobotWithCoinTypesConstructor() {
-        return assertConstructorExists(
+        if (linkToRobotWithCoinTypesConstructor != null) {
+            return linkToRobotWithCoinTypesConstructor;
+        }
+        return linkToRobotWithCoinTypesConstructor = assertConstructorExists(
             linkToRobotWithCoinTypes(),
             sameTypes(
                 linkToInt(),

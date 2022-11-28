@@ -2,8 +2,11 @@ package h04.student;
 
 import org.tudalgo.algoutils.tutor.general.assertions.Assertions2;
 import org.tudalgo.algoutils.tutor.general.assertions.Context;
+import org.tudalgo.algoutils.tutor.general.match.Matcher;
 import org.tudalgo.algoutils.tutor.general.reflections.MethodLink;
 import org.tudalgo.algoutils.tutor.general.reflections.TypeLink;
+
+import java.util.concurrent.atomic.AtomicReference;
 
 import static h04.Tests.stringMatcher;
 import static h04.student.H01Student.linkToH01;
@@ -15,17 +18,35 @@ import static org.tudalgo.algoutils.tutor.general.reflections.Modifier.NON_STATI
 
 public interface WithCoinTypesStudent {
 
+    AtomicReference<TypeLink> linkToWithCoinTypes = new AtomicReference<>();
+    AtomicReference<MethodLink> linkToGetCoinTypes = new AtomicReference<>();
+    AtomicReference<MethodLink> linkToSetNumberOfCoinsOfType = new AtomicReference<>();
 
     static TypeLink linkToWithCoinTypes() {
-        return assertTypeExists(linkToH01(), stringMatcher("WithCoinTypes"));
+        if (linkToWithCoinTypes.get() != null) {
+            return linkToWithCoinTypes.get();
+        }
+        linkToWithCoinTypes.set(assertTypeExists(linkToH01(), stringMatcher("WithCoinTypes")));
+        return linkToWithCoinTypes.get();
     }
 
     static MethodLink linkToGetNumberOfCoinsOfType() {
-        return assertMethodExists(linkToWithCoinTypes(), stringMatcher("getNumberOfCoinsOfType").and(hasModifiers(NON_STATIC)));
+        if (linkToGetCoinTypes.get() != null) {
+            return linkToGetCoinTypes.get();
+        }
+        linkToGetCoinTypes.set(assertMethodExists(linkToWithCoinTypes(), stringMatcher("getNumberOfCoinsOfType").and(hasModifiers(NON_STATIC))));
+        return linkToGetCoinTypes.get();
     }
 
     static MethodLink linkToSetNumberOfCoinsOfType() {
-        return assertMethodExists(linkToWithCoinTypes(), stringMatcher("setNumberOfCoinsOfType").and(hasModifiers(NON_STATIC)));
+        if (linkToSetNumberOfCoinsOfType.get() != null) {
+            return linkToSetNumberOfCoinsOfType.get();
+        }
+        linkToSetNumberOfCoinsOfType.set(assertMethodExists(
+            linkToWithCoinTypes(),
+            stringMatcher("setNumberOfCoinsOfType").and(hasModifiers(NON_STATIC)).and(Matcher.of(m -> m.typeList().size() == 2)))
+        );
+        return linkToSetNumberOfCoinsOfType.get();
     }
 
     default int getNumberOfCoinsOfType(Object type) {

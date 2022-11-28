@@ -91,22 +91,57 @@ public class RobotWithCoinTypesAndRefStateTwoStudent extends RobotWithCoinTypesS
         );
     }
 
+    private static TypeLink linkToRobotWithCoinTypesAndRefStateTwo;
+    private static FieldLink linkToRefRobot;
+    private static ConstructorLink linkToRobotWithCoinTypesAndRefStateTwoConstructor;
+    private static MethodLink linkToGetDiffX;
+    private static MethodLink linkToGetDiffY;
+    private static MethodLink linkToGetDiffNumberOfCoins;
+    private static MethodLink linkToGetDiffNumberOfSilverCoins;
+    private static MethodLink linkToSetCurrentStateAsReferenceState;
+
+    public int getDiffX() {
+        // TODO
+        return callObject(
+            () -> linkToGetDiffX().invoke(instance),
+            context,
+            r -> UNEXPECTED_EXCEPTION
+        );
+    }
+
     public static TypeLink linkToRobotWithCoinTypesAndRefStateTwo() {
-        return assertTypeExists(
+        if (linkToRobotWithCoinTypesAndRefStateTwo != null) {
+            return linkToRobotWithCoinTypesAndRefStateTwo;
+        }
+        return linkToRobotWithCoinTypesAndRefStateTwo = assertTypeExists(
             linkToH01(),
             stringMatcher("RobotWithCoinTypesAndRefStateTwo")
         );
     }
 
     public static FieldLink linkToRefRobot() {
-        return assertFieldExists(
+        if (linkToRefRobot != null) {
+            return linkToRefRobot;
+        }
+        return linkToRefRobot = assertFieldExists(
             linkToRobotWithCoinTypesAndRefStateTwo(),
             stringMatcher("refRobot").and(hasModifiers(NON_STATIC)).and(sameType(linkToReferenceRobot()))
         );
     }
 
+    public int getDiffY() {
+        return callObject(
+            () -> linkToGetDiffY().invoke(instance),
+            context,
+            r -> UNEXPECTED_EXCEPTION
+        );
+    }
+
     public static ConstructorLink linkToRobotWithCoinTypesAndRefStateTwoConstructor() {
-        return assertConstructorExists(
+        if (linkToRobotWithCoinTypesAndRefStateTwoConstructor != null) {
+            return linkToRobotWithCoinTypesAndRefStateTwoConstructor;
+        }
+        return linkToRobotWithCoinTypesAndRefStateTwoConstructor = assertConstructorExists(
             linkToRobotWithCoinTypesAndRefStateTwo(),
             sameTypes(
                 linkToInt(),
@@ -119,42 +154,13 @@ public class RobotWithCoinTypesAndRefStateTwoStudent extends RobotWithCoinTypesS
         );
     }
 
-
     public MethodLink linkToGetDiffX() {
-        return assertMethodExists(
+        if (linkToGetDiffX != null) {
+            return linkToGetDiffX;
+        }
+        return linkToGetDiffX = assertMethodExists(
             linkToRobotWithCoinTypesAndRefStateTwo(),
             stringMatcher("getDiffX").and(hasModifiers(NON_STATIC)).and(sameTypes()).and(sameType(linkToInt()))
-        );
-    }
-
-    public int getDiffX() {
-        // TODO
-        return callObject(
-            () -> linkToGetDiffX().invoke(instance),
-            context,
-            r -> UNEXPECTED_EXCEPTION
-        );
-    }
-
-    public MethodLink linkToGetDiffY() {
-        return assertMethodExists(
-            linkToRobotWithCoinTypesAndRefStateTwo(),
-            stringMatcher("getDiffY").and(hasModifiers(NON_STATIC)).and(sameTypes()).and(sameType(linkToInt()))
-        );
-    }
-
-    public int getDiffY() {
-        return callObject(
-            () -> linkToGetDiffY().invoke(instance),
-            context,
-            r -> UNEXPECTED_EXCEPTION
-        );
-    }
-
-    public MethodLink linkToGetDiffNumberOfCoins() {
-        return assertMethodExists(
-            linkToRobotWithCoinTypesAndRefStateTwo(),
-            stringMatcher("getDiffNumberOfCoins").and(hasModifiers(NON_STATIC)).and(sameTypes()).and(sameType(linkToInt()))
         );
     }
 
@@ -166,10 +172,23 @@ public class RobotWithCoinTypesAndRefStateTwoStudent extends RobotWithCoinTypesS
         );
     }
 
-    public MethodLink linkToGetDiffDirection() {
-        return assertMethodExists(
+    public MethodLink linkToGetDiffY() {
+        if (linkToGetDiffY != null) {
+            return linkToGetDiffY;
+        }
+        return linkToGetDiffY = assertMethodExists(
             linkToRobotWithCoinTypesAndRefStateTwo(),
-            stringMatcher("getDiffDirection").and(hasModifiers(NON_STATIC)).and(sameTypes()).and(sameType(linkToDirection()))
+            stringMatcher("getDiffY").and(hasModifiers(NON_STATIC)).and(sameTypes()).and(sameType(linkToInt()))
+        );
+    }
+
+    public MethodLink linkToGetDiffNumberOfCoins() {
+        if (linkToGetDiffNumberOfCoins != null) {
+            return linkToGetDiffNumberOfCoins;
+        }
+        return linkToGetDiffNumberOfCoins = assertMethodExists(
+            linkToRobotWithCoinTypesAndRefStateTwo(),
+            stringMatcher("getDiffNumberOfCoins").and(hasModifiers(NON_STATIC)).and(sameTypes()).and(sameType(linkToInt()))
         );
     }
 
@@ -181,8 +200,21 @@ public class RobotWithCoinTypesAndRefStateTwoStudent extends RobotWithCoinTypesS
         );
     }
 
+    public MethodLink linkToGetDiffDirection() {
+        if (linkToGetDiffNumberOfSilverCoins != null) {
+            return linkToGetDiffNumberOfSilverCoins;
+        }
+        return linkToGetDiffNumberOfSilverCoins = assertMethodExists(
+            linkToRobotWithCoinTypesAndRefStateTwo(),
+            stringMatcher("getDiffDirection").and(hasModifiers(NON_STATIC)).and(sameTypes()).and(sameType(linkToDirection()))
+        );
+    }
+
     public MethodLink linkToSetCurrentStateAsReferenceState() {
-        return assertMethodExists(
+        if (linkToSetCurrentStateAsReferenceState != null) {
+            return linkToSetCurrentStateAsReferenceState;
+        }
+        return linkToSetCurrentStateAsReferenceState = assertMethodExists(
             linkToRobotWithCoinTypesAndRefStateTwo(),
             stringMatcher("setCurrentStateAsReferenceState").and(hasModifiers(NON_STATIC)).and(sameTypes()).and(sameType(linkToVoid()))
         );

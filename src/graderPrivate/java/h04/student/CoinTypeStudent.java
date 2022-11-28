@@ -7,7 +7,6 @@ import org.tudalgo.algoutils.tutor.general.reflections.TypeLink;
 import static h04.Tests.stringMatcher;
 import static h04.student.H01Student.linkToH01;
 import static org.tudalgo.algoutils.tutor.general.assertions.Assertions3.assertTypeExists;
-import static org.tudalgo.algoutils.tutor.general.match.BasicStringMatchers.identical;
 
 public class CoinTypeStudent {
 
@@ -15,15 +14,28 @@ public class CoinTypeStudent {
         return assertTypeExists(linkToH01(), stringMatcher("CoinType"));
     }
 
+    private static EnumConstantLink linkToCoinTypeSilver = null;
+    private static EnumConstantLink linkToCoinTypeCopper = null;
+    private static EnumConstantLink linkToCoinTypeBrass = null;
+
     public static EnumConstantLink linkToCoinTypeSilver() {
-        return Assertions3.assertHasEnumConstant(linkToCoinType(), stringMatcher("SILVER"));
+        if (linkToCoinTypeSilver != null) {
+            return linkToCoinTypeSilver;
+        }
+        return linkToCoinTypeSilver = Assertions3.assertHasEnumConstant(linkToCoinType(), stringMatcher("SILVER"));
     }
 
     public static EnumConstantLink linkToCoinTypeBrass() {
-        return Assertions3.assertHasEnumConstant(linkToCoinType(), stringMatcher("BRASS"));
+        if (linkToCoinTypeCopper != null) {
+            return linkToCoinTypeCopper;
+        }
+        return linkToCoinTypeCopper = Assertions3.assertHasEnumConstant(linkToCoinType(), stringMatcher("BRASS"));
     }
 
     public static EnumConstantLink linkToCoinTypeCopper() {
-        return Assertions3.assertHasEnumConstant(linkToCoinType(), stringMatcher("COPPER"));
+        if (linkToCoinTypeBrass != null) {
+            return linkToCoinTypeBrass;
+        }
+        return linkToCoinTypeBrass = Assertions3.assertHasEnumConstant(linkToCoinType(), stringMatcher("COPPER"));
     }
 }

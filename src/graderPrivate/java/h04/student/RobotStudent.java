@@ -11,7 +11,6 @@ import org.tudalgo.algoutils.tutor.general.reflections.TypeLink;
 
 import static h04.Tests.stringMatcher;
 import static h04.student.More.linkToFieldEntity;
-import static org.tudalgo.algoutils.tutor.general.match.BasicStringMatchers.identical;
 
 public interface RobotStudent {
 

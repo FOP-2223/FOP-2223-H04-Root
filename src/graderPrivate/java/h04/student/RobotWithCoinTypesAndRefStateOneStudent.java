@@ -91,50 +91,23 @@ public class RobotWithCoinTypesAndRefStateOneStudent extends RobotWithCoinTypesS
         );
     }
 
+    private static TypeLink linkToRobotWithCoinTypesAndRefStateOne;
+    private static FieldLink linkToRefX;
+    private static FieldLink linkToRefY;
+    private static FieldLink linkToRefDirection;
+    private static FieldLink linkToRefNumberOfCoins;
+    private static ConstructorLink linkToRobotWithCoinTypesAndRefStateOneConstructor;
+    private static MethodLink linkToGetDiffX;
+    private static MethodLink linkToGetDiffY;
+    private static MethodLink linkToGetDiffNumberOfCoins;
+    private static MethodLink linkToGetDiffDirection;
+    private static MethodLink linkToSetCurrentStateAsReferenceState;
+
     public static TypeLink linkToRobotWithCoinTypesAndRefStateOne() {
-        return assertTypeExists(linkToH01(), stringMatcher("RobotWithCoinTypesAndRefStateOne"));
-    }
-
-    public static FieldLink linkToRefX() {
-        return assertFieldExists(
-            linkToRobotWithCoinTypesAndRefStateOne(),
-            stringMatcher("refX").and(hasModifiers(NON_STATIC)).and(sameType(linkToInt()))
-        );
-    }
-
-    public static FieldLink linkToRefY() {
-        return assertFieldExists(
-            linkToRobotWithCoinTypesAndRefStateOne(),
-            stringMatcher("refY").and(hasModifiers(NON_STATIC)).and(sameType(linkToInt()))
-        );
-    }
-
-    public static FieldLink linkToRefDirection() {
-        return assertFieldExists(
-            linkToRobotWithCoinTypesAndRefStateOne(),
-            stringMatcher("refDirection").and(hasModifiers(NON_STATIC)).and(sameType(linkToDirection()))
-        );
-    }
-
-    public static FieldLink linkToRefNumberOfCoins() {
-        return assertFieldExists(
-            linkToRobotWithCoinTypesAndRefStateOne(),
-            stringMatcher("refNumberOfCoins").and(hasModifiers(NON_STATIC)).and(sameType(linkToInt()))
-        );
-    }
-
-    public static ConstructorLink linkToRobotWithCoinTypesAndRefStateOneConstructor() {
-        return assertConstructorExists(
-            linkToRobotWithCoinTypesAndRefStateOne(),
-            sameTypes(
-                linkToInt(),
-                linkToInt(),
-                linkToDirection(),
-                linkToInt(),
-                linkToInt(),
-                linkToInt()
-            )
-        );
+        if (linkToRobotWithCoinTypesAndRefStateOne != null) {
+            return linkToRobotWithCoinTypesAndRefStateOne;
+        }
+        return linkToRobotWithCoinTypesAndRefStateOne = assertTypeExists(linkToH01(), stringMatcher("RobotWithCoinTypesAndRefStateOne"));
     }
 
     public int refX() {
@@ -169,10 +142,23 @@ public class RobotWithCoinTypesAndRefStateOneStudent extends RobotWithCoinTypesS
         linkToRefNumberOfCoins().set(instance, refNumberOfCoins);
     }
 
-    public MethodLink linkToGetDiffX() {
-        return assertMethodExists(
+    public static FieldLink linkToRefX() {
+        if (linkToRefX != null) {
+            return linkToRefX;
+        }
+        return linkToRefX = assertFieldExists(
             linkToRobotWithCoinTypesAndRefStateOne(),
-            stringMatcher("getDiffX").and(hasModifiers(NON_STATIC)).and(sameTypes()).and(sameType(linkToInt()))
+            stringMatcher("refX").and(hasModifiers(NON_STATIC)).and(sameType(linkToInt()))
+        );
+    }
+
+    public static FieldLink linkToRefY() {
+        if (linkToRefY != null) {
+            return linkToRefY;
+        }
+        return linkToRefY = assertFieldExists(
+            linkToRobotWithCoinTypesAndRefStateOne(),
+            stringMatcher("refY").and(hasModifiers(NON_STATIC)).and(sameType(linkToInt()))
         );
     }
 
@@ -184,10 +170,23 @@ public class RobotWithCoinTypesAndRefStateOneStudent extends RobotWithCoinTypesS
         );
     }
 
-    public MethodLink linkToGetDiffY() {
-        return assertMethodExists(
+    public static FieldLink linkToRefDirection() {
+        if (linkToRefDirection != null) {
+            return linkToRefDirection;
+        }
+        return linkToRefDirection = assertFieldExists(
             linkToRobotWithCoinTypesAndRefStateOne(),
-            stringMatcher("getDiffY").and(hasModifiers(NON_STATIC)).and(sameTypes()).and(sameType(linkToInt()))
+            stringMatcher("refDirection").and(hasModifiers(NON_STATIC)).and(sameType(linkToDirection()))
+        );
+    }
+
+    public static FieldLink linkToRefNumberOfCoins() {
+        if (linkToRefNumberOfCoins != null) {
+            return linkToRefNumberOfCoins;
+        }
+        return linkToRefNumberOfCoins = assertFieldExists(
+            linkToRobotWithCoinTypesAndRefStateOne(),
+            stringMatcher("refNumberOfCoins").and(hasModifiers(NON_STATIC)).and(sameType(linkToInt()))
         );
     }
 
@@ -199,10 +198,30 @@ public class RobotWithCoinTypesAndRefStateOneStudent extends RobotWithCoinTypesS
         );
     }
 
-    public MethodLink linkToGetDiffNumberOfCoins() {
-        return assertMethodExists(
+    public static ConstructorLink linkToRobotWithCoinTypesAndRefStateOneConstructor() {
+        if (linkToRobotWithCoinTypesAndRefStateOneConstructor != null) {
+            return linkToRobotWithCoinTypesAndRefStateOneConstructor;
+        }
+        return linkToRobotWithCoinTypesAndRefStateOneConstructor = assertConstructorExists(
             linkToRobotWithCoinTypesAndRefStateOne(),
-            stringMatcher("getDiffNumberOfCoins").and(hasModifiers(NON_STATIC)).and(sameTypes()).and(sameType(linkToInt()))
+            sameTypes(
+                linkToInt(),
+                linkToInt(),
+                linkToDirection(),
+                linkToInt(),
+                linkToInt(),
+                linkToInt()
+            )
+        );
+    }
+
+    public MethodLink linkToGetDiffX() {
+        if (linkToGetDiffX != null) {
+            return linkToGetDiffX;
+        }
+        return linkToGetDiffX = assertMethodExists(
+            linkToRobotWithCoinTypesAndRefStateOne(),
+            stringMatcher("getDiffX").and(hasModifiers(NON_STATIC)).and(sameTypes()).and(sameType(linkToInt()))
         );
     }
 
@@ -214,10 +233,23 @@ public class RobotWithCoinTypesAndRefStateOneStudent extends RobotWithCoinTypesS
         );
     }
 
-    public MethodLink linkToGetDiffDirection() {
-        return assertMethodExists(
+    public MethodLink linkToGetDiffY() {
+        if (linkToGetDiffY != null) {
+            return linkToGetDiffY;
+        }
+        return linkToGetDiffY = assertMethodExists(
             linkToRobotWithCoinTypesAndRefStateOne(),
-            stringMatcher("getDiffDirection").and(hasModifiers(NON_STATIC).and(sameTypes()).and(sameType(linkToDirection())))
+            stringMatcher("getDiffY").and(hasModifiers(NON_STATIC)).and(sameTypes()).and(sameType(linkToInt()))
+        );
+    }
+
+    public MethodLink linkToGetDiffNumberOfCoins() {
+        if (linkToGetDiffNumberOfCoins != null) {
+            return linkToGetDiffNumberOfCoins;
+        }
+        return linkToGetDiffNumberOfCoins = assertMethodExists(
+            linkToRobotWithCoinTypesAndRefStateOne(),
+            stringMatcher("getDiffNumberOfCoins").and(hasModifiers(NON_STATIC)).and(sameTypes()).and(sameType(linkToInt()))
         );
     }
 
@@ -229,8 +261,21 @@ public class RobotWithCoinTypesAndRefStateOneStudent extends RobotWithCoinTypesS
         );
     }
 
+    public MethodLink linkToGetDiffDirection() {
+        if (linkToGetDiffDirection != null) {
+            return linkToGetDiffDirection;
+        }
+        return linkToGetDiffDirection = assertMethodExists(
+            linkToRobotWithCoinTypesAndRefStateOne(),
+            stringMatcher("getDiffDirection").and(hasModifiers(NON_STATIC).and(sameTypes()).and(sameType(linkToDirection())))
+        );
+    }
+
     public MethodLink linkToSetCurrentStateAsReferenceState() {
-        return assertMethodExists(
+        if (linkToSetCurrentStateAsReferenceState != null) {
+            return linkToSetCurrentStateAsReferenceState;
+        }
+        return linkToSetCurrentStateAsReferenceState = assertMethodExists(
             linkToRobotWithCoinTypesAndRefStateOne(),
             stringMatcher("setCurrentStateAsReferenceState").and(hasModifiers(NON_STATIC)).and(sameTypes())
         );
