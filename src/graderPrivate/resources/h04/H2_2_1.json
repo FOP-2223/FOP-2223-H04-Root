@@ -1,0 +1,42 @@
+[
+  {
+    "robot": {
+      "x": 4,
+      "y": 2,
+      "direction": "UP",
+      "numberOfSilverCoins": 1,
+      "numberOfBrassCoins": 2,
+      "numberOfCopperCoins": 3
+    }
+  },
+  {
+    "robot": {
+      "x": 2,
+      "y": 4,
+      "direction": "RIGHT",
+      "numberOfSilverCoins": 10,
+      "numberOfBrassCoins": 20,
+      "numberOfCopperCoins": 30
+    }
+  },
+  {
+    "robot": {
+      "x": 3,
+      "y": 3,
+      "direction": "LEFT",
+      "numberOfSilverCoins": 1024,
+      "numberOfBrassCoins": 64,
+      "numberOfCopperCoins": 2048
+    }
+  },
+  {
+    "robot": {
+      "x": 1,
+      "y": 1,
+      "direction": "DOWN",
+      "numberOfSilverCoins": 0,
+      "numberOfBrassCoins": 0,
+      "numberOfCopperCoins": 0
+    }
+  }
+]

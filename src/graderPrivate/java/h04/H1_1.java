@@ -1,73 +1,71 @@
 package h04;
 
-import fopbot.Direction;
+import h04.student.RobotWithReferenceStateStudent;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.sourcegrade.jagr.api.rubric.TestForSubmission;
-import org.tudalgo.algoutils.reflect.ClassTester;
-import org.tudalgo.algoutils.reflect.MethodTester;
 
-import java.lang.reflect.Modifier;
-import java.util.ArrayList;
+import static h04.student.More.linkToDirection;
+import static h04.student.More.linkToInt;
+import static h04.student.More.linkToVoid;
+import static h04.student.RobotWithReferenceStateStudent.linkToRobotWithReferenceState;
+import static h04.student.RobotWithReferenceStateStudent.linkToSetCurrentStateAsReferenceState;
+import static org.tudalgo.algoutils.tutor.general.assertions.Assertions3.assertCorrectModifiers;
+import static org.tudalgo.algoutils.tutor.general.assertions.Assertions3.assertCorrectParameters;
+import static org.tudalgo.algoutils.tutor.general.assertions.Assertions3.assertCorrectReturnType;
+import static org.tudalgo.algoutils.tutor.general.match.BasicReflectionMatchers.sameType;
+import static org.tudalgo.algoutils.tutor.general.reflections.Modifier.INTERFACE;
 
 
-
-@TestForSubmission("h04")
-@DisplayName("H1_1")
+@TestForSubmission
+@DisplayName("H1.1")
 public class H1_1 {
-    public final static double minSim = 0.8d;
-    public final static ClassTester<?> RobotWithReferenceStateCT = new ClassTester<>("h04",
-        "RobotWithReferenceState", minSim, Modifier.PUBLIC | Modifier.ABSTRACT | Modifier.INTERFACE);
-    final String interface_name = "RobotWithReferenceState";
+
 
     @Test
-    @DisplayName("1 | Existenz Interface " + interface_name)
-    public void test01() {
-        RobotWithReferenceStateCT.verify(1.0d);
+    @DisplayName("1 | Existenz RobotWithReferenceState")
+    public void t1_1() {
+        var type = linkToRobotWithReferenceState();
+        assertCorrectModifiers(type, INTERFACE);
     }
 
     @Test
     @DisplayName("2 | setCurrentStateAsReferenceState()")
-    public void test02() {
-        new MethodTester(RobotWithReferenceStateCT.assureClassResolved(),
-            "setCurrentStateAsReferenceState", 0.8,
-            Modifier.PUBLIC | Modifier.ABSTRACT,
-            void.class, new ArrayList<>()).verify();
+    public void t1_2() {
+        var method = linkToSetCurrentStateAsReferenceState();
+        assertCorrectReturnType(method, sameType(linkToVoid()));
+        assertCorrectParameters(method);
     }
 
     @Test
     @DisplayName("3 | getDiffX()")
-    public void test03() {
-        new MethodTester(RobotWithReferenceStateCT.assureClassResolved(),
-            "getDiffX", 0.8,
-            Modifier.PUBLIC | Modifier.ABSTRACT,
-            int.class, new ArrayList<>()).verify();
+    public void t1_3() {
+        var method = RobotWithReferenceStateStudent.linkToGetDiffX();
+        assertCorrectReturnType(method, sameType(linkToInt()));
+        assertCorrectParameters(method);
     }
 
     @Test
     @DisplayName("4 | getDiffY()")
-    public void test04() {
-        new MethodTester(RobotWithReferenceStateCT.assureClassResolved(),
-            "getDiffY", 0.8,
-            Modifier.PUBLIC | Modifier.ABSTRACT,
-            int.class, new ArrayList<>()).verify();
+    public void t1_4() {
+        var method = RobotWithReferenceStateStudent.linkToGetDiffY();
+        assertCorrectReturnType(method, sameType(linkToInt()));
+        assertCorrectParameters(method);
     }
 
     @Test
     @DisplayName("5 | getDiffDirection()")
-    public void test05() {
-        new MethodTester(RobotWithReferenceStateCT.assureClassResolved(),
-            "getDiffDirection", 0.8,
-            Modifier.PUBLIC | Modifier.ABSTRACT,
-            Direction.class, new ArrayList<>()).verify();
+    public void t1_5() {
+        var method = RobotWithReferenceStateStudent.linkToGetDiffDirection();
+        assertCorrectReturnType(method, sameType(linkToDirection()));
+        assertCorrectParameters(method);
     }
 
     @Test
     @DisplayName("6 | getDiffNumberOfCoins()")
-    public void test06() {
-        new MethodTester(RobotWithReferenceStateCT.assureClassResolved(),
-            "getDiffNumberOfCoins", 0.8,
-            Modifier.PUBLIC | Modifier.ABSTRACT,
-            int.class, new ArrayList<>()).verify();
+    public void t1_6() {
+        var method = RobotWithReferenceStateStudent.linkToGetDiffNumberOfCoins();
+        assertCorrectReturnType(method, sameType(linkToInt()));
+        assertCorrectParameters(method);
     }
 }

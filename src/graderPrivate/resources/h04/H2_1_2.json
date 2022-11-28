@@ -1,0 +1,110 @@
+[
+  {
+    "robotBefore": {
+      "x": 4,
+      "y": 2,
+      "direction": "UP",
+      "numberOfSilverCoins": 10,
+      "numberOfBrassCoins": 20,
+      "numberOfCopperCoins": 30
+    },
+    "robotAfter": {
+      "x": 4,
+      "y": 2,
+      "direction": "UP",
+      "numberOfSilverCoins": 10,
+      "numberOfBrassCoins": 20,
+      "numberOfCopperCoins": 29
+    }
+  },
+  {
+    "robotBefore": {
+      "x": 4,
+      "y": 2,
+      "direction": "UP",
+      "numberOfSilverCoins": 20,
+      "numberOfBrassCoins": 30,
+      "numberOfCopperCoins": 0
+    },
+    "robotAfter": {
+      "x": 4,
+      "y": 2,
+      "direction": "UP",
+      "numberOfSilverCoins": 20,
+      "numberOfBrassCoins": 29,
+      "numberOfCopperCoins": 0
+    }
+  },
+  {
+    "robotBefore": {
+      "x": 4,
+      "y": 2,
+      "direction": "UP",
+      "numberOfSilverCoins": 30,
+      "numberOfBrassCoins": 0,
+      "numberOfCopperCoins": 0
+    },
+    "robotAfter": {
+      "x": 4,
+      "y": 2,
+      "direction": "UP",
+      "numberOfSilverCoins": 29,
+      "numberOfBrassCoins": 0,
+      "numberOfCopperCoins": 0
+    }
+  },
+  {
+    "robotBefore": {
+      "x": 4,
+      "y": 2,
+      "direction": "DOWN",
+      "numberOfSilverCoins": 1024,
+      "numberOfBrassCoins": 2048,
+      "numberOfCopperCoins": 4096
+    },
+    "robotAfter": {
+      "x": 4,
+      "y": 2,
+      "direction": "DOWN",
+      "numberOfSilverCoins": 1024,
+      "numberOfBrassCoins": 2048,
+      "numberOfCopperCoins": 4095
+    }
+  },
+  {
+    "robotBefore": {
+      "x": 4,
+      "y": 2,
+      "direction": "DOWN",
+      "numberOfSilverCoins": 1024,
+      "numberOfBrassCoins": 2048,
+      "numberOfCopperCoins": 0
+    },
+    "robotAfter": {
+      "x": 4,
+      "y": 2,
+      "direction": "DOWN",
+      "numberOfSilverCoins": 1024,
+      "numberOfBrassCoins": 2047,
+      "numberOfCopperCoins": 0
+    }
+  },
+  {
+    "robotBefore": {
+      "x": 4,
+      "y": 2,
+      "direction": "LEFT",
+      "numberOfSilverCoins": 1024,
+      "numberOfBrassCoins": 0,
+      "numberOfCopperCoins": 0
+    },
+    "robotAfter": {
+      "x": 4,
+      "y": 2,
+      "direction": "LEFT",
+      "numberOfSilverCoins": 1023,
+      "numberOfBrassCoins": 0,
+      "numberOfCopperCoins": 0
+    }
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "coinCollectionBefore": {
+      "numberOfSilverCoins": 1,
+      "numberOfBrassCoins": 2,
+      "numberOfCopperCoins": 3
+    },
+    "coinCollectionAfter": {
+      "numberOfSilverCoins": 3,
+      "numberOfBrassCoins": 2,
+      "numberOfCopperCoins": 1
+    }
+  },
+  {
+    "coinCollectionBefore": {
+      "numberOfSilverCoins": 1024,
+      "numberOfBrassCoins": 64,
+      "numberOfCopperCoins": 2048
+    },
+    "coinCollectionAfter": {
+      "numberOfSilverCoins": 32,
+      "numberOfBrassCoins": 16,
+      "numberOfCopperCoins": 128
+    }
+  }
+]
