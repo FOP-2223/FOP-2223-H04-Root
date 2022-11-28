@@ -10,8 +10,13 @@ import static org.tudalgo.algoutils.tutor.general.assertions.Assertions3.assertT
 
 public class CoinTypeStudent {
 
+    private static TypeLink linkToCoinType;
+
     public static TypeLink linkToCoinType() {
-        return assertTypeExists(linkToH01(), stringMatcher("CoinType"));
+        if (linkToCoinType != null) {
+            return linkToCoinType;
+        }
+        return linkToCoinType = assertTypeExists(linkToH01(), stringMatcher("CoinType"));
     }
 
     private static EnumConstantLink linkToCoinTypeSilver = null;

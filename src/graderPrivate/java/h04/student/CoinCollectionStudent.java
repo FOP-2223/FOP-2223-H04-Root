@@ -47,36 +47,62 @@ public class CoinCollectionStudent implements WithCoinTypesStudent {
         }
     }
 
+    private static TypeLink linkToCoinCollection;
+    private static FieldLink linkToNumberOfSilverCoins;
+    private static FieldLink linkToNumberOfBrassCoins;
+    private static FieldLink linkToNumberOfCopperCoins;
+    private static ConstructorLink linkToCoinCollectionConstructor;
+    private static MethodLink linkToGetNumberOfSilverCoins;
+    private static MethodLink linkToGetNumberOfBrassCoins;
+    private static MethodLink linkToGetNumberOfCopperCoins;
+    private static MethodLink linkToInsertCoin;
+    private static MethodLink linkToRemoveCoin;
+
     public static TypeLink linkToCoinCollection() {
-        return assertTypeExists(
+        if (linkToCoinCollection != null) {
+            return linkToCoinCollection;
+        }
+        return linkToCoinCollection = assertTypeExists(
             linkToH01(),
             stringMatcher("CoinCollection").and(hasModifiers(CLASS))
         );
     }
 
     public static FieldLink linkToNumberOfSilverCoins() {
-        return assertFieldExists(
+        if (linkToNumberOfSilverCoins != null) {
+            return linkToNumberOfSilverCoins;
+        }
+        return linkToNumberOfSilverCoins = assertFieldExists(
             linkToCoinCollection(),
             stringMatcher("numberOfSilverCoins").and(sameType(linkToInt()))
         );
     }
 
     public static FieldLink linkToNumberOfBrassCoins() {
-        return assertFieldExists(
+        if (linkToNumberOfBrassCoins != null) {
+            return linkToNumberOfBrassCoins;
+        }
+        return linkToNumberOfBrassCoins = assertFieldExists(
             linkToCoinCollection(),
             stringMatcher("numberOfBrassCoins").and(sameType(linkToInt()))
         );
     }
 
     public static FieldLink linkToNumberOfCopperCoins() {
-        return assertFieldExists(
+        if (linkToNumberOfCopperCoins != null) {
+            return linkToNumberOfCopperCoins;
+        }
+        return linkToNumberOfCopperCoins = assertFieldExists(
             linkToCoinCollection(),
             stringMatcher("numberOfCopperCoins").and(sameType(linkToInt()))
         );
     }
 
     public static ConstructorLink linkToCoinCollectionConstructor() {
-        return assertConstructorExists(
+        if (linkToCoinCollectionConstructor != null) {
+            return linkToCoinCollectionConstructor;
+        }
+        return linkToCoinCollectionConstructor = assertConstructorExists(
             linkToCoinCollection(),
             sameTypes(
                 linkToInt(),
@@ -87,35 +113,50 @@ public class CoinCollectionStudent implements WithCoinTypesStudent {
     }
 
     public static MethodLink linkToGetNumberOfSilverCoins() {
-        return assertMethodExists(
+        if (linkToGetNumberOfSilverCoins != null) {
+            return linkToGetNumberOfSilverCoins;
+        }
+        return linkToGetNumberOfSilverCoins = assertMethodExists(
             linkToCoinCollection(),
             stringMatcher("getNumberOfSilverCoins").and(sameTypes()).and(sameType(linkToInt()))
         );
     }
 
     public static MethodLink linkToGetNumberOfBrassCoins() {
-        return assertMethodExists(
+        if (linkToGetNumberOfBrassCoins != null) {
+            return linkToGetNumberOfBrassCoins;
+        }
+        return linkToGetNumberOfBrassCoins = assertMethodExists(
             linkToCoinCollection(),
             stringMatcher("getNumberOfBrassCoins").and(sameTypes()).and(sameType(linkToInt()))
         );
     }
 
     public static MethodLink linkToGetNumberOfCopperCoins() {
-        return assertMethodExists(
+        if (linkToGetNumberOfCopperCoins != null) {
+            return linkToGetNumberOfCopperCoins;
+        }
+        return linkToGetNumberOfCopperCoins = assertMethodExists(
             linkToCoinCollection(),
             stringMatcher("getNumberOfCopperCoins").and(sameTypes()).and(sameType(linkToInt()))
         );
     }
 
     public static MethodLink linkToInsertCoin() {
-        return assertMethodExists(
+        if (linkToInsertCoin != null) {
+            return linkToInsertCoin;
+        }
+        return linkToInsertCoin = assertMethodExists(
             linkToCoinCollection(),
             stringMatcher("insertCoin").and(sameTypes(linkToCoinType()))
         );
     }
 
     public static MethodLink linkToRemoveCoin() {
-        return assertMethodExists(
+        if (linkToRemoveCoin != null) {
+            return linkToRemoveCoin;
+        }
+        return linkToRemoveCoin = assertMethodExists(
             linkToCoinCollection(),
             stringMatcher("removeCoin").and(sameTypes(linkToCoinType()))
         );
