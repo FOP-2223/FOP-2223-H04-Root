@@ -9,21 +9,22 @@ import org.tudalgo.algoutils.tutor.general.reflections.FieldLink;
 import org.tudalgo.algoutils.tutor.general.reflections.MethodLink;
 import org.tudalgo.algoutils.tutor.general.reflections.TypeLink;
 
+import static h04.Tests.stringMatcher;
 import static h04.student.More.linkToFieldEntity;
 import static org.tudalgo.algoutils.tutor.general.match.BasicStringMatchers.identical;
 
 public interface RobotStudent {
 
     TypeLink linkToRobot = BasicTypeLink.of(Robot.class);
-    FieldLink linkToRobotX = linkToFieldEntity().getField(identical("x"));
-    FieldLink linkToRobotY = linkToFieldEntity().getField(identical("y"));
-    FieldLink linkToRobotDirection = linkToRobot().getField(identical("direction"));
-    FieldLink linkToRobotWorld = linkToRobot().getField(identical("world"));
-    FieldLink linkToRobotNumberOfCoins = linkToRobot().getField(identical("numberOfCoins"));
-    MethodLink linkToRobotSetNumberOfCoins = linkToRobot().getMethod(identical("setNumberOfCoins"));
-    MethodLink linkToPickCoin = linkToRobot().getMethod(identical("pickCoin"));
-    MethodLink linkToPutCoin = linkToRobot().getMethod(identical("putCoin"));
-    MethodLink linkToMove = linkToRobot().getMethod(identical("move"));
+    FieldLink linkToRobotX = linkToFieldEntity().getField(stringMatcher("x"));
+    FieldLink linkToRobotY = linkToFieldEntity().getField(stringMatcher("y"));
+    FieldLink linkToRobotDirection = linkToRobot().getField(stringMatcher("direction"));
+    FieldLink linkToRobotWorld = linkToRobot().getField(stringMatcher("world"));
+    FieldLink linkToRobotNumberOfCoins = linkToRobot().getField(stringMatcher("numberOfCoins"));
+    MethodLink linkToRobotSetNumberOfCoins = linkToRobot().getMethod(stringMatcher("setNumberOfCoins"));
+    MethodLink linkToPickCoin = linkToRobot().getMethod(stringMatcher("pickCoin"));
+    MethodLink linkToPutCoin = linkToRobot().getMethod(stringMatcher("putCoin"));
+    MethodLink linkToMove = linkToRobot().getMethod(stringMatcher("move"));
 
     static FieldLink linkToRobotX() {
         return linkToRobotX;

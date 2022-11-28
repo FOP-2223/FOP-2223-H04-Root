@@ -8,6 +8,7 @@ import org.tudalgo.algoutils.tutor.general.reflections.FieldLink;
 import org.tudalgo.algoutils.tutor.general.reflections.MethodLink;
 import org.tudalgo.algoutils.tutor.general.reflections.TypeLink;
 
+import static h04.Tests.stringMatcher;
 import static h04.student.CoinTypeStudent.linkToCoinType;
 import static h04.student.H01Student.linkToH01;
 import static h04.student.More.linkToInt;
@@ -22,7 +23,6 @@ import static org.tudalgo.algoutils.tutor.general.assertions.Assertions3.assertT
 import static org.tudalgo.algoutils.tutor.general.match.BasicReflectionMatchers.hasModifiers;
 import static org.tudalgo.algoutils.tutor.general.match.BasicReflectionMatchers.sameType;
 import static org.tudalgo.algoutils.tutor.general.match.BasicReflectionMatchers.sameTypes;
-import static org.tudalgo.algoutils.tutor.general.match.BasicStringMatchers.identical;
 import static org.tudalgo.algoutils.tutor.general.reflections.Modifier.CLASS;
 
 public class CoinCollectionStudent implements WithCoinTypesStudent {
@@ -50,28 +50,28 @@ public class CoinCollectionStudent implements WithCoinTypesStudent {
     public static TypeLink linkToCoinCollection() {
         return assertTypeExists(
             linkToH01(),
-            identical("CoinCollection").and(hasModifiers(CLASS))
+            stringMatcher("CoinCollection").and(hasModifiers(CLASS))
         );
     }
 
     public static FieldLink linkToNumberOfSilverCoins() {
         return assertFieldExists(
             linkToCoinCollection(),
-            identical("numberOfSilverCoins").and(sameType(linkToInt()))
+            stringMatcher("numberOfSilverCoins").and(sameType(linkToInt()))
         );
     }
 
     public static FieldLink linkToNumberOfBrassCoins() {
         return assertFieldExists(
             linkToCoinCollection(),
-            identical("numberOfBrassCoins").and(sameType(linkToInt()))
+            stringMatcher("numberOfBrassCoins").and(sameType(linkToInt()))
         );
     }
 
     public static FieldLink linkToNumberOfCopperCoins() {
         return assertFieldExists(
             linkToCoinCollection(),
-            identical("numberOfCopperCoins").and(sameType(linkToInt()))
+            stringMatcher("numberOfCopperCoins").and(sameType(linkToInt()))
         );
     }
 
@@ -89,35 +89,35 @@ public class CoinCollectionStudent implements WithCoinTypesStudent {
     public static MethodLink linkToGetNumberOfSilverCoins() {
         return assertMethodExists(
             linkToCoinCollection(),
-            identical("getNumberOfSilverCoins").and(sameTypes()).and(sameType(linkToInt()))
+            stringMatcher("getNumberOfSilverCoins").and(sameTypes()).and(sameType(linkToInt()))
         );
     }
 
     public static MethodLink linkToGetNumberOfBrassCoins() {
         return assertMethodExists(
             linkToCoinCollection(),
-            identical("getNumberOfBrassCoins").and(sameTypes()).and(sameType(linkToInt()))
+            stringMatcher("getNumberOfBrassCoins").and(sameTypes()).and(sameType(linkToInt()))
         );
     }
 
     public static MethodLink linkToGetNumberOfCopperCoins() {
         return assertMethodExists(
             linkToCoinCollection(),
-            identical("getNumberOfCopperCoins").and(sameTypes()).and(sameType(linkToInt()))
+            stringMatcher("getNumberOfCopperCoins").and(sameTypes()).and(sameType(linkToInt()))
         );
     }
 
     public static MethodLink linkToInsertCoin() {
         return assertMethodExists(
             linkToCoinCollection(),
-            identical("insertCoin").and(sameTypes(linkToCoinType()))
+            stringMatcher("insertCoin").and(sameTypes(linkToCoinType()))
         );
     }
 
     public static MethodLink linkToRemoveCoin() {
         return assertMethodExists(
             linkToCoinCollection(),
-            identical("removeCoin").and(sameTypes(linkToCoinType()))
+            stringMatcher("removeCoin").and(sameTypes(linkToCoinType()))
         );
     }
 

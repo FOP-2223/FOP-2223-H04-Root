@@ -6,6 +6,7 @@ import org.sourcegrade.jagr.api.rubric.TestForSubmission;
 
 import java.util.List;
 
+import static h04.Tests.stringMatcher;
 import static h04.student.CoinTypeStudent.linkToCoinType;
 import static h04.student.More.linkToInt;
 import static h04.student.More.linkToVoid;
@@ -38,7 +39,7 @@ public class H1_2 {
     public void t2() {
         var type = linkToCoinType();
         for (var constant : List.of("BRASS", "COPPER", "SILVER")) {
-            assertHasEnumConstant(type, identical(constant));
+            assertHasEnumConstant(type, stringMatcher(constant));
         }
     }
 
